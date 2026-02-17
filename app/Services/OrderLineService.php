@@ -110,9 +110,9 @@ class OrderLineService
 
             // 3 Adjust Stock based on $diff
             if ($diff > 0) {
-                $this->productService->decreaseStock($product, $diff);
+                $this->productService->decreaseStock($product, abs($diff));
             } elseif ($diff < 0) {
-                $this->productService->increaseStock($product, $diff);
+                $this->productService->increaseStock($product, abs($diff));
             }
 
             // 4 Recalculates Totals on Order
