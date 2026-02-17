@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('order_lines', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
-            $table->foreignId('product_id')->constrained('products')->restrictOnDelete();;
+            $table->foreignId('product_id')->constrained('products')->restrictOnDelete();
             $table->integer('quantity');
             $table->decimal('unit_price_without_iva', 10, 2);
             $table->integer('iva_percentage');
