@@ -19,6 +19,7 @@ return new class extends Migration
             $table->decimal('unit_price_without_iva', 10, 2);
             $table->integer('iva_percentage');
             $table->decimal('subtotal_without_iva', 10, 2);
+            $table->decimal('subtotal_iva', 10, 2);
             $table->decimal('subtotal_with_iva', 10, 2);
 
             $table->timestamps();
