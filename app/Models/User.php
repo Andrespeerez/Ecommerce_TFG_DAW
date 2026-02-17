@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -55,6 +56,14 @@ class User extends Authenticatable
      */
     public function role(): BelongsTo {
         return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * Return a collection of Orders that belongs to this User
+     * @return HasMany<Order, User>
+     */
+    public function orders():HasMany {
+        return $this->hasMany(Order::class);
     }
 
 }
