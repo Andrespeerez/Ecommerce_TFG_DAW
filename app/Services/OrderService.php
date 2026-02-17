@@ -105,6 +105,24 @@ class OrderService {
     }
 
     /**
+     * Remove an order and restore the stock for all Products on OrderLine
+     * @param Order $order
+     * @return void
+     */
+    public function removeOrder(Order $order): void
+    {
+        DB::transaction(function () use ($order) {
+            $order->load('orderLines.product');
+
+            foreach ($order->orderLines as $line) {
+                $this->productService->increaseStock($line->product, $line->quantity);
+            }
+
+            $order->delete();
+        });
+    }
+
+    /**
      * Generate Order Number from time and random hexadecimal number
      * 
      * The numbers are always ordenated, because the timestamp of linux is incremental.
