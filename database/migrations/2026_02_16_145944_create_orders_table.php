@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('order_number')->unique()->index();
             $table->foreignId('user_id')->constrained('users')->restrictOnDelete();;
-            $table->dateTime('order_date');
+            $table->date('order_date');
             $table->decimal('subtotal_without_iva', 10, 2);
             $table->decimal('iva', 10, 2);
             $table->decimal('total_price', 10, 2);
