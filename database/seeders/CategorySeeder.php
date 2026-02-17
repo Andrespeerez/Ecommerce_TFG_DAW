@@ -13,49 +13,21 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        Category::create([
-            'name' => 'Silla',
-            'active' => true,
-        ]);
+        $categories = [
+            'Silla',
+            'Mesa',
+            'Escritorio',
+            'Armario',
+            'Estantería',
+            'Cajenera',
+            'Cama',
+        ];
 
-        Category::create([
-            'name' => 'Mesa',
-            'active' => true,
-        ]);
-
-        Category::create([
-            'name' => 'Mesita de noche',
-            'active' => true,
-        ]);
-
-        Category::create([
-            'name' => 'Escritorio',
-            'active' => true,
-        ]);
-
-        Category::create([
-            'name' => 'Armario',
-            'active' => true,
-        ]);
-
-        Category::create([
-            'name' => 'Estantería',
-            'active' => true,
-        ]);
-
-        Category::create([
-            'name' => 'Estante',
-            'active' => true,
-        ]);
-
-        Category::create([
-            'name' => 'Cajonera',
-            'active' => true,
-        ]);
-
-        Category::create([
-            'name' => 'Cama',
-            'active' => true,
-        ]);
+        foreach ($categories as $category) {
+            Category::create([
+                'name' => $category,
+                'active' => true,
+            ]);
+        }
     }
 }
