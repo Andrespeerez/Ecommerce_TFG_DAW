@@ -25,7 +25,7 @@ class MaterialSeeder extends Seeder
 
         foreach ($materiales as $material) {
             Material::create([
-                'nombre' => $material,
+                'name' => $material,
                 'active' => true,
             ]);
         }
