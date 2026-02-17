@@ -4,9 +4,14 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
+/**
+ * Class that represents a User
+ */
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -18,9 +23,21 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'full_name',
         'email',
         'password',
+        'phone',
+        'address',
+        'city',
+        'province',
+        'postal_code',
+        'role_id',
+        'active'
+    ];
+
+    protected $casts = [
+        'active' => 'boolean',
+        'password' => 'hashed',
     ];
 
     /**
@@ -34,15 +51,19 @@ class User extends Authenticatable
     ];
 
     /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
+     * Return the Role assigned to this User
+     * @return BelongsTo<Role, User>
      */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+    public function role(): BelongsTo {
+        return $this->belongsTo(Role::class);
     }
+
+    /**
+     * Return a collection of Orders that belongs to this User
+     * @return HasMany<Order, User>
+     */
+    public function orders():HasMany {
+        return $this->hasMany(Order::class);
+    }
+
 }
