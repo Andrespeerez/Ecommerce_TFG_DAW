@@ -8,7 +8,7 @@ class Finish extends Model
 {
     protected $fillable = ['name', 'active'];
 
-    protected $cast = [
+    protected $casts = [
         'active' => 'boolean',
     ];
 
