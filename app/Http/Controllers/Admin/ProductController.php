@@ -92,13 +92,11 @@ class ProductController extends Controller
     /**
      * Form component to update a Product. Recieves a product id by parameter.
      * 
-     * @param int $id
+     * @param Product $product
      * @return \Inertia\Response
      */
-    public function edit(int $id)
+    public function edit(Product $product)
     {
-        $product = Product::findOrFail($id);
-
         return Inertia::render('Admin/Products/Form', [
             'product' => $product,  // The form recieves an existing product
             'categories' => Category::where('active', true)->get(),
@@ -111,13 +109,11 @@ class ProductController extends Controller
      * Updates an existing product.
      * 
      * @param Request $request
-     * @param int $id
+     * @param Product $product
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, Product $product)
     {
-        $product = Product::findOrfail($id);
-
         // 1 Validate the request
         $fields = [
             'name' => 'required|string|max:255',
@@ -152,13 +148,11 @@ class ProductController extends Controller
      * 
      * Cannot delete products that are in OrderLines.
      * 
-     * @param int $id
+     * @param Product $product
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(Product $product)
     {
-        $product = Product::findOrFail($id);
-
         // 1 Check if product is in any OrderLine
         if ($product->orderLines()->exists()) {
             return redirect()->route('admin.productos.index')

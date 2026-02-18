@@ -31,6 +31,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         return "Eres admin";
     });
 
-    Route::resource('productos', AdminProductController::class);
+    Route::resource('productos', AdminProductController::class)
+        ->parameters(['productos' => 'product'])
+        ->names('products');
 });
 require __DIR__.'/auth.php';
