@@ -143,7 +143,7 @@ class ProductController extends Controller
         $product->update($validated);
 
         // 4 Redirect with message
-        return redirect()->route('admin.products.index')
+        return redirect()->route('admin.productos.index')
             ->with('success', 'Producto actualizado correctamente.');
     }
 
@@ -161,7 +161,7 @@ class ProductController extends Controller
 
         // 1 Check if product is in any OrderLine
         if ($product->orderLines()->exists()) {
-            return redirect()->route('admin.products.index')
+            return redirect()->route('admin.productos.index')
                 ->with('error', 'No se puede eliminar un producto que está en pedidos.');
         }
 
@@ -169,7 +169,7 @@ class ProductController extends Controller
         $product->delete();
 
         // 3 Redirect with message
-        return redirect()->route('admin.products.index')
+        return redirect()->route('admin.productos.index')
             ->with('success', 'Producto eliminado correctamente.');
     }
 }
