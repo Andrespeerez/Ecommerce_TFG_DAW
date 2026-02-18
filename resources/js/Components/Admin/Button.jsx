@@ -6,11 +6,11 @@ const variants = {
     secondary: 'bg-gray-100 hover:bg-gray-200 text-gray-700',
 };
 
-export function Button ({ children, onClick, disabled = false, variant = 'primary' }) {
+export function Button ({ type = 'button', children, onClick, disabled = false, variant = 'primary' }) {
 
     return (
         <button
-        type='button'
+        type={type}
         onClick={onClick}
         disabled={disabled}
         className={`px-4 py-2 rounded-md disabled:opacity-50 ${variants[variant]}`}
