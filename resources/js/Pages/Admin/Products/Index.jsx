@@ -34,10 +34,12 @@ export default function Index ({ products }) {
                         <TableHead>Categoría</TableHead>
                         <TableHead>Material</TableHead>
                         <TableHead>Acabado</TableHead>
-                        <TableHead>Precio</TableHead>
+                        <TableHead>Precio (sin IVA)</TableHead>
                         <TableHead>IVA</TableHead>
+                        <TableHead>Precio</TableHead>
                         <TableHead>Stock</TableHead>
                         <TableHead>Estado</TableHead>
+                        <TableHead>Acciones</TableHead>
                     </TableHeader>
                     <TableBody>
                         {products.data.map((product) => (
@@ -46,15 +48,20 @@ export default function Index ({ products }) {
                                 <TableCell className='text-sm text-gray-900'>{product.category.name}</TableCell>
                                 <TableCell className='text-sm text-gray-900'>{product.material.name}</TableCell>
                                 <TableCell className='text-sm text-gray-900'>{product.finish.name}</TableCell>
-                                <TableCell className='text-sm text-gray-900'>{product.price_with_iva}</TableCell>
+                                <TableCell className='text-sm text-gray-900'>{product.price_without_iva}</TableCell>
                                 <TableCell className='text-sm text-gray-900'>{product.iva_percentage}</TableCell>
+                                <TableCell className='text-sm text-gray-900'>{product.price_with_iva}</TableCell>
                                 <TableCell className='text-sm text-gray-900'>{product.stock}</TableCell>
                                 <TableCell className='text-sm text-gray-900'>{product.active ? 'Activo' : 'Inactivo'}</TableCell>
                                 <TableCell className='text-sm text-gray-900'>
                                     <Link
                                     href={`/admin/productos/${product.id}/edit`}
                                     >
-                                        Editar
+                                        <Button
+                                        variant='secondary'
+                                        >
+                                            Editar
+                                        </Button>
                                     </Link>
                                     <Button
                                     onClick={() => deleteProduct(product)}
