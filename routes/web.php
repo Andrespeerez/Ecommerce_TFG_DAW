@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -24,13 +25,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('admin')->group(function () {
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
     // Test if you are admin
-    Route::get('/admin/hello', function() {
+    Route::get('/hello', function() {
         return "Eres admin";
     });
 
-    
+    Route::resource('productos', AdminProductController::class)
+        ->parameters(['productos' => 'product'])
+        ->names('products');
 });
-
 require __DIR__.'/auth.php';

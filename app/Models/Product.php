@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
@@ -57,5 +58,15 @@ class Product extends Model
      */
     public function finish(): BelongsTo {
         return $this->belongsTo(Finish::class);
+    }
+
+    /**
+     * Gets all the orderLines that references this product
+     * 
+     * We need this to ensure we cannot delete a product that is referenced by an order line
+     * @return HasMany<OrderLine, Product>
+     */
+    public function orderLines(): HasMany {
+        return $this->hasMany(OrderLine::class);
     }
 }
