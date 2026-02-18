@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             MaterialSeeder::class,
             FinishSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }
