@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\ImageService;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
@@ -65,6 +66,7 @@ class ProductController extends Controller
             'height_cm' => 'required|numeric|min:0',
             'depth_cm' => 'required|numeric|min:0',
             'active' => 'boolean',
+            'image' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
         ];
 
         $validated = $request->validate($fields);
@@ -72,13 +74,16 @@ class ProductController extends Controller
         // 2 Add price_with_iva field
         $validated['price_with_iva'] = $validated['price_without_iva'] * (1 + $validated['iva_percentage'] / 100);
 
-        $validated['image_url'] = 'https://placehold.co/600x400';
+        // 3 Upload image
+        $imageService = new ImageService();
+        $validated['image_url'] = $imageService->uploadAsWebP($request->file('image'));
+        unset($validated['image']);  // only store the image_url in DB, so remove the gfield
 
-        // 3 Create Product
+        // 4 Create Product
         Product::create($validated);
 
-        // 4 Redirect with message
-        return redirect()->route('admin.productos.index')->with('success', 'Producto creado correctamente.');
+        // 5 Redirect with message
+        return redirect()->route('admin.products.index')->with('success', 'Producto creado correctamente.');
     }
 
     /**
@@ -128,18 +133,24 @@ class ProductController extends Controller
             'height_cm' => 'required|numeric|min:0',
             'depth_cm' => 'required|numeric|min:0',
             'active' => 'boolean',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ];
 
         $validated = $request->validate($fields);
 
-        // 2 Recalculate price_with_iva
+        // 2 Update image if new image provided
+        $imageService = new ImageService();
+        $validated['image_url'] = $imageService->updateImage($request->file('image'), $product->image_url);
+        unset($validated['image']);
+
+        // 3 Recalculate price_with_iva
         $validated['price_with_iva'] = $validated['price_without_iva'] * (1 + $validated['iva_percentage'] / 100);
 
-        // 3 Update the product
+        // 4 Update the product
         $product->update($validated);
 
-        // 4 Redirect with message
-        return redirect()->route('admin.productos.index')
+        // 5 Redirect with message
+        return redirect()->route('admin.products.index')
             ->with('success', 'Producto actualizado correctamente.');
     }
 
@@ -155,15 +166,19 @@ class ProductController extends Controller
     {
         // 1 Check if product is in any OrderLine
         if ($product->orderLines()->exists()) {
-            return redirect()->route('admin.productos.index')
+            return redirect()->route('admin.products.index')
                 ->with('error', 'No se puede eliminar un producto que está en pedidos.');
         }
 
-        // 2 Delete the product
+        // 2 Delete image
+        $imageService = new ImageService();
+        $imageService->deleteImage( $product->image_url);
+
+        // 3 Delete the product
         $product->delete();
 
         // 3 Redirect with message
-        return redirect()->route('admin.productos.index')
+        return redirect()->route('admin.products.index')
             ->with('success', 'Producto eliminado correctamente.');
     }
 }

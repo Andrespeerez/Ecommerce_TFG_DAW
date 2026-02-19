@@ -23,16 +23,18 @@ export default function Form({ product, categories, materials, finishes }) {
         height_cm: product?.height_cm || '',
         depth_cm: product?.depth_cm || '',
         active: product?.active ?? true,
+        image: null, 
+        _method: isEditing ? 'PUT' : 'POST',
     });
 
     function submit(e) {
         e.preventDefault();
-        
-        if (isEditing) {
-            put(`/admin/productos/${product.id}`);
-        } else {
-            post('/admin/productos');
-        }
+
+        const url = isEditing ? `/admin/productos/${product.id}` : '/admin/productos';
+
+        post(url, {
+            forceFormData: true,
+        });
     }
 
     return (
@@ -65,6 +67,26 @@ export default function Form({ product, categories, materials, finishes }) {
                         error={errors.description}
                         required
                     />
+
+                    <div>
+                        <label htmlFor="image" className="block text-sm font-medium text-gray-700 mb-1">
+                            Imagen del producto *
+                        </label>
+                        <input type="file" name="image" id="image" accept='image/*' onChange={e => setData('image', e.target.files[0])} 
+                        className='w-full border border-gray-300 rounded-md px-3 py-2'
+                        />
+                        {errors.image && <div className="text-red-600 text-sm mt-1">{errors.image}</div>}
+
+                        {isEditing && product.image_url && !data.image && (
+                            <div className="mt-2">
+                                <img 
+                                    src={`/storage/${product.image_url}`} 
+                                    alt={product.name}
+                                    className="h-32 w-auto rounded border"
+                                />
+                            </div>
+                        )}
+                    </div>
 
                     <div className="grid grid-cols-2 gap-4">
                         <Input
