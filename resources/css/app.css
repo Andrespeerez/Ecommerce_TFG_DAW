@@ -1,3 +1,60 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    /* Texts */
+    .heading-1 {
+        @apply text-h1 font-bold font-lora;
+    }
+
+    .heading-2 {
+        @apply text-h2 font-bold font-lora;
+    }
+
+    .heading-3 {
+        @apply text-h3 font-semibold font-lora;
+    }
+
+    .heading-4 {
+        @apply text-h4 font-semibold font-lora;
+    }
+
+    .heading-5 {
+        @apply text-h5 font-semibold font-lora;
+    }
+
+    .heading-6 {
+        @apply text-h6 font-semibold font-lora;
+    }
+
+    .texto-base {
+        @apply text-base font-normal font-sans;
+    }
+
+    .texto-sm {
+        @apply text-sm font-normal font-sans;
+    }
+
+    .texto-xs {
+        @apply text-xs font-normal font-sans;
+    }
+
+    /* Buttons */
+    .btn {
+        @apply px-5 py-3 drop-shadow-md text-primary-50 text-center;
+    }
+
+    .btn-primary {
+        @apply btn h5 bg-primary-700 hover:bg-primary-500 active:bg-primary-900;
+    }
+
+    .btn-secondary {
+        @apply btn h6 bg-secondary-500 hover:bg-secondary-700 active:bg-secondary-900;
+    }
+
+    .btn-accent {
+        @apply btn h6 bg-accent-500 hover:bg-accent-700 active:bg-accent-800;
+    }
+
+}
