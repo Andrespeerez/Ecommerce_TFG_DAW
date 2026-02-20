@@ -14,10 +14,14 @@ export default function SearchBar() {
     }
 
     return (
-        <form onSubmit={handleSearch}>
-            <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
-            <button type="submit">
-                Buscar
+        <form onSubmit={handleSearch} className="w-1/3 flex -space-x-16">
+            <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} 
+            className="w-full py-5 px-10 rounded-3xl"
+            />
+            <button type="submit" 
+            className="-top-[40%] right-0"
+            >
+                <img src="/assets/images/search.svg" alt="Buscar" />
             </button>
         </form>
     )
