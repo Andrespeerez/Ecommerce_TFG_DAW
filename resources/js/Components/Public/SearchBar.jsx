@@ -14,7 +14,7 @@ export default function SearchBar() {
     }
 
     return (
-        <form onSubmit={handleSearch} className="w-1/3 flex -space-x-16">
+        <form onSubmit={handleSearch} className="w-1/3 -space-x-16 hidden md:flex">
             <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} 
             className="w-full pl-5 pr-20 px-10 rounded-3xl texto-base"
             />
