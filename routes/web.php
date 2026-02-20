@@ -15,6 +15,14 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/test', function() {
+    return Inertia::render('Public/Test', [
+        'cart' => [
+            'total_items' => 10,
+        ],
+    ]);
+});
+
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
