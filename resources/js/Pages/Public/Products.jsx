@@ -12,15 +12,30 @@ export default function Products ({ auth, cart = cartDefault, products, categori
         <Head title="Tienda" />
         
         <PublicLayout auth={auth} cart={cart}>
-            <h1>Productos</h1>
 
-            <section
-            className="grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 gap-5"
+            <div
+            className="flex gap-5 p-10"
             >
-            {products.data.map((product) => (
-                <ProductCard key={product.id} product={product} />
-            ))}
-            </section>
+                <aside className="hidden lg:block w-[260px] shrink-0">
+                    <div className="sticky top-5">
+                        Aquí van los filtros
+                    </div>
+                </aside>
+
+                <div className="flex-1 min-w-0">
+                    <div>
+                        Aquí van pills de productos
+                    </div>
+                    <div
+                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 justify-items-center"
+                    >
+                        {products.data.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))}
+                    </div>
+                </div>
+            </div>
+            
         </PublicLayout>
         
         </>
