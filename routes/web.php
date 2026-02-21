@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Public\HomeController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -15,17 +16,20 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+// This one is just to test pages
 Route::get('/test', function() {
-    return Inertia::render('Public/Test', [
+    return Inertia::render('Public/Home', [
         'cart' => [
             'total_items' => 10,
         ],
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/home', [HomeController::class, 'index']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
