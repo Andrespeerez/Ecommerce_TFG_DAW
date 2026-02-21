@@ -9,7 +9,7 @@ export default function SearchBar() {
 
         // If not empty, call ProductController::Index with search parameter
         if (searchValue.trim()) {
-            router.get('/productos', {search: searchValue});
+            router.get('/tienda', {search: searchValue});
         }
     }
 

@@ -12,7 +12,7 @@ export default function Hero () {
 
             <h1 className="heading-4 lg:heading-1 md:heading-3 text-primary-900">Carpintería Barberes</h1>
 
-            <ButtonLink href="/productos">
+            <ButtonLink href="/tienda">
                 Ver Catálogo
             </ButtonLink>
         </section>
