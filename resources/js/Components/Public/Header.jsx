@@ -9,7 +9,7 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
 
     return (
         <header
-        className="bg-primary-50 stroke-primary-200 flex justify-between items-center px-5 py-[10px] border-b-2 h-20"
+        className="sticky top-0 z-50 bg-primary-50 stroke-primary-200 flex justify-between items-center px-5 py-[10px] border-b-2 h-20"
         >
             <Link href="/" className="flex items-center">
                 <img src="/assets/images/logo.svg" alt="Logo Carpintería Barberes" />
