@@ -32,7 +32,7 @@ Route::get('/test', function() {
 
 Route::get('/home', [HomeController::class, 'index']);
 Route::get('/tienda', [ProductController::class, 'index']);
-Route::get('/producto/{id}', [ProductController::class, 'show']);
+Route::get('/productos/{id}', [ProductController::class, 'show']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
