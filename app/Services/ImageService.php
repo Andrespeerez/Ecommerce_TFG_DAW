@@ -31,7 +31,7 @@ class ImageService {
 
         // 3 Convert and save as WebP
         Image::read($file)
-            ->scale(width: 800)
+            ->pad(width: 600, height: 600, background: 'ffffff') // https://image.intervention.io/v3/modifying-images/resizing
             ->toWebp(quality: $quality)
             ->save($fullpath);
 
