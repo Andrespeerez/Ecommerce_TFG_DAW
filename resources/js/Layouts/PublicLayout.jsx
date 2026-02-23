@@ -22,7 +22,8 @@ export default function PublicLayout ({ children, auth, cart }) {
         handleCloseModal();
 
         // open menu
-        setMenuOpen(true);
+        if (menuOpen == true) setMenuOpen(false);
+        else setMenuOpen(true);
     }
 
     function handleOpenLogin() {
@@ -30,7 +31,8 @@ export default function PublicLayout ({ children, auth, cart }) {
         handleCloseModal();
 
         // open menu
-        setLoginOpen(true);
+        if (loginOpen == true) setLoginOpen(false);
+        else setLoginOpen(true);
     }
 
     function handleOpenCart() {
@@ -38,7 +40,8 @@ export default function PublicLayout ({ children, auth, cart }) {
         handleCloseModal();
 
         // open menu
-        setCartOpen(true);
+        if (cartOpen == true) setCartOpen(false);
+        else setCartOpen(true);
     }
 
     function handleCloseModal() {
@@ -62,7 +65,7 @@ export default function PublicLayout ({ children, auth, cart }) {
             {menuOpen && 
             <Modal closeModal={handleCloseModal} 
             type="menu"
-            modalStyle="h-full w-1/2 bg-neutral-200 p-100 flex flex-col gap-20 items-center"
+            modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
             >
                               
             </Modal>
@@ -71,7 +74,7 @@ export default function PublicLayout ({ children, auth, cart }) {
             {loginOpen && 
             <Modal closeModal={handleCloseModal} 
             type="login"
-            modalStyle="h-full w-1/2 bg-neutral-200 p-100 flex flex-col gap-20 items-center"
+            modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
             >
                               
             </Modal>
@@ -80,7 +83,7 @@ export default function PublicLayout ({ children, auth, cart }) {
             {cartOpen && 
             <Modal closeModal={handleCloseModal} 
             type="cart"
-            modalStyle="h-full w-1/3 bg-neutral-200 p-100 flex flex-col gap-20 items-center"
+            modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
             >
                               
             </Modal>

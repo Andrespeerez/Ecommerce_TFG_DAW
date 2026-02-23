@@ -3,7 +3,7 @@ import { Link } from "@inertiajs/react";
 export default function Footer() {
     return (
         <footer
-        className="flex justify-center items-center py-[60px] bg-neutral-700 text-neutral-50"
+        className="flex justify-center items-center py-[60px] bg-neutral-700 text-neutral-50 z-10"
         >
             <section>
                 <h2 className="heading-6 text-center">Navegación:</h2>
