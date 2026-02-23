@@ -24,6 +24,11 @@ export default function PillsContainer ({ categories, materials, finishes, filte
     const pills = [];
 
     Object.entries(filters).forEach(([filterKey, filterValue]) => {
+        // nulls not allowed!
+        if (filterValue === null) {
+            return;
+        }
+
         if (Array.isArray(filterValue)) {
             filterValue.forEach(value => {
                 pills.push({filterKey, filterValue: value});

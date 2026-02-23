@@ -24,7 +24,7 @@ export default function PillFilters({ filters, categories, materials, finishes }
     
     return (
         <div
-        className="flex flex-wrap gap-5"
+        className="flex flex-wrap gap-5 px-10 pt-10"
         >
             <PillsContainer filters={filters} categories={categories} materials={materials} finishes={finishes} />
 
@@ -37,7 +37,7 @@ export default function PillFilters({ filters, categories, materials, finishes }
                 >
                     <img src="/assets/images/close.svg" alt="Eliminar Icono" aria-label="Eliminar filtro" />
                 </button>
-                Quitar todos los filtros
+                Quitar filtros
             </div>
             }
         </div>
