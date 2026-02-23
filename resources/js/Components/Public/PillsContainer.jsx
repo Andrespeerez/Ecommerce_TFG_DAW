@@ -65,6 +65,12 @@ export default function PillsContainer ({ categories, materials, finishes, filte
         if (filterKey === 'finishes')
             return finishes.find(finish => String(finish.id) === String(filterValue))?.name ?? filterValue;
 
+        if (filterKey === 'price_min')
+            return `Precio Mínimo: ${filterValue}€`;
+
+        if (filterKey === 'price_max')
+            return `Precio Máximo: ${filterValue}€`;
+
         return filterValue;
     }
 
@@ -93,7 +99,7 @@ export default function PillsContainer ({ categories, materials, finishes, filte
     
     return (
         <div
-        className="flex gap-2"
+        className="flex gap-2 flex-wrap"
         >
             {pills.map((pill, index) => (
                 <Pill key={index} onRemove={() => removeFilter(pill.filterKey, pill.filterValue)} >

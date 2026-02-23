@@ -15,11 +15,11 @@ export default function Filters ({ filters, categories, materials, finishes}) {
     useEffect(() => {
         setData({
             categories: filters.categories ?? [],
-            materials:  filters.materials  ?? [],
-            finishes:   filters.finishes   ?? [],
-            price_min:  filters.price_min  ?? '',
-            price_max:  filters.price_max  ?? '',
-            search:     filters.search     ?? '',
+            materials: filters.materials ?? [],
+            finishes: filters.finishes ?? [],
+            price_min: filters.price_min ?? '',
+            price_max: filters.price_max ?? '',
+            search: filters.search ?? '',
         });
     }, [filters]);
 
@@ -111,6 +111,27 @@ export default function Filters ({ filters, categories, materials, finishes}) {
                         {finish.name}
                     </label>
                 ))}
+
+                <section>
+                    <h3 className="heading-5">Precios:</h3>
+                    <div
+                    className="flex gap-4 items-center"
+                    >
+                        <label>
+                            Precio mínimo:
+                            <input type="number" onChange={e => setData('price_min', e.target.value)} value={data.price_min}
+                            className="w-12 text-right p-2 rounded-2xl ml-2"
+                            />€
+                        </label>
+                        <label>
+                            Precio máximo:
+                            <input type="number" onChange={e => setData('price_max', e.target.value)} value={data.price_max}
+                            className="w-12 text-right p-2 rounded-2xl ml-2"
+                            />€
+                        </label>
+                    </div>
+                    
+                </section>
             </section>
 
             
