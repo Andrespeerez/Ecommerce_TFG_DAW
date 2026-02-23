@@ -1,6 +1,7 @@
+import PillFilters from "@/Components/Public/PillFilters";
 import ProductCard from "@/Components/Public/ProductCard";
 import PublicLayout from "@/Layouts/PublicLayout";
-import { Head } from "@inertiajs/react";
+import { Head, router } from "@inertiajs/react";
 
 const cartDefault = {
     total_items: 0
@@ -22,12 +23,11 @@ export default function Products ({ auth, cart = cartDefault, products, categori
                     </div>
                 </aside>
 
-                <div className="flex-1 min-w-0">
-                    <div>
-                        Aquí van pills de productos
-                    </div>
+                <div className="flex-1 min-w-0 gap-10">
+                    <PillFilters categories={categories} materials={materials} finishes={finishes} filters={filters} />
+                    
                     <div
-                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 justify-items-center"
+                    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 justify-items-center "
                     >
                         {products.data.map((product) => (
                             <ProductCard key={product.id} product={product} />
