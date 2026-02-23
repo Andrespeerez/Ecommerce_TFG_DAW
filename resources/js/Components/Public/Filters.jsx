@@ -11,11 +11,17 @@ export default function Filters ({ filters, categories, materials, finishes}) {
         search: filters.search ?? '',
     });
 
-    // updates if search change
-    // if not, there is a bug that cause the previous search to be constantly applied
+    // if filters change, updates the form too
     useEffect(() => {
-        setData('search', filters.search ?? '');
-    }, [filters.search]);
+        setData({
+            categories: filters.categories ?? [],
+            materials:  filters.materials  ?? [],
+            finishes:   filters.finishes   ?? [],
+            price_min:  filters.price_min  ?? '',
+            price_max:  filters.price_max  ?? '',
+            search:     filters.search     ?? '',
+        });
+    }, [filters]);
 
 
     /**
