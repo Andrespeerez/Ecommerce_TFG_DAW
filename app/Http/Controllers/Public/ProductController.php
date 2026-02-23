@@ -26,6 +26,15 @@ class ProductController extends Controller
      * @return \Inertia\Response
      */
     public function index(Request $request) {
+        // search "Una mesa de roble macizo"
+        // array "una", "mesa", "de", "roble", "macizo"
+        // words with meaning: "mesa", "roble", "macizo"
+        // search LIKE mesa AND LIKE roble AND LIKE macizo
+        $uselessWords = ['de', 'la', 'lo', 'el', 'los', 'las', 'un', 'una', 'y', 'en', 'a'];
+
+        $searchArray = explode(' ', trim(strtolower($request->search))); // separete words
+        $searchArray = array_diff($searchArray, $uselessWords); // remove words without meaning
+
         // Filter products
         /*
         Query:
@@ -39,7 +48,6 @@ class ProductController extends Controller
 
         When method:
         https://medium.com/@zulfikarditya/laravels-when-method-a-comprehensive-guide-54fe6ae68e90
-
         */
         $products = Product::where('active', true)
                     ->when($request->categories, fn($q, $v) => $q->whereIn('category_id', $v))
@@ -47,7 +55,7 @@ class ProductController extends Controller
                     ->when($request->finishes, fn($q, $v) => $q->whereIn('finish_id', $v))
                     ->when($request->price_max, fn($q, $v) => $q->where('price_with_iva', '<=', $v))
                     ->when($request->price_min, fn($q, $v) => $q->where('price_with_iva', '>=', $v))
-                    ->when($request->search, fn($q, $v) => $q->where('name', 'like', "%{$v}%"))
+                    ->when(!empty($searchArray), fn($q) => $this->applySearchFilter($q, $searchArray))
                     ->with(['category', 'material', 'finish'])
                     ->paginate(12);
 
@@ -66,5 +74,19 @@ class ProductController extends Controller
         return Inertia::render('Public/ProductDetails', [
             'product' => $product,
         ]);
+    }
+
+    /**
+     * Apply a search filter for each word on an arrya
+     * @param mixed $query
+     * @param array $words - Array of words to search
+     * @return void
+     */
+    private function applySearchFilter($query, array $words) {
+        $query->where(function($q) use ($words) {
+            foreach ($words as $word) {
+                $q->where('name', 'like', "%$word%");
+            }
+        });
     }
 }
