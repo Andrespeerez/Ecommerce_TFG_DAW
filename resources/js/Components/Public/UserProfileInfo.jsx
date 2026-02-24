@@ -5,7 +5,7 @@ import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 
-export default function UserProfileInfo({ mustVerifyEmail, status }) {
+export default function UserProfileInfo() {
     const user = usePage().props.auth.user;
     const { data, setData, patch, errors, processing, recentlySuccessful, reset } = useForm({
         full_name: user.full_name || '',
