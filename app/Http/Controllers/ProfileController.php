@@ -55,13 +55,11 @@ class ProfileController extends Controller
 
         $user = $request->user();
 
-        if ($request->filled('password')) {
-            if (!Hash::check($request->current_password, $user->password)) {
-                return back()->withErrors(['current_password' => 'La contraseña actual no es correcta.']);
-            }
-            $user->password = Hash::make($request->password);
+        if (!Hash::check($validated['current_password'], $user->password)) {
+            return back()->withErrors(['current_password' => 'La contraseña actual no es correcta.']);
         }
 
+        $user->password = Hash::make($validated['password']);
         $user->save();
 
         return Redirect::route('profile.edit');
