@@ -27,12 +27,12 @@ const servicies = [
     },
 ]
 
-export default function Home({ cart = cartDefault, auth, mostSelled }) {
+export default function Home({ cart = cartDefault, auth, mostSelled, canResetPassword, categories }) {
     return (
         <>
             <Head title="Inicio" />
             
-            <PublicLayout cart={cart} auth={auth} >
+            <PublicLayout cart={cart} auth={auth} canResetPassword={canResetPassword} categories={categories} >
                 <Hero />
 
                 <section className="flex flex-col items-center mt-[30px]">
