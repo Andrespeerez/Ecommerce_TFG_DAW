@@ -1,4 +1,5 @@
 import UserProfileAccount from "@/Components/Public/UserProfileAccount";
+import UserProfileDelete from "@/Components/Public/UserProfileDetele";
 import UserProfileInfo from "@/Components/Public/UserProfileInfo";
 import UserProfileShipment from "@/Components/Public/UserProfileShipment";
 import PublicLayout from "@/Layouts/PublicLayout";
@@ -30,6 +31,7 @@ export default function UserProfile({ cart = cartDefault, auth, canResetPassword
                         <UserProfileAccount mustVerifyEmail={mustVerifyEmail} status={status} /> 
                         <UserProfileInfo />
                         <UserProfileShipment />
+                        <UserProfileDelete />
                     </div>
                 </div>
                 
