@@ -35,9 +35,10 @@ Route::get('/tienda', [ProductController::class, 'index'])->name('products.index
 Route::get('/productos/{id}', [ProductController::class, 'show'])->name('products.show');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/area-cliente', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/area-cliente/pedidos', [ProfileController::class, 'edit'])->name('profile.orders');
+    Route::patch('/area-cliente', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/area-cliente', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -50,4 +51,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         ->parameters(['productos' => 'product'])
         ->names('products');
 });
+
+
 require __DIR__.'/auth.php';

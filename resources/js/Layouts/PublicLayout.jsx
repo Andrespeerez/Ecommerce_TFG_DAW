@@ -61,7 +61,7 @@ export default function PublicLayout ({ children, auth, cart, canResetPassword }
 
     return (
         <div className="min-h-screen flex flex-col bg-neutral-50">
-            <Header setMenuOpen={handleOpenMenu} setCartOpen={handleOpenCart} setLoginOpen={handleOpenLogin} auth={auth} cart={cart} />
+            <Header setMenuOpen={handleOpenMenu} setCartOpen={handleOpenCart} setLoginOpen={handleOpenLogin} auth={auth} cart={cart} handleCloseModal={handleCloseModal} />
 
             <main className="flex-1">
                 {children}

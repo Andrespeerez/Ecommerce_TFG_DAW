@@ -6,7 +6,7 @@ import SearchBar from "./SearchBar";
 import { useState } from "react";
 import Dropdown from "../Dropdown";
 
-export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartOpen }) {
+export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartOpen, handleCloseModal }) {
     const name = String(auth.user?.full_name).split(' ')[0];
 
 
@@ -27,17 +27,16 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
 
             <SearchBar />
             
-            
-
             {auth.user ? 
             <Dropdown>
                 <Dropdown.Trigger>
                     <span className="inline-flex rounded-md">
                         <button
                             type="button"
-                            className="bg-neutral-50 hover:bg-neutral-300 active:bg-neutral-500 flex items-center px-[10px] py-[5px]"
+                            className="bg-neutral-50 hover:bg-neutral-300 active:bg-neutral-500 flex items-center px-[10px] py-[5px] rounded-[10px]"
+                            onClick={handleCloseModal}
                         >
-                            <span className="w-[130px] truncate heading-6 text-[16px] hidden md:inline">{name}</span>
+                            <span className="max-w-[130px] truncate heading-6 text-[16px] hidden md:inline text-right">{name}</span>
                             <svg
                                 className="-me-0.5 ms-2 h-4 w-4"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -56,12 +55,12 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
 
                 <Dropdown.Content>
                     <Dropdown.Link
-                        href={route('cliente.edit')}
+                        href={route('profile.edit')}
                     >
                         Mi Perfil
                     </Dropdown.Link>
                     <Dropdown.Link
-                        href={route('cliente.pedidos')}
+                        href={route('profile.orders')}
                     >
                         Mis Pedidos
                     </Dropdown.Link>

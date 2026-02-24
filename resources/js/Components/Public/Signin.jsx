@@ -28,15 +28,15 @@ export default function Signin() {
                 <TextInput
                     id="name"
                     name="name"
-                    value={data.name}
+                    value={data.full_name}
                     className="mt-1 block w-full"
                     autoComplete="name"
                     isFocused={true}
-                    onChange={(e) => setData('name', e.target.value)}
+                    onChange={(e) => setData('full_name', e.target.value)}
                     required
                 />
 
-                <InputError message={errors.name} className="mt-2" />
+                <InputError message={errors.full_name} className="mt-2" />
             </div>
 
             <div className="mt-4">
