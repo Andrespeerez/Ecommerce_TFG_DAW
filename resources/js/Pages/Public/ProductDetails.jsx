@@ -20,12 +20,12 @@ const productDefault = {
 
 
 
-export default function ProductDetails({ auth, cart = cartDefault, product = productDefault }) {
+export default function ProductDetails({ auth, cart = cartDefault, product = productDefault, canResetPassword, categories, }) {
     return (
         <>
         <Head title={product.name} />
 
-        <PublicLayout auth={auth} cart={cart} >
+        <PublicLayout cart={cart} auth={auth} canResetPassword={canResetPassword} categories={categories} >
             <h1>{product.name}</h1>
             <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} />
             <ReactMarkdown>

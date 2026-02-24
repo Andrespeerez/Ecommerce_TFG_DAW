@@ -10,7 +10,7 @@ export default function CartButton({ onClick, cart }) {
             className="absolute bg-success text-white font-semibold rounded-full size-6 -top-1 left-6 texto-base text-center"
             >{cart ? cart.total_items : ''}</span>
 
-            <span className="hidden sm:inline text-primary-900 heading-6">Carrito</span>
+            <span className="hidden md:inline text-primary-900 heading-6">Carrito</span>
         </button>
     );
 }
