@@ -1,5 +1,6 @@
 import UserProfileAccount from "@/Components/Public/UserProfileAccount";
 import UserProfileInfo from "@/Components/Public/UserProfileInfo";
+import UserProfileShipment from "@/Components/Public/UserProfileShipment";
 import PublicLayout from "@/Layouts/PublicLayout";
 import { Head, Link } from "@inertiajs/react";
 
@@ -27,7 +28,8 @@ export default function UserProfile({ cart = cartDefault, auth, canResetPassword
                     </aside>
                     <div className="grow flex flex-col gap-3 mx-4">
                         <UserProfileAccount mustVerifyEmail={mustVerifyEmail} status={status} /> 
-                        <UserProfileInfo mustVerifyEmail={mustVerifyEmail} status={status} /> 
+                        <UserProfileInfo />
+                        <UserProfileShipment />
                     </div>
                 </div>
                 

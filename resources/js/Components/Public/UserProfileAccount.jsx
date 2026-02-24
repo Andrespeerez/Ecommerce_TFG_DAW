@@ -5,7 +5,7 @@ import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
 
-export default function UserProfileAccount({ mustVerifyEmail, status }) {
+export default function UserProfileAccount() {
     const user = usePage().props.auth.user;
     const { data, setData, patch, errors, processing, recentlySuccessful, reset } = useForm({
         email: user.email,
@@ -78,7 +78,7 @@ export default function UserProfileAccount({ mustVerifyEmail, status }) {
                 </div>
             </form>
 
-            <form onSubmit={submitPassword}>
+            <form onSubmit={submitPassword} className="mt-6 space-y-6">
                 
                 <div className="border-t pt-4">
                     <h3 className="heading-6 mb-4">Cambiar Contraseña</h3>
