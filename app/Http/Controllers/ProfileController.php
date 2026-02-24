@@ -7,7 +7,9 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Validation\Rules\Password;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -27,11 +29,52 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function updateEmail(Request $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $validated = $request->validate([
+            'email' => 'required|email|max:255|unique:users,email,' . $request->user()->id,
+        ]);
 
-        $request->user()->save();
+        $user = $request->user();
+
+        $user->email = $validated['email'];
+        $user->save();
+
+        return Redirect::route('profile.edit');
+    }
+
+    /**
+     * Update the user's profile information.
+     */
+    public function updatePassword(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'current_password' => 'required_with:password,email',
+            'password' => ['nullable', 'confirmed', Password::defaults()],
+        ]);
+
+        $user = $request->user();
+
+        if ($request->filled('password')) {
+            if (!Hash::check($request->current_password, $user->password)) {
+                return back()->withErrors(['current_password' => 'La contraseña actual no es correcta.']);
+            }
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+
+        return Redirect::route('profile.edit');
+    }
+
+    public function updateInfo(Request $request): RedirectResponse 
+    {
+        $validated = $request->validate([
+            'full_name' => 'requited|string|max:255',
+            'phone' => 'nullable|string|max:15',
+        ]);
+
+        $request->user()->update($validated);
 
         return Redirect::route('profile.edit');
     }

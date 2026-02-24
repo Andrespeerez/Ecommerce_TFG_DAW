@@ -37,10 +37,11 @@ Route::get('/productos/{id}', [ProductController::class, 'show'])->name('product
 Route::middleware('auth')->group(function () {
     Route::get('/area-cliente', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/area-cliente/pedidos', [ProfileController::class, 'edit'])->name('profile.orders');
-    Route::patch('/area-cliente', [ProfileController::class, 'update'])->name('profile.update');
-    Route::patch('/area-cliente/info', [ProfileController::class, 'infoupdate'])->name('profile.info.update');
-    Route::patch('/area-cliente/shipment', [ProfileController::class, 'shipmentupdate'])->name('profile.shipment.update');
-    Route::delete('/area-cliente', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::patch('/area-cliente/email', [ProfileController::class, 'updateEmail'])->name('profile.update.email')->middleware('password.confirm');
+    Route::patch('/area-cliente/password', [ProfileController::class, 'updateEmail'])->name('profile.update.password');
+    Route::patch('/area-cliente/info', [ProfileController::class, 'updateInfo'])->name('profile.update.info');
+    Route::patch('/area-cliente/shipment', [ProfileController::class, 'updateShipment'])->name('profile.update.shipment')->middleware('password.confirm');
+    Route::delete('/area-cliente', [ProfileController::class, 'destroy'])->name('profile.destroy')->middleware('password.confirm');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {

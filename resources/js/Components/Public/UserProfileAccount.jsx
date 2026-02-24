@@ -7,15 +7,27 @@ import { Link, useForm, usePage } from '@inertiajs/react';
 
 export default function UserProfileAccount({ mustVerifyEmail, status }) {
     const user = usePage().props.auth.user;
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
-        full_name: user.full_name,
+    const { data, setData, patch, errors, processing, recentlySuccessful, reset } = useForm({
         email: user.email,
+        current_password: '',
+        password: '',
+        password_confirmation: '',
     });
 
-    const submit = (e) => {
+    const submitEmail = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        patch(route('profile.update.email'), {
+            onSuccess: () => reset('current_password', 'password', 'password_confirmation'),
+        });
+    }
+
+    const submitPassword = (e) => {
+        e.preventDefault();
+
+        patch(route('profile.update.password'), {
+            onSuccess: () => reset('current_password', 'password', 'password_confirmation'),
+        });
     }
 
     return (
@@ -24,27 +36,12 @@ export default function UserProfileAccount({ mustVerifyEmail, status }) {
                 <h2 className="heading-5">
                     Información de Cuenta
                 </h2>
-                <p>
+                <p className='text-base'>
                     Actualiza la información de tu cuenta.
                 </p>
             </header>
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
-                <div>
-                    <InputLabel htmlFor="full_name" value="Nombre" />
-
-                    <TextInput
-                        id="full_name"
-                        className="mt-1 block w-full"
-                        value={data.full_name}
-                        onChange={(e) => setData('full_name', e.target.value)}
-                        required
-                        isFocused
-                        autoComplete="full_name"
-                    />
-
-                    <InputError className="mt-2" message={errors.full_name} />
-                </div>
+            <form onSubmit={submitEmail} className="mt-6 space-y-6">
 
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
@@ -61,28 +58,6 @@ export default function UserProfileAccount({ mustVerifyEmail, status }) {
 
                     <InputError className="mt-2" message={errors.email} />
                 </div>
-
-                {mustVerifyEmail && user.email_verified_at === null && (
-                    <div>
-                        <p className="mt-2 text-sm text-gray-800">
-                            Tu email debe de estar verificado.
-                            <Link
-                                href={route('verification.send')}
-                                method="post"
-                                as="button"
-                                className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                                Clica aquí para verificar tu email.
-                            </Link>
-                        </p>
-
-                        {status === 'verification-link-sent' && (
-                            <div className="mt-2 text-sm font-medium text-green-600">
-                                Se te ha enviado un nuevo link de verificación.
-                            </div>
-                        )}
-                    </div>
-                )}
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}
@@ -101,6 +76,69 @@ export default function UserProfileAccount({ mustVerifyEmail, status }) {
                         </p>
                     </Transition>
                 </div>
+            </form>
+
+            <form onSubmit={submitPassword}>
+                
+                <div className="border-t pt-4">
+                    <h3 className="heading-6 mb-4">Cambiar Contraseña</h3>
+                    
+                    <div className="space-y-4">
+                        <div>
+                            <InputLabel htmlFor="current_password" value="Contraseña Actual" />
+                            <TextInput
+                                id="current_password"
+                                type="password"
+                                className="mt-1 block w-full"
+                                value={data.current_password}
+                                onChange={(e) => setData('current_password', e.target.value)}
+                            />
+                            <InputError className="mt-2" message={errors.current_password} />
+                        </div>
+
+                        <div>
+                            <InputLabel htmlFor="password" value="Nueva Contraseña" />
+                            <TextInput
+                                id="password"
+                                type="password"
+                                className="mt-1 block w-full"
+                                value={data.password}
+                                onChange={(e) => setData('password', e.target.value)}
+                            />
+                            <InputError className="mt-2" message={errors.password} />
+                        </div>
+
+                        <div>
+                            <InputLabel htmlFor="password_confirmation" value="Confirmar Nueva Contraseña" />
+                            <TextInput
+                                id="password_confirmation"
+                                type="password"
+                                className="mt-1 block w-full"
+                                value={data.password_confirmation}
+                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <div className="flex items-center gap-4">
+                    <PrimaryButton disabled={processing}
+                    className='bg-primary-700 hover:bg-primary-500 active:bg-primary-900 text-primary-50 heading-6'
+                    >Guardar</PrimaryButton>
+
+                    <Transition
+                        show={recentlySuccessful}
+                        enter="transition ease-in-out"
+                        enterFrom="opacity-0"
+                        leave="transition ease-in-out"
+                        leaveTo="opacity-0"
+                    >
+                        <p className="text-sm text-gray-600">
+                            Guardado.
+                        </p>
+                    </Transition>
+                </div>
+
             </form>
         </section>
     );

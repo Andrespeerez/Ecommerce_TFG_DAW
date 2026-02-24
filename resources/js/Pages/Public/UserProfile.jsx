@@ -1,4 +1,4 @@
-import UserProfileEditInfo from "@/Components/Public/UserProfileEditInfo";
+import UserProfileAccount from "@/Components/Public/UserProfileAccount";
 import PublicLayout from "@/Layouts/PublicLayout";
 import { Head } from "@inertiajs/react";
 
@@ -17,7 +17,7 @@ export default function UserProfile({ cart = cartDefault, auth, canResetPassword
 
                 </aside>
                 <div>
-                    <UserProfileEditInfo mustVerifyEmail={mustVerifyEmail} status={status} /> 
+                    <UserProfileAccount mustVerifyEmail={mustVerifyEmail} status={status} /> 
                 </div>
             </PublicLayout>
         </>
