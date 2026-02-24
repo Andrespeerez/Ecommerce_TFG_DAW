@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/area-cliente', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/area-cliente/pedidos', [ProfileController::class, 'edit'])->name('profile.orders');
     Route::patch('/area-cliente', [ProfileController::class, 'update'])->name('profile.update');
+    Route::patch('/area-cliente/info', [ProfileController::class, 'infoupdate'])->name('profile.info.update');
+    Route::patch('/area-cliente/shipment', [ProfileController::class, 'shipmentupdate'])->name('profile.shipment.update');
     Route::delete('/area-cliente', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
