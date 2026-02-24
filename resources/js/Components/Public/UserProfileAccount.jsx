@@ -42,9 +42,9 @@ export default function UserProfileAccount({ mustVerifyEmail, status }) {
             </header>
 
             <form onSubmit={submitEmail} className="mt-6 space-y-6">
-
+                <h3 className="heading-6 mb-4">Cambiar Email</h3>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
+                    <InputLabel htmlFor="email" value="Email" className='text-base font-semibold'/>
 
                     <TextInput
                         id="email"
@@ -85,7 +85,7 @@ export default function UserProfileAccount({ mustVerifyEmail, status }) {
                     
                     <div className="space-y-4">
                         <div>
-                            <InputLabel htmlFor="current_password" value="Contraseña Actual" />
+                            <InputLabel htmlFor="current_password" value="Contraseña Actual" className='text-base font-semibold'/>
                             <TextInput
                                 id="current_password"
                                 type="password"
@@ -109,7 +109,7 @@ export default function UserProfileAccount({ mustVerifyEmail, status }) {
                         </div>
 
                         <div>
-                            <InputLabel htmlFor="password_confirmation" value="Confirmar Nueva Contraseña" />
+                            <InputLabel htmlFor="password_confirmation" value="Confirmar Nueva Contraseña" className='text-base font-semibold'/>
                             <TextInput
                                 id="password_confirmation"
                                 type="password"
