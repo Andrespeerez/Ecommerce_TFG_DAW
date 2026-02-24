@@ -68,7 +68,7 @@ class ProfileController extends Controller
     public function updateInfo(Request $request): RedirectResponse 
     {
         $validated = $request->validate([
-            'full_name' => 'requited|string|max:255',
+            'full_name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:15',
         ]);
 
