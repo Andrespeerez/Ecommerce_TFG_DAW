@@ -10,7 +10,7 @@ const cartDefault = {
     total_items: 0
 }
 
-export default function Products ({ auth, cart = cartDefault, products, categories, materials, finishes, filters }) {
+export default function Products ({ auth, cart = cartDefault, products, canResetPassword, categories, materials, finishes, filters }) {
     const [ mobileFiltersOpen, setMobileFiltersOpen ] = useState(true);
 
     function handleOpenFilters() {
@@ -27,7 +27,7 @@ export default function Products ({ auth, cart = cartDefault, products, categori
         <>
         <Head title="Tienda" />
         
-        <PublicLayout auth={auth} cart={cart}>
+        <PublicLayout cart={cart} auth={auth} canResetPassword={canResetPassword} categories={categories} >
 
             <div
             className="flex gap-5 min-h-screen"

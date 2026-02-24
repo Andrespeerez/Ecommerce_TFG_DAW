@@ -27,7 +27,7 @@ const servicies = [
     },
 ]
 
-export default function Home({ cart = cartDefault, auth, mostSelled, canResetPassword, categories }) {
+export default function Home({ cart = cartDefault, auth, canResetPassword, categories, mostSelled }) {
     return (
         <>
             <Head title="Inicio" />
