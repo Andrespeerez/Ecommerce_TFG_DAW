@@ -77,6 +77,20 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
     }
 
+    public function updateShipment(Request $request): RedirectResponse 
+    {
+        $validated = $request->validate([
+            'address' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'province' => 'nullable|string|max:255',
+            'postal_code' => 'nullable|string|max:5',
+        ]);
+
+        $request->user()->update($validated);
+
+        return Redirect::route('profile.edit');
+    }
+
     /**
      * Delete the user's account.
      */
