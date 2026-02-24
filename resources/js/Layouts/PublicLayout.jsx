@@ -6,15 +6,14 @@ import { useState } from "react";
 import Signin from "@/Components/Public/Signin";
 import Login from "@/Components/Public/Login";
 import { Button } from "@/Components/Admin/Button";
+import Categories from "@/Components/Public/Categories";
 
-/**
- * 
- * @param {*} props.children Page content
- * @param {*} props.auth Data from the user
- * @param {*} props.cart Data from the cart 
- * @returns 
- */
-export default function PublicLayout ({ children, auth, cart, canResetPassword }) {
+
+export default function PublicLayout ({ children, auth, cart, categories, canResetPassword }) {
+    console.log(categories);
+    console.log(cart);
+    console.log(auth);
+
     // open/close modals
     const [ menuOpen, setMenuOpen ] = useState(false);
     const [ loginOpen, setLoginOpen ] = useState(false);
@@ -75,7 +74,7 @@ export default function PublicLayout ({ children, auth, cart, canResetPassword }
             type="menu"
             modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
             >
-                              
+                <Categories categories={categories} />      
             </Modal>
             }
 
