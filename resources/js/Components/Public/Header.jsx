@@ -37,6 +37,7 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
                             onClick={handleCloseModal}
                         >
                             <span className="max-w-[130px] truncate heading-6 text-[16px] hidden md:inline text-right">{name}</span>
+                            <img src="/assets/images/login.svg" alt="" className="md:hidden inline"/>
                             <svg
                                 className="-me-0.5 ms-2 h-4 w-4"
                                 xmlns="http://www.w3.org/2000/svg"
