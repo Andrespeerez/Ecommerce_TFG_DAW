@@ -45,6 +45,13 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
         <Head title={product.name} />
 
         <PublicLayout cart={cart} auth={auth} canResetPassword={canResetPassword} categories={categories} >
+            <button
+            onClick={() => window.history.back()}
+            className="text-accent-800 heading-6 p-5 mb-3"
+            >
+                Volver
+            </button>
+
             <div className="flex">
                 <section className="flex-1 mb-12 px-10">
                     <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} className="mx-auto"/>
@@ -81,12 +88,12 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                     </div>
                     
                 </section>
-                <aside>
+                <aside className="w-1/3 2xl:w-fit lg:block hidden">
                     <form onSubmit={submit}
                     className="sticky top-[90px] bg-primary-100 rounded-[10px] px-[42px] py-[25px] lg:flex flex-col items-center gap-[16px] mr-10 hidden"
                     >
                         <h2
-                        className="heading-6"
+                        className="heading-6 text-center"
                         >{product.name}</h2>
                         <p className="heading-6">{product.price_with_iva}€</p>
                         <Button type="submit" variant="secondary" disabled={isAdding}>
