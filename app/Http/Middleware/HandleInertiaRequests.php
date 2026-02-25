@@ -72,18 +72,24 @@ class HandleInertiaRequests extends Middleware
                     $quantity = $cart[$product->id]['quantity'];
                     $itemErrors = [];
 
+                    $max_items_per_product = config('cart.max_items_per_product');
+
                     if (!$product->active) {
-                        $itemError[] = 'El producto ya no está disponible';
+                        $itemErrors[] = 'El producto ya no está disponible';
                     }
 
-                    if (!$quantity > $product->stock) {
-                        $itemError[] = 'No hay stock suficiente';
+                    if ($quantity > $product->stock) {
+                        $itemErrors[] = 'No hay stock suficiente';
+                    }
+
+                    if ($quantity > $max_items_per_product) {
+                        $itemErrors[] = "No puedes tener más de $max_items_per_product items del mismo producto";
                     }
 
                     return [
                         'data' => $product,
                         'quantity' => $quantity,
-                        'errors' => $itemError,
+                        'errors' => $itemErrors,
                     ];
                 });
 
@@ -92,8 +98,9 @@ class HandleInertiaRequests extends Middleware
         $totalPrice = $cartItems->sum(fn($item) => $item['data']->price_with_iva * $item['quantity']);
 
         $cartErrors = [];
-        if ($totalItems > 20) {
-            $cartErrors[] = 'Tienes demasiados productos en el carrito';
+        $max_items_total = config('cart.max_items_total');
+        if ($totalItems > $max_items_total) {
+            $cartErrors[] = "No puedes tener más de $max_items_total items en el carrito";
         }
 
         return [
