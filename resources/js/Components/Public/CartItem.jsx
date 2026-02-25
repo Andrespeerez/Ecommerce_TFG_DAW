@@ -56,7 +56,7 @@ export default function CartItem({ product, quantity }) {
         e.preventDefault();
         setIsUpdating(true);
 
-        router.post(route('cart.remove', id), {}, {
+        router.delete(route('cart.remove', id), {}, {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
