@@ -1,7 +1,8 @@
 import PublicLayout from "@/Layouts/PublicLayout";
 import ReactMarkdown from 'react-markdown';
-import { Head, useForm } from "@inertiajs/react";
+import { Head, router, useForm } from "@inertiajs/react";
 import Button from "@/Components/Public/Button";
+import { useState } from "react";
 
 const cartDefault = {
     total_items: 0
@@ -20,7 +21,24 @@ const productDefault = {
 }
 
 export default function ProductDetails({ auth, cart = cartDefault, product = productDefault, canResetPassword, categories, }) {
-    const { data, setData, post, processing, errors, reset } = useForm({});
+    const [ isAdding, setIsAdding ] = useState(false);
+
+    function submit(e) {
+        e.preventDefault();
+
+        setIsAdding(true);
+
+        router.post(route('cart.add', product.id), {}, {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => {
+                setIsAdding(false);
+            },
+            onError: () => {
+                setIsAdding(false);
+            },
+        });
+    }
 
     return (
         <>
@@ -39,34 +57,30 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                     
                 </section>
                 <section>
-                    <form onSubmit={() => {
-                        post(route('cart.add', product.id));
-                    }}
+                    <form onSubmit={submit}
                     className="sticky top-[90px] bg-primary-100 rounded-[10px] px-[42px] py-[25px] lg:flex flex-col items-center gap-[16px] mr-10 hidden"
                     >
                         <h2
                         className="heading-6"
                         >{product.name}</h2>
                         <p className="heading-6">{product.price_with_iva}€</p>
-                        <Button type="submit" variant="secondary">
-                            Añadir al Carrito
+                        <Button type="submit" variant="secondary" disabled={isAdding}>
+                            { isAdding ? "Añadiendo ..." : "Añadir al Carrito" }
                         </Button>
                     </form>
 
                 </section>
             </div>
 
-            <form onSubmit={() => {
-                post(route('cart.add', product.id));
-            }}
+            <form onSubmit={submit}
             className="sticky bottom-0 z-50 bg-primary-100 w-full lg:hidden"
             >
                 <h2
                 className="heading-6"
                 >{product.name}</h2>
                 <p className="heading-6">{product.price_with_iva}€</p>
-                <Button type="submit" variant="secondary" className="w-full">
-                    Añadir al Carrito
+                <Button type="submit" variant="secondary" disabled={isAdding} className="w-full">
+                    { isAdding ? "Añadiendo ..." : "Añadir al Carrito" }
                 </Button>
             </form>
             
