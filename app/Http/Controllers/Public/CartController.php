@@ -57,5 +57,60 @@ class CartController extends Controller
         return back();
     }
 
+    /**
+     * Decrease the quantity of the product on 1
+     * 
+     * If quantity is 0, remove it instead
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function decrease(int $id) {
+        $cart = session('cart', []);
+        
+        if (!isset($cart[$id])) {
+            return back()->with('error', 'Producto no encontrado en el carrito');return back()->with('error', 'Producto no encontrado en el carrito');
+        }
+
+        $currentQuantity = $cart[$id]['quantity'];
+
+        // If quantity is lower than 1, remove it!
+        if ($currentQuantity <= 1) {
+            return $this->remove($id);
+        }
+        
+        $cart[$id]['quantity'] = $currentQuantity - 1;
+        session(['cart' => $cart]);
+
+        return back()->with('success', 'Cantidad actualizada');
+    }
+
+    /**
+     * Remove an item from the cart
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function remove(int $id) {
+        $cart = session('cart', []);
+
+        if (!isset($cart[$id])) {
+            return back()->with('error', 'Producto no encontrado en el carrito');
+        }
+
+        unset($cart[$id]);
+        session(['cart' => $cart]);
+
+        return back()->with('success', 'Producto eliminado del carrito');
+    }
+
+    /**
+     * Clear all product on the cart
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function clear() {
+        session(['cart' => []]);
+        return back()->with('success', 'Carrito vaciado');
+    }
+
     
 }
