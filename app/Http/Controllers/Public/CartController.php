@@ -30,19 +30,25 @@ class CartController extends Controller
 
         // 2 Get cart and currentQuantity for product If already exists
         $cart = session('cart');
-        $currentQuantity = isset($cart[$product->id]->quantity) ? $cart[$product->id]->quantity : 0;
+        $currentQuantity = $cart[$product->id]['quantity'] ?? 0;
 
         // 3 Check if enough stock
         if ($currentQuantity + 1 > $product->stock) {
             return back()->with('error', 'No hay suficiente stock.');
         }
 
-        // 4 Check if max limit is exceded
+        // 4 Check if max limit for product is exceded
         if ($currentQuantity + 1 > $max_items_per_product) {
             return back()->with('error', 'Máximo 10 unidades por producto.');
         }
 
-        // 5 Update Session Cart
+        // 5 Check if max limit total is exceded
+        $totalItems = array_sum(array_column($cart, 'quantity'));
+        if ($totalItems + 1 > $max_items_total) {
+            return back()->with('error', 'Has alcanzado el límite de productos en el carrito');
+        }
+
+        // 6 Update Session Cart
         session(['cart.' . $product->id => [
             'product_id' => $product->id,
             'quantity' => $currentQuantity + 1,
