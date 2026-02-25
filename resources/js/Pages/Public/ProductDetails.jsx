@@ -1,6 +1,7 @@
 import PublicLayout from "@/Layouts/PublicLayout";
 import ReactMarkdown from 'react-markdown';
-import { Head } from "@inertiajs/react";
+import { Head, useForm } from "@inertiajs/react";
+import Button from "@/Components/Public/Button";
 
 const cartDefault = {
     total_items: 0
@@ -18,19 +19,57 @@ const productDefault = {
     price_with_iva: 40,
 }
 
-
-
 export default function ProductDetails({ auth, cart = cartDefault, product = productDefault, canResetPassword, categories, }) {
+    const { data, setData, post, processing, errors, reset } = useForm({});
+
     return (
         <>
         <Head title={product.name} />
 
         <PublicLayout cart={cart} auth={auth} canResetPassword={canResetPassword} categories={categories} >
-            <h1>{product.name}</h1>
-            <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} />
-            <ReactMarkdown>
-                {product.description}
-            </ReactMarkdown>
+            <div className="flex">
+                <section className="flex-1 mb-12 px-10">
+                    <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} className="mx-auto"/>
+                    <h2 className="lg:heading-3 heading-5 text-center mt-4">{product.name}</h2>
+                    <div id="product_description">
+                        <ReactMarkdown>
+                            {product.description}
+                        </ReactMarkdown>
+                    </div>
+                    
+                </section>
+                <section>
+                    <form onSubmit={() => {
+                        post(route('cart.add', product.id));
+                    }}
+                    className="sticky top-[90px] bg-primary-100 rounded-[10px] px-[42px] py-[25px] lg:flex flex-col items-center gap-[16px] mr-10 hidden"
+                    >
+                        <h2
+                        className="heading-6"
+                        >{product.name}</h2>
+                        <p className="heading-6">{product.price_with_iva}€</p>
+                        <Button type="submit" variant="secondary">
+                            Añadir al Carrito
+                        </Button>
+                    </form>
+
+                </section>
+            </div>
+
+            <form onSubmit={() => {
+                post(route('cart.add', product.id));
+            }}
+            className="sticky bottom-0 z-50 bg-primary-100 w-full lg:hidden"
+            >
+                <h2
+                className="heading-6"
+                >{product.name}</h2>
+                <p className="heading-6">{product.price_with_iva}€</p>
+                <Button type="submit" variant="secondary" className="w-full">
+                    Añadir al Carrito
+                </Button>
+            </form>
+            
         </PublicLayout>
 
         </>
