@@ -9,6 +9,13 @@ use Inertia\Inertia;
 
 class HomeController extends Controller
 {
+    /**
+     * Show the Landing page view.
+     * 
+     * Includes mostSelled products
+     * 
+     * @return \Inertia\Response
+     */
     public function index() {
         $mostSelled = Product::where('active', true)
                         ->withCount('orderLines')

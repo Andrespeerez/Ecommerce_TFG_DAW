@@ -16,7 +16,9 @@ use Inertia\Response;
 class ProfileController extends Controller
 {
     /**
-     * Display the user's profile form.
+     * Show a Profile View to edit User data (table users)
+     * @param Request $request
+     * @return \Inertia\Response
      */
     public function edit(Request $request): Response
     {
@@ -27,7 +29,9 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information.
+     * Updates user Email
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function updateEmail(Request $request): RedirectResponse
     {
@@ -44,7 +48,9 @@ class ProfileController extends Controller
     }
 
     /**
-     * Update the user's profile information.
+     * Updates user password
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function updatePassword(Request $request): RedirectResponse
     {
@@ -65,6 +71,11 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
     }
 
+    /**
+     * Updates user info (full_name, phone)
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function updateInfo(Request $request): RedirectResponse 
     {
         $validated = $request->validate([
@@ -77,6 +88,11 @@ class ProfileController extends Controller
         return Redirect::route('profile.edit');
     }
 
+    /**
+     * Updates user data for Shipment
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function updateShipment(Request $request): RedirectResponse 
     {
         $validated = $request->validate([
