@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "./Button";
 import { router } from "@inertiajs/react";
 
-export default function CartItem({ product, quantity }) {
+export default function CartItem({ product, quantity, errors }) {
     const [ isUpdating, setIsUpdating ] = useState(false);
 
     /**
@@ -108,6 +108,10 @@ export default function CartItem({ product, quantity }) {
                     </button>
                 </div>
                 {isUpdating ? 'Actualizando ...' : ''}
+                {errors.map((error) => (
+                        <p className="text-base text-warning">{error}</p> 
+                    ) 
+                )}
             </div>
             
         </article>
