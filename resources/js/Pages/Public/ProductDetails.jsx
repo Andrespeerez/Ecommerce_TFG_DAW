@@ -48,15 +48,40 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
             <div className="flex">
                 <section className="flex-1 mb-12 px-10">
                     <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} className="mx-auto"/>
-                    <h2 className="lg:heading-3 heading-5 text-center mt-4">{product.name}</h2>
+                    <h2 className="lg:heading-3 heading-5 text-center my-4">{product.name}</h2>
                     <div id="product_description">
                         <ReactMarkdown>
                             {product.description}
                         </ReactMarkdown>
                     </div>
+                    <div>
+                        <h3 className="heading-6">Caraterísticas:</h3>
+                        
+                        <h4 className="text-base font-lora font-bold">Dimensiones:</h4>
+                        <ul>
+                            <li
+                            className="font-semibold"
+                            >
+                                Ancho: 
+                                <span className="font-normal"> {product.width_cm} cm</span>
+                            </li>
+                            <li
+                            className="font-semibold"
+                            >
+                                Alto: 
+                                <span className="font-normal"> {product.height_cm} cm</span>
+                            </li>
+                            <li
+                            className="font-semibold"
+                            >
+                                Profundo: 
+                                <span className="font-normal"> {product.depth_cm} cm</span>
+                            </li>
+                        </ul>
+                    </div>
                     
                 </section>
-                <section>
+                <aside>
                     <form onSubmit={submit}
                     className="sticky top-[90px] bg-primary-100 rounded-[10px] px-[42px] py-[25px] lg:flex flex-col items-center gap-[16px] mr-10 hidden"
                     >
@@ -69,17 +94,14 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                         </Button>
                     </form>
 
-                </section>
+                </aside>
             </div>
 
             <form onSubmit={submit}
             className="sticky bottom-0 z-50 bg-primary-100 w-full lg:hidden"
             >
-                <h2
-                className="heading-6"
-                >{product.name}</h2>
-                <p className="heading-6">{product.price_with_iva}€</p>
-                <Button type="submit" variant="secondary" disabled={isAdding} className="w-full">
+                <p className="heading-6 text-center">{product.price_with_iva}€</p>
+                <Button type="submit" variant="secondary" disabled={isAdding} className="w-full rounded-b-[0px] heading-6">
                     { isAdding ? "Añadiendo ..." : "Añadir al Carrito" }
                 </Button>
             </form>
