@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Order;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -15,6 +16,17 @@ use Inertia\Response;
 
 class ProfileController extends Controller
 {
+    public function orders(Request $request) {
+        $orders = Order::where("user_id", $request->user()->id)
+            ->with(['orderLines.product'])
+            ->orderBy('order_number', 'desc')
+            ->paginate(10);
+
+        return Inertia::render('Public/UserOrders', [
+            'orders' => $orders,
+        ]);
+    }
+
     /**
      * Show a Profile View to edit User data (table users)
      * @param Request $request
