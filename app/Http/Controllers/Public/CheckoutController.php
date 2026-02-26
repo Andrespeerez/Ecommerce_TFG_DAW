@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
+    // Services includes methods to create Orders and calculate Totals, Subtotals, and change Stock
     private readonly OrderService $orderService;
     private readonly OrderLineService $orderLineService;
 
@@ -24,6 +25,14 @@ class CheckoutController extends Controller
         $this->orderLineService = $orderLineService;
     }
 
+    /**
+     * Create a Order and OrderLines using data from the Cart
+     * 
+     * Uses OrderService and OrderLineService to create Order and OrderLine
+     * 
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(Request $request) {
         $max_items_total = config('cart.max_items_total', 20);
         $max_items_per_product = config('cart.max_items_per_product', 10);
@@ -31,6 +40,7 @@ class CheckoutController extends Controller
 
         $cartSession = session('cart', []);
 
+        // --------- CHECK FOR ERRORS --------------
         if (count($cartSession) == 0) {
             return back()->with('error', 'El carrito está vacío.');
         }
@@ -63,10 +73,11 @@ class CheckoutController extends Controller
             }            
         }
 
+        // ----------- CREATE ORDERS AND ORDERLINES ----------
         try {
             DB::beginTransaction();
 
-            $order = $this->orderService->createOrder($user);
+            $order = $this->orderService->createOrder($user); 
 
             foreach ($cartSession as $productId => $item) {
                 $product = $products[$productId];
