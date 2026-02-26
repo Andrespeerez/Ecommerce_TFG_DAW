@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Public\CartController;
+use App\Http\Controllers\Public\CheckoutController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController;
 use Illuminate\Foundation\Application;
@@ -46,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/area-cliente/info', [ProfileController::class, 'updateInfo'])->name('profile.update.info');
     Route::patch('/area-cliente/shipment', [ProfileController::class, 'updateShipment'])->name('profile.update.shipment')->middleware('password.confirm');
     Route::delete('/area-cliente', [ProfileController::class, 'destroy'])->name('profile.destroy')->middleware('password.confirm');
+
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
