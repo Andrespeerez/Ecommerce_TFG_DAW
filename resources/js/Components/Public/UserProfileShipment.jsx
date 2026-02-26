@@ -45,7 +45,7 @@ export default function UserProfileShipment() {
                         id="address"
                         type="text"
                         className="mt-1 block w-full"
-                        value={data.email}
+                        value={data.address}
                         onChange={(e) => setData('address', e.target.value)}
                         autoComplete="address"
                     />
@@ -60,7 +60,7 @@ export default function UserProfileShipment() {
                         id="city"
                         type="text"
                         className="mt-1 block w-full"
-                        value={data.email}
+                        value={data.city}
                         onChange={(e) => setData('city', e.target.value)}
                         autoComplete="city"
                     />
@@ -75,7 +75,7 @@ export default function UserProfileShipment() {
                         id="province"
                         type="text"
                         className="mt-1 block w-full"
-                        value={data.email}
+                        value={data.province}
                         onChange={(e) => setData('province', e.target.value)}
                         autoComplete="province"
                     />
@@ -90,7 +90,7 @@ export default function UserProfileShipment() {
                         id="postal_code"
                         type="text"
                         className="mt-1 block w-full"
-                        value={data.email}
+                        value={data.postal_code}
                         onChange={(e) => setData('postal_code', e.target.value)}
                         autoComplete="postal_code"
                     />
