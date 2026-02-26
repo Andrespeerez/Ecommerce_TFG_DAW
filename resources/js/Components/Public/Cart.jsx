@@ -1,13 +1,26 @@
 import { useState } from "react";
 import Button from "./Button";
 import CartItem from "./CartItem";
+import { router } from "@inertiajs/react";
 
 export default function Cart({ cart }) {
     const [ hasErrors, setHasErrors ] = useState(false);
 
+    const noActive = hasErrors || cart.items.length == 0;
+
     if (cart.errors.length > 0) {
         setHasErrors(true);
     }
+
+    /**
+     * Submit to the server to create the orders
+     * @param {Event} e 
+     */
+    function submit(e) {
+        e.preventDefault();
+
+        router.post(route('checkout.store'), {}, {});
+    }    
 
     return (
         <div className="flex flex-col justify-between pt-5 gap-2 h-full w-full">
@@ -33,7 +46,12 @@ export default function Cart({ cart }) {
                 
                 <Button 
                 className="w-full rounded-b-[0px]"
-                disabled={hasErrors}
+                disabled={noActive}
+                onClick={(e) => {
+                    if (confirm("Confirmar pedido")) {
+                        submit(e);
+                    }
+                }}
                 >
                     Realizar Pedido
                 </Button>
