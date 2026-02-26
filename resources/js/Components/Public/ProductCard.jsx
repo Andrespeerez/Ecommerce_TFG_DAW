@@ -35,7 +35,7 @@ export default function ProductCard({ product = productFake }) {
             itemScope 
             itemType="https://schema.org/Offer"
             >
-                <meta itemprop="priceCurrency" content="EUR" />
+                <meta itemProp="priceCurrency" content="EUR" />
                 <div
                 className="text-primary-900 heading-6 lg:heading-5"
                 >

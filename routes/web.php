@@ -40,15 +40,25 @@ Route::post('/cart/decrease/{id}', [CartController::class, 'decrease'])->name('c
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 Route::middleware('auth')->group(function () {
+    /*
+    middleware('throttle:1,2')  :  For each user, allow only 1 request each 2 minuts to this enpoint
+
+    This middleware must to be applied to:
+    - Changes on the data base
+    - Checkouts
+    - Logins, registers
+    */
+
+
     Route::get('/area-cliente', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::get('/area-cliente/pedidos', [ProfileController::class, 'orders'])->name('profile.orders');
-    Route::patch('/area-cliente/email', [ProfileController::class, 'updateEmail'])->name('profile.update.email')->middleware('password.confirm');
-    Route::patch('/area-cliente/password', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
-    Route::patch('/area-cliente/info', [ProfileController::class, 'updateInfo'])->name('profile.update.info');
-    Route::patch('/area-cliente/shipment', [ProfileController::class, 'updateShipment'])->name('profile.update.shipment')->middleware('password.confirm');
+    Route::patch('/area-cliente/email', [ProfileController::class, 'updateEmail'])->middleware('throttle:1,2')->name('profile.update.email')->middleware('password.confirm');
+    Route::patch('/area-cliente/password', [ProfileController::class, 'updatePassword'])->middleware('throttle:1,2')->name('profile.update.password');
+    Route::patch('/area-cliente/info', [ProfileController::class, 'updateInfo'])->middleware('throttle:1,2')->name('profile.update.info');
+    Route::patch('/area-cliente/shipment', [ProfileController::class, 'updateShipment'])->middleware('throttle:1,2')->name('profile.update.shipment')->middleware('password.confirm');
     Route::delete('/area-cliente', [ProfileController::class, 'destroy'])->name('profile.destroy')->middleware('password.confirm');
 
-    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store')->middleware('throttle:1,2');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
