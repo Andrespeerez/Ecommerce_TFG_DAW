@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Inertia\Middleware;
@@ -63,36 +64,11 @@ class HandleInertiaRequests extends Middleware
         }
         */
 
-        // 2 Object to return as a prop
-        $cart = session('cart', []);
 
-        $cartItems = empty($cart) ? collect() : 
-            Product::whereIn('id', array_keys($cart))->get()
-                ->map(function($product) use ($cart) {
-                    $quantity = $cart[$product->id]['quantity'];
-                    $itemErrors = [];
+        // 2 Create CartItems from CartService (cache)
+        $cartService = new CartService();
 
-                    $max_items_per_product = config('cart.max_items_per_product');
-
-                    if (!$product->active) {
-                        $itemErrors[] = 'El producto ya no está disponible';
-                    }
-
-                    if ($quantity > $product->stock) {
-                        $itemErrors[] = 'No hay stock suficiente';
-                    }
-
-                    if ($quantity > $max_items_per_product) {
-                        $itemErrors[] = "No puedes tener más de $max_items_per_product items del mismo producto";
-                    }
-
-                    return [
-                        'data' => $product,
-                        'quantity' => $quantity,
-                        'errors' => $itemErrors,
-                    ];
-                });
-
+        $cartItems = $cartService->getCartItems(300);
         
         $totalItems = $cartItems->sum('quantity');
         $totalPrice = $cartItems->sum(fn($item) => $item['data']->price_with_iva * $item['quantity']);
