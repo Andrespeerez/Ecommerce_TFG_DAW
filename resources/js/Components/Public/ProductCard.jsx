@@ -37,10 +37,9 @@ export default function ProductCard({ product = productFake }) {
             >
                 <meta itemprop="priceCurrency" content="EUR" />
                 <div
-                itemProp="price"
                 className="text-primary-900 heading-6 lg:heading-5"
                 >
-                    {product.price_with_iva}€
+                    <span itemProp="price">{product.price_with_iva}</span>€
                 </div>
 
                 <ButtonLink variant="secondary" href={`/productos/${product.id}`}>
