@@ -14,12 +14,14 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
         <header
         className="sticky top-0 z-50 bg-primary-50 stroke-primary-200 flex justify-between items-center px-5 py-[10px] border-b-2 h-20"
         >
-            <Link href="/" className="flex items-center">
+            <Link href="/" className="flex items-center" aria-label="Volver a la vista Home">
                 <img src="/assets/images/logo_small.svg" alt="Logo Carpintería Barberes" 
                 className="md:hidden"
+                aria-label="Logo Carpintería"
                 />
                 <img src="/assets/images/logo.svg" alt="Logo Carpintería Barberes" 
                 className="hidden md:block"
+                aria-label="Logo Carpintería"
                 />
             </Link>
 
