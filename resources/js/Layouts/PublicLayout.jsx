@@ -7,6 +7,7 @@ import Signin from "@/Components/Public/Signin";
 import Login from "@/Components/Public/Login";
 import { Button } from "@/Components/Admin/Button";
 import Categories from "@/Components/Public/Categories";
+import Cart from "@/Components/Public/Cart";
 
 
 export default function PublicLayout ({ children, auth, cart, categories, canResetPassword }) {
@@ -81,14 +82,13 @@ export default function PublicLayout ({ children, auth, cart, categories, canRes
             {loginOpen && 
             <Modal closeModal={handleCloseModal} 
             type="login"
-            modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
+            modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center pt-10"
             >
-                <Button onClick={toggleLoginSignin}>{loginSignin ? "Log In" : "Registrarse"}</Button>
-
                 {loginSignin ? 
                 <Signin /> : 
                 <Login canResetPassword={canResetPassword} />
-                }           
+                }       
+                <Button onClick={toggleLoginSignin}>{loginSignin ? "Ya tienes cuenta? Entra" : "No tienes cuenta? Registrate"}</Button>    
             </Modal>
             }
 
@@ -97,7 +97,7 @@ export default function PublicLayout ({ children, auth, cart, categories, canRes
             type="cart"
             modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
             >
-                              
+                <Cart cart={cart} />
             </Modal>
             }
 

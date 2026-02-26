@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Public\CartController;
 use App\Http\Controllers\Public\HomeController;
 use App\Http\Controllers\Public\ProductController;
 use Illuminate\Foundation\Application;
@@ -33,6 +34,9 @@ Route::get('/test', function() {
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
 Route::get('/tienda', [ProductController::class, 'index'])->name('products.index');
 Route::get('/productos/{id}', [ProductController::class, 'show'])->name('products.show');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/decrease/{id}', [CartController::class, 'decrease'])->name('cart.decrease');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 Route::middleware('auth')->group(function () {
     Route::get('/area-cliente', [ProfileController::class, 'edit'])->name('profile.edit');
