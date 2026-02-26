@@ -37,9 +37,11 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
                             type="button"
                             className="bg-neutral-50 hover:bg-neutral-300 active:bg-neutral-500 flex items-center px-[10px] py-[5px] rounded-[10px]"
                             onClick={handleCloseModal}
+                            role="menu"
+                            aria-label="Abrir Menu de Usuario"
                         >
                             <span className="max-w-[130px] truncate heading-6 text-[16px] hidden md:inline text-right">{name}</span>
-                            <img src="/assets/images/login.svg" alt="" className="md:hidden inline"/>
+                            <img src="/assets/images/login.svg" alt="" className="md:hidden inline" aria-label={`${name}`}/>
                             <svg
                                 className="-me-0.5 ms-2 h-4 w-4"
                                 xmlns="http://www.w3.org/2000/svg"
