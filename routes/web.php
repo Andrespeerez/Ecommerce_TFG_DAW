@@ -41,7 +41,7 @@ Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('car
 
 Route::middleware('auth')->group(function () {
     Route::get('/area-cliente', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/area-cliente/pedidos', [ProfileController::class, 'edit'])->name('profile.orders');
+    Route::get('/area-cliente/pedidos', [ProfileController::class, 'orders'])->name('profile.orders');
     Route::patch('/area-cliente/email', [ProfileController::class, 'updateEmail'])->name('profile.update.email')->middleware('password.confirm');
     Route::patch('/area-cliente/password', [ProfileController::class, 'updatePassword'])->name('profile.update.password');
     Route::patch('/area-cliente/info', [ProfileController::class, 'updateInfo'])->name('profile.update.info');
