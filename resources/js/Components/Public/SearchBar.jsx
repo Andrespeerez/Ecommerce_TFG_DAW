@@ -5,6 +5,10 @@ export default function SearchBar() {
     const [ searchValue, setSearchValue ] = useState('');
     const [ mobileDropDown, setMobileDropDown ] = useState(false);
 
+    /**
+     * Submit search param to /tienda?search=...
+     * @param {Event} e 
+     */
     function handleSearch(e) {
         e.preventDefault();
 
@@ -16,9 +20,11 @@ export default function SearchBar() {
 
     return (
         <>
-            <form onSubmit={handleSearch} className="w-1/3 -space-x-16 hidden md:flex">
-                <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} 
+            <form onSubmit={handleSearch} className="w-1/3 -space-x-16 hidden md:flex relative">
+                <label htmlFor="search-bar" className="absolute -z-50">Buscador</label>
+                <input id="search-bar" type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} 
                 className="w-full pl-5 pr-20 px-10 rounded-3xl texto-base"
+                aria-label="Buscador"
                 />
                 <button type="submit" 
                 className="-top-[40%] right-0"

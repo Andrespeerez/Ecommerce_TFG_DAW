@@ -1,11 +1,19 @@
+import OrderCard from "@/Components/Public/OrderCard";
 import PublicLayout from "@/Layouts/PublicLayout";
 import { Head, Link } from "@inertiajs/react";
-import OrderCard from "./OrderCard";
+
 
 export default function UserOrders({ auth, cart, canResetPassword, categories, orders }) {
     return (
         <>
-            <Head title="Pedidos" />
+    
+            <Head>
+                <title>Pedidos</title>
+                <meta name="description" content="Carpintería Barberes es un negocio local de elaboración de muebles y objetos de madera de forma tradicional y artesanal. Nuestra tienda online muestra productos de madera de la más alta calidad fabricados a mano. Ofrecemos servicios para remodelar baño, cocinas, armarios empotrados y parqué. " />
+                <meta property="og:type" content="website" />
+                <meta property="og:title" content="Carpintería Barberes" />
+                <meta property="og:description" content="Muebles y reformas de madera a medida con acabado artesanal." />
+            </Head>
         
             <PublicLayout auth={auth} cart={cart} categories={categories} canResetPassword={canResetPassword}>
                 <div
