@@ -20,6 +20,8 @@ return new class extends Migration
             $table->decimal('price_with_iva', 10, 2);
             $table->integer('stock');
             $table->string('image_url');
+            $table->string('image_small_url');
+            $table->string('image_preview_url');
             $table->foreignId('category_id')->constrained('categories');
             $table->foreignId('material_id')->constrained('materials');
             $table->foreignId('finish_id')->constrained('finishes');
