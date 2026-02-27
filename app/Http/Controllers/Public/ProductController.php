@@ -32,7 +32,7 @@ class ProductController extends Controller
         // search LIKE mesa AND LIKE roble AND LIKE macizo
         $uselessWords = ['de', 'la', 'lo', 'el', 'los', 'las', 'un', 'una', 'y', 'en', 'a'];
 
-        $searchArray = explode(' ', trim(strtolower($request->search))); // separete words
+        $searchArray = explode(' ', trim(strtolower(strip_tags($request->search)))); // separete words
         $searchArray = array_diff($searchArray, $uselessWords); // remove words without meaning
 
         // Filter products
