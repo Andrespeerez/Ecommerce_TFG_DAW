@@ -6,7 +6,7 @@ import TextInput from '@/Components/TextInput';
 import PublicLayout from "@/Layouts/PublicLayout";
 import { Link, useForm } from "@inertiajs/react";
 
-export default function Login({ canResetPassword }) {
+export default function Login({ canResetPassword, closeModal }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
@@ -23,6 +23,7 @@ export default function Login({ canResetPassword }) {
 
         post(route('login'), {
             onFinish: () => reset('password'),
+            onSuccess: () => closeModal(),
         });
     }
 

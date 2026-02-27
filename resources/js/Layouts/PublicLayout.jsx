@@ -87,8 +87,8 @@ export default function PublicLayout ({ children, auth, cart, categories, canRes
             modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center pt-10"
             >
                 {loginSignin ? 
-                <Signin /> : 
-                <Login canResetPassword={canResetPassword} />
+                <Signin closeModal={handleCloseModal} /> : 
+                <Login canResetPassword={canResetPassword} closeModal={handleCloseModal} />
                 }       
                 <Button onClick={toggleLoginSignin}>{loginSignin ? "Ya tienes cuenta? Entra" : "No tienes cuenta? Registrate"}</Button>    
             </Modal>
