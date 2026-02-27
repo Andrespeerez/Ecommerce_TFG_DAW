@@ -71,7 +71,7 @@ export default function CartItem({ product, quantity, errors }) {
 
     return (
         <article className="flex gap-6 p-3 w-full border-b-[1px] border-primary-200">
-            <img src={`/storage/${product.image_preview_url}`} alt="Imagen" className="size-32 flex-shrink-0 object-cover"/>
+            <img src={`/storage/${product.image_preview_url}`} alt="Imagen" className="size-32 flex-shrink-0 object-cover" loading="lazy"/>
 
             <section className="flex flex-col justify-evenly w-full min-w-0">
                 <h3 className="heading-6 truncate">

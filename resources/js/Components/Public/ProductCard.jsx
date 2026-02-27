@@ -19,6 +19,7 @@ export default function ProductCard({ product = productFake }) {
             <img src={`/storage/${product.image_small_url}`} alt={`Foto de ${product.name}`} 
             className="object-cover w-full h-[70%]"
             itemProp="image"
+            loading="lazy"
             />
 
             <h3
