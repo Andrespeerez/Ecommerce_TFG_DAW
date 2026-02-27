@@ -1,6 +1,13 @@
-import { Link } from "@inertiajs/react";
+import { router } from "@inertiajs/react";
 
-export default function UserProfileDelete() {    
+export default function UserProfileDelete() {  
+    
+    function submit(e) {
+        e.preventDefault();
+
+        router.delete(route('profile.destroy'));
+    }
+    
     return (
         <section className="bg-neutral-300 text-neutral-900 p-5 flex flex-col gap-2">
             <header>
@@ -12,9 +19,15 @@ export default function UserProfileDelete() {
                 </p>
             </header>
 
-            <Link method="DELETE" className="bg-danger p-2 rounded-lg text-primary-900 heading-6" 
-            href={route('profile.destroy')}
-            >Borrar cuenta</Link>
+            <button 
+            className="bg-danger p-2 rounded-lg text-primary-900 heading-6"
+            aria-label="Borrar cuenta"
+            onClick={(e) => {
+                if (confirm('¿Estás seguro de borrar tu cuenta?')) {
+                    submit(e);
+                }
+            }}
+            >Borrar cuenta</button>
         </section>
     );
 }
