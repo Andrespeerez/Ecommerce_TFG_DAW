@@ -111,7 +111,7 @@ class ProfileController extends Controller
             'address' => 'nullable|string|max:255',
             'city' => 'nullable|string|max:255',
             'province' => 'nullable|string|max:255',
-            'postal_code' => 'nullable|string|max:5',
+            'postal_code' => 'nullable|string|regex:/^\d{5}$/',
         ]);
 
         $request->user()->update($validated);

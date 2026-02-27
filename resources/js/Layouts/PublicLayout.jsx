@@ -61,9 +61,11 @@ export default function PublicLayout ({ children, auth, cart, categories, canRes
 
     return (
         <div className="min-h-screen flex flex-col bg-neutral-50">
+            <a href="#main-content" className="absolute -top-10 left-0 text-white focus:top-0">Saltar al contenido principal</a>
+
             <Header setMenuOpen={handleOpenMenu} setCartOpen={handleOpenCart} setLoginOpen={handleOpenLogin} auth={auth} cart={cart} handleCloseModal={handleCloseModal} />
 
-            <main className="flex-1">
+            <main className="flex-1" id="main-content">
                 {children}
             </main>
 
@@ -85,8 +87,8 @@ export default function PublicLayout ({ children, auth, cart, categories, canRes
             modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center pt-10"
             >
                 {loginSignin ? 
-                <Signin /> : 
-                <Login canResetPassword={canResetPassword} />
+                <Signin closeModal={handleCloseModal} /> : 
+                <Login canResetPassword={canResetPassword} closeModal={handleCloseModal} />
                 }       
                 <Button onClick={toggleLoginSignin}>{loginSignin ? "Ya tienes cuenta? Entra" : "No tienes cuenta? Registrate"}</Button>    
             </Modal>

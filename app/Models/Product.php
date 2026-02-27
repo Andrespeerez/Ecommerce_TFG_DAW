@@ -16,6 +16,8 @@ class Product extends Model
         'price_with_iva',
         'stock',
         'image_url',
+        'image_small_url',
+        'image_preview_url',
         'category_id',
         'material_id',
         'finish_id',

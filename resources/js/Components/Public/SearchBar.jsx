@@ -21,13 +21,14 @@ export default function SearchBar() {
     return (
         <>
             <form onSubmit={handleSearch} className="w-1/3 -space-x-16 hidden md:flex relative">
-                <label htmlFor="search-bar" className="absolute -z-50">Buscador</label>
+                <label htmlFor="search-bar" className="sr-only">Buscador</label>
                 <input id="search-bar" type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} 
                 className="w-full pl-5 pr-20 px-10 rounded-3xl texto-base"
-                aria-label="Buscador"
+                placeholder="Buscar productos..."
                 />
                 <button type="submit" 
                 className="-top-[40%] right-0"
+                aria-label="Buscar producto"
                 >
                     <img src="/assets/images/search.svg" alt="Buscar" />
                 </button>
@@ -36,6 +37,7 @@ export default function SearchBar() {
             <button
                 className="md:hidden"
                 onClick={(e) => setMobileDropDown((previous) => !previous)}
+                aria-label="Abrir buscador"
             >
                 <img src="/assets/images/search.svg" alt="Buscar" />
             </button>
@@ -47,6 +49,7 @@ export default function SearchBar() {
                     />
                     <button type="submit" 
                     className="-ml-12 inline"
+                    aria-label="Buscar producto"
                     >
                         <img src="/assets/images/search.svg" alt="Buscar" />
                     </button>

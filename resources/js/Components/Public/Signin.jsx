@@ -4,7 +4,7 @@ import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm } from "@inertiajs/react";
 
-export default function Signin() {
+export default function Signin({ closeModal }) {
     const { data, setData, post, processing, errors, reset } = useForm({
         full_name: '',
         email: '',
@@ -17,6 +17,7 @@ export default function Signin() {
 
         post(route('register'), {
             onFinish: () => reset('password', 'password_confirmation'),
+            onSuccess: () => closeModal(),
         });
     };
 

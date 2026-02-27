@@ -4,10 +4,18 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Services\CartService;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
+    private  readonly CartService $cartService;
+
+    public function __construct() {
+        $this->cartService = new CartService();
+    }
+
+
     /**
      * Add a product to the cart, or increase quantity in 1
      *
@@ -54,6 +62,9 @@ class CartController extends Controller
             'quantity' => $currentQuantity + 1,
         ]]);
 
+        // 7 Remove cache cart
+        $this->cartService->clearCache();
+
         return back();
     }
 
@@ -82,6 +93,9 @@ class CartController extends Controller
         $cart[$id]['quantity'] = $currentQuantity - 1;
         session(['cart' => $cart]);
 
+        // Remove cache cart
+        $this->cartService->clearCache();
+
         return back()->with('success', 'Cantidad actualizada');
     }
 
@@ -100,6 +114,9 @@ class CartController extends Controller
         unset($cart[$id]);
         session(['cart' => $cart]);
 
+        // Remove cache cart
+        $this->cartService->clearCache();
+
         return back()->with('success', 'Producto eliminado del carrito');
     }
 
@@ -109,6 +126,8 @@ class CartController extends Controller
      */
     public function clear() {
         session(['cart' => []]);
+        $this->cartService->clearCache();
+
         return back()->with('success', 'Carrito vaciado');
     }
 

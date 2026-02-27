@@ -62,6 +62,7 @@ export default function UserProfileAccount() {
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}
                     className='bg-primary-700 hover:bg-primary-500 active:bg-primary-900 text-primary-50 heading-6'
+                    aria-label="Guardar cambios de email"
                     >Guardar</PrimaryButton>
 
                     <Transition
@@ -124,6 +125,7 @@ export default function UserProfileAccount() {
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing}
                     className='bg-primary-700 hover:bg-primary-500 active:bg-primary-900 text-primary-50 heading-6'
+                    aria-label="Guardar nueva contraseña"
                     >Guardar</PrimaryButton>
 
                     <Transition

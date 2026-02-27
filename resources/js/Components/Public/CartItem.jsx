@@ -4,6 +4,7 @@ import { router } from "@inertiajs/react";
 
 export default function CartItem({ product, quantity, errors }) {
     const [ isUpdating, setIsUpdating ] = useState(false);
+    console.log(product);
 
     /**
      * Increase quantity in 1
@@ -70,9 +71,9 @@ export default function CartItem({ product, quantity, errors }) {
 
     return (
         <article className="flex gap-6 p-3 w-full border-b-[1px] border-primary-200">
-            <img src={`/storage/${product.image_url}`} alt="Imagen" className="size-32 flex-shrink-0 object-cover"/>
+            <img src={`/storage/${product.image_preview_url}`} alt="Imagen" className="size-32 flex-shrink-0 object-cover" loading="lazy"/>
 
-            <div className="flex flex-col justify-evenly w-full min-w-0">
+            <section className="flex flex-col justify-evenly w-full min-w-0">
                 <h3 className="heading-6 truncate">
                     {product.name}
                 </h3>
@@ -82,7 +83,7 @@ export default function CartItem({ product, quantity, errors }) {
                 <div className="flex justify-between items-center">
                     <div className="flex items-center gap-2">
                         <button 
-                        aria-label="Reducir cantidad de producto"
+                        aria-label={`Reducir cantidad de ${product.name}`}
                         disabled={isUpdating}
                         onClick={(e) => decreaseItem(e, product.id)}
                         >
@@ -94,7 +95,7 @@ export default function CartItem({ product, quantity, errors }) {
                         <button 
                         disabled={isUpdating}
                         onClick={(e) => addItem(e, product.id)}
-                        aria-label="Aumentar cantidad de producto"
+                        aria-label={`Aumentar cantidad de ${product.name}`}
                         >
                             <img src="/assets/images/plus.svg" alt="Incrementar un producto" />
                         </button>
@@ -102,17 +103,17 @@ export default function CartItem({ product, quantity, errors }) {
                     <button 
                     disabled={isUpdating}
                     onClick={(e) => removeItem(e, product.id)}
-                    aria-label="Borra el producto del carrito"
+                    aria-label={`Borrar ${product.name} del carrito`}
                     >
                         <img src="/assets/images/remove.svg" alt="Elimina el producto" />
                     </button>
                 </div>
                 {isUpdating ? 'Actualizando ...' : ''}
-                {errors.map((error) => (
-                        <p className="text-base text-warning">{error}</p> 
+                {errors.map((error, index) => (
+                        <p key={index} className="text-base text-warning">{error}</p> 
                     ) 
                 )}
-            </div>
+            </section>
             
         </article>
     );
