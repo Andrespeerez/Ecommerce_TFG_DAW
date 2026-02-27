@@ -61,9 +61,11 @@ export default function PublicLayout ({ children, auth, cart, categories, canRes
 
     return (
         <div className="min-h-screen flex flex-col bg-neutral-50">
+            <a href="#main-content" className="absolute -top-10 left-0 text-white focus:top-0">Saltar al contenido principal</a>
+
             <Header setMenuOpen={handleOpenMenu} setCartOpen={handleOpenCart} setLoginOpen={handleOpenLogin} auth={auth} cart={cart} handleCloseModal={handleCloseModal} />
 
-            <main className="flex-1">
+            <main className="flex-1" id="main-content">
                 {children}
             </main>
 

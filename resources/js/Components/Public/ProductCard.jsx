@@ -43,7 +43,7 @@ export default function ProductCard({ product = productFake }) {
                 </div>
 
                 <ButtonLink variant="secondary" href={`/productos/${product.id}`}>
-                    Ver Producto
+                    Ver Producto <span className="hidden">{product.name}</span>
                 </ButtonLink>
             </div>
 
