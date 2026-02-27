@@ -76,7 +76,8 @@ class ProductController extends Controller
 
         // 3 Upload image
         $imageService = new ImageService();
-        $validated['image_url'] = $imageService->uploadAsWebP($request->file('image'));
+        $imagePaths = $imageService->uploadAsWebP($request->file('image'));
+        $validated = array_merge($validated, $imagePaths);
         unset($validated['image']);  // only store the image_url in DB, so remove the gfield
 
         // 4 Create Product
@@ -140,7 +141,13 @@ class ProductController extends Controller
 
         // 2 Update image if new image provided
         $imageService = new ImageService();
-        $validated['image_url'] = $imageService->updateImage($request->file('image'), $product->image_url);
+        $imagePaths = $imageService->updateImages(
+            $request->file('image'),
+            $product->image_url,
+            $product->image_small_url,
+            $product->image_preview_url
+        );
+        $validated = array_merge($validated, $imagePaths);
         unset($validated['image']);
 
         // 3 Recalculate price_with_iva
@@ -172,7 +179,7 @@ class ProductController extends Controller
 
         // 2 Delete image
         $imageService = new ImageService();
-        $imageService->deleteImage( $product->image_url);
+        $imageService->deleteImages( $product->image_url, $product->image_small_url, $product->image_preview_url);
 
         // 3 Delete the product
         $product->delete();
