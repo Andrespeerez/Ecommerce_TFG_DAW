@@ -16,7 +16,7 @@ export default function ProductCard({ product = productFake }) {
         itemType="https://schema.org/Product"
         className="rounded-[20px] flex flex-col justify-between gap-3 pb-[10px] bg-neutral-300 max-w-[450px] w-full overflow-hidden border-t-1 lg:h-[600px] md:h-[500px]"
         >
-            <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} 
+            <img src={`/storage/${product.image_small_url}`} alt={`Foto de ${product.name}`} 
             className="object-cover w-full h-[70%]"
             itemProp="image"
             />
