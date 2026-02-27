@@ -92,7 +92,7 @@ class ImageService {
     {
         // If there is new file, delete the old one and upload new
         if ($newFile) {
-            $this->deleteImage($oldImagePath, $oldImageSmallPath, $oldImagePreviewPath);
+            $this->deleteImages($oldImagePath, $oldImageSmallPath, $oldImagePreviewPath);
             return $this->uploadAsWebP($newFile, $directory);
         }
 
