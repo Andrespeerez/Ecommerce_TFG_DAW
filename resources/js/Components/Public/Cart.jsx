@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import CartItem from "./CartItem";
 import { router } from "@inertiajs/react";
@@ -6,11 +6,11 @@ import { router } from "@inertiajs/react";
 export default function Cart({ cart }) {
     const [ hasErrors, setHasErrors ] = useState(false);
 
-    const noActive = hasErrors || cart.items.length == 0;
+    useEffect(() => {
+        const errors = cart.errors.length > 0 || cart.items.some(item => item.errors.length > 0);
 
-    if (cart.errors.length > 0) {
-        setHasErrors(true);
-    }
+        setHasErrors(errors);
+    }, [cart])
 
     /**
      * Submit to the server to create the orders
@@ -26,10 +26,6 @@ export default function Cart({ cart }) {
         <div className="flex flex-col justify-between pt-5 gap-2 h-full w-full">
             <div className="w-full overflow-y-auto">
                 {cart.items.map((item) => {
-                    if (item.errors.length > 0) {
-                        setHasErrors(true);
-                    }
-
                     return (
                         <CartItem key={item.data.id} product={item.data} quantity={item.quantity} errors={item.errors} />
                     );
@@ -46,7 +42,7 @@ export default function Cart({ cart }) {
                 
                 <Button 
                 className="w-full rounded-b-[0px]"
-                disabled={noActive}
+                disabled={hasErrors}
                 onClick={(e) => {
                     if (confirm("Confirmar pedido")) {
                         submit(e);

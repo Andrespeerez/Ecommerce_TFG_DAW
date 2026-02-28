@@ -33,6 +33,9 @@ class CartController extends Controller
         $max_items_total = config('cart.max_items_total');
         $max_items_per_product = config('cart.max_items_per_product');
 
+        // 7 Remove cache cart
+        $this->cartService->clearCache();
+
         // 1 Check if product exists
         $product = Product::findOrFail($id);
 
@@ -62,9 +65,6 @@ class CartController extends Controller
             'quantity' => $currentQuantity + 1,
         ]]);
 
-        // 7 Remove cache cart
-        $this->cartService->clearCache();
-
         return back()->with('success', 'Producto agregado al carrito.');;
     }
 
@@ -78,6 +78,9 @@ class CartController extends Controller
      */
     public function decrease(int $id) {
         $cart = session('cart', []);
+
+        // Remove cache cart
+        $this->cartService->clearCache();
         
         if (!isset($cart[$id])) {
             return back()->with('error', 'Producto no encontrado en el carrito.');
@@ -93,9 +96,6 @@ class CartController extends Controller
         $cart[$id]['quantity'] = $currentQuantity - 1;
         session(['cart' => $cart]);
 
-        // Remove cache cart
-        $this->cartService->clearCache();
-
         return back()->with('success', 'Cantidad actualizada.');
     }
 
@@ -107,15 +107,15 @@ class CartController extends Controller
     public function remove(int $id) {
         $cart = session('cart', []);
 
+        // Remove cache cart
+        $this->cartService->clearCache();
+
         if (!isset($cart[$id])) {
             return back()->with('error', 'Producto no encontrado en el carrito.');
         }
 
         unset($cart[$id]);
         session(['cart' => $cart]);
-
-        // Remove cache cart
-        $this->cartService->clearCache();
 
         return back()->with('success', 'Producto eliminado del carrito.');
     }
