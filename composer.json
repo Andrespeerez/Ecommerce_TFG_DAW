@@ -53,6 +53,10 @@
             "@php artisan config:clear --ansi",
             "@php artisan test"
         ],
+        "post-install-cmd": [
+            "php artisan clear-compiled",
+            "php artisan storage:link --force"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

@@ -23,6 +23,8 @@ export default function Signin({ closeModal }) {
 
     return (
         <form onSubmit={submit}>
+            <p className='text-neutral-600'>Esta página no es un e-commerce real. Se ruega que no se usen datos reales.</p>
+
             <div>
                 <InputLabel htmlFor="name" value="Name" />
 
