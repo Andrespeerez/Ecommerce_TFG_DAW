@@ -53,7 +53,7 @@ class CartController extends Controller
         // 5 Check if max limit total is exceded
         $totalItems = array_sum(array_column($cart, 'quantity'));
         if ($totalItems + 1 > $max_items_total) {
-            return back()->with('error', 'Has alcanzado el límite de productos en el carrito');
+            return back()->with('error', 'Has alcanzado el límite de productos en el carrito.');
         }
 
         // 6 Update Session Cart
@@ -65,7 +65,7 @@ class CartController extends Controller
         // 7 Remove cache cart
         $this->cartService->clearCache();
 
-        return back();
+        return back()->with('success', 'Producto agregado al carrito.');;
     }
 
     /**
@@ -80,7 +80,7 @@ class CartController extends Controller
         $cart = session('cart', []);
         
         if (!isset($cart[$id])) {
-            return back()->with('error', 'Producto no encontrado en el carrito');return back()->with('error', 'Producto no encontrado en el carrito');
+            return back()->with('error', 'Producto no encontrado en el carrito.');
         }
 
         $currentQuantity = $cart[$id]['quantity'];
@@ -96,7 +96,7 @@ class CartController extends Controller
         // Remove cache cart
         $this->cartService->clearCache();
 
-        return back()->with('success', 'Cantidad actualizada');
+        return back()->with('success', 'Cantidad actualizada.');
     }
 
     /**
@@ -108,7 +108,7 @@ class CartController extends Controller
         $cart = session('cart', []);
 
         if (!isset($cart[$id])) {
-            return back()->with('error', 'Producto no encontrado en el carrito');
+            return back()->with('error', 'Producto no encontrado en el carrito.');
         }
 
         unset($cart[$id]);
@@ -117,7 +117,7 @@ class CartController extends Controller
         // Remove cache cart
         $this->cartService->clearCache();
 
-        return back()->with('success', 'Producto eliminado del carrito');
+        return back()->with('success', 'Producto eliminado del carrito.');
     }
 
     /**
@@ -128,7 +128,7 @@ class CartController extends Controller
         session(['cart' => []]);
         $this->cartService->clearCache();
 
-        return back()->with('success', 'Carrito vaciado');
+        return back()->with('success', 'Carrito vaciado.');
     }
 
     

@@ -8,6 +8,7 @@ import Login from "@/Components/Public/Login";
 import { Button } from "@/Components/Admin/Button";
 import Categories from "@/Components/Public/Categories";
 import Cart from "@/Components/Public/Cart";
+import Notification from "@/Components/Public/Notification";
 
 
 export default function PublicLayout ({ children, auth, cart, categories, canResetPassword }) {
@@ -64,6 +65,8 @@ export default function PublicLayout ({ children, auth, cart, categories, canRes
             <a href="#main-content" className="absolute -top-10 left-0 text-white focus:top-0">Saltar al contenido principal</a>
 
             <Header setMenuOpen={handleOpenMenu} setCartOpen={handleOpenCart} setLoginOpen={handleOpenLogin} auth={auth} cart={cart} handleCloseModal={handleCloseModal} />
+
+            <Notification />
 
             <main className="flex-1" id="main-content">
                 {children}
