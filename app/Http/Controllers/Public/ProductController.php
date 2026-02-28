@@ -57,7 +57,8 @@ class ProductController extends Controller
                     ->when($request->price_min, fn($q, $v) => $q->where('price_with_iva', '>=', $v))
                     ->when(!empty($searchArray), fn($q) => $this->applySearchFilter($q, $searchArray))
                     ->with(['category', 'material', 'finish'])
-                    ->paginate(12);
+                    ->paginate(6)
+                    ->appends($request->only(['categories', 'materials', 'finishes', 'price_min', 'price_max', 'search'])); 
 
         return Inertia::render('Public/Products', [
             'products' => $products,

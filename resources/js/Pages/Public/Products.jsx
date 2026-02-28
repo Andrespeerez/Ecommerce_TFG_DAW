@@ -3,7 +3,7 @@ import Modal from "@/Components/Public/Modal";
 import PillFilters from "@/Components/Public/PillFilters";
 import ProductCard from "@/Components/Public/ProductCard";
 import PublicLayout from "@/Layouts/PublicLayout";
-import { Head, router } from "@inertiajs/react";
+import { Head, Link, router } from "@inertiajs/react";
 import { useEffect, useState } from "react";
 
 const cartDefault = {
@@ -52,6 +52,21 @@ export default function Products ({ auth, cart = cartDefault, products, canReset
                     >
                         {products.data.map((product) => (
                             <ProductCard key={product.id} product={product} />
+                        ))}
+                    </div>
+                    <div className="flex justify-center items-center gap-2 pb-10">
+                        {products.links.map((link, index) => (
+                            <Link
+                                key={index}
+                                href={link.url || '#'}
+                                className={`px-4 py-2 border rounded ${
+                                    link.active 
+                                        ? 'bg-neutral-800 text-white border-neutral-800' 
+                                        : 'bg-white text-neutral-800 border-neutral-300 hover:bg-neutral-100'
+                                } ${!link.url && 'opacity-50 cursor-not-allowed'}`}
+                                preserveScroll
+                                dangerouslySetInnerHTML={{ __html: link.label }}
+                            />
                         ))}
                     </div>
                 </div>
