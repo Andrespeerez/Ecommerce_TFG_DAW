@@ -7,6 +7,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-gd": "*",
+        "ext-intl": "*",
+        "ext-pdo_mysql": "*",
+        "ext-zip": "*",
         "inertiajs/inertia-laravel": "^2.0",
         "intervention/image-laravel": "^1.5",
         "laravel/framework": "^12.0",
