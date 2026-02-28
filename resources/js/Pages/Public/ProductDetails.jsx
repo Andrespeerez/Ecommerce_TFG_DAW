@@ -111,7 +111,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
             </div>
 
             <form onSubmit={submit}
-            className="sticky bottom-0 z-50 bg-primary-100 w-full lg:hidden"
+            className="sticky bottom-0 z-40 bg-primary-100 w-full lg:hidden"
             >
                 <p className="heading-6 text-center">{product.price_with_iva}€</p>
                 <Button type="submit" variant="secondary" disabled={isAdding} className="w-full rounded-b-[0px] heading-6">
