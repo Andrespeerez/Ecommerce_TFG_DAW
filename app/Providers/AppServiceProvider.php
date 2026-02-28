@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
     {
         if (config('app.env') === 'production') {
             URL::forceScheme('https');
+            
+            \Illuminate\Pagination\Paginator::currentPathResolver(function () {
+            return str_replace('http://', 'https://', request()->url());
+        });
         }
 
         Vite::prefetch(concurrency: 3);
