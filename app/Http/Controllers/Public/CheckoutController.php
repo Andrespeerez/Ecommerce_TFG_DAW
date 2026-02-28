@@ -49,6 +49,10 @@ class CheckoutController extends Controller
             return back()->with('error', 'El carrito está vacío.');
         }
 
+        if ($user->address == null || $user->city == null || $user->province == null || $user->postal_code == null) {
+            return back()->with('error', 'No tienes dirección de envío bien definida.');
+        }
+
         $totalItems = array_sum(array_column($cartSession, 'quantity')); //  array_column() : [quantity1, quantity2, ...] -> array_sum()
         if ($totalItems > $max_items_total) {
             return back()->with('error', "No puedes comprar más de $max_items_total");
