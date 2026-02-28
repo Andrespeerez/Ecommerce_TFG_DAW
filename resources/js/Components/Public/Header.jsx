@@ -15,12 +15,14 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
         className="sticky top-0 z-50 bg-primary-50 stroke-primary-200 flex justify-between items-center px-5 py-[10px] border-b-2 h-20"
         >
             <Link href="/" className="flex items-center" aria-label="Ir a la página principal">
-                <img src="/assets/images/logo_small.svg" alt="Logo Carpintería Barberes" 
+                <img src="/assets/images/logo2.svg" alt="Logo Carpintería Barberes" 
                 className="md:hidden"
                 />
-                <img src="/assets/images/logo.svg" alt="Logo Carpintería Barberes" 
-                className="hidden md:block"
-                />
+                <p
+                className="hidden md:flex flex-col font-extrabold font-lora">
+                    <span className="text-primary-700">Carpintería</span>
+                    <span className="text-secondary-700">Andrés</span>
+                </p>
             </Link>
 
             <CategoriesButton onClick={() => setMenuOpen(true)} />
