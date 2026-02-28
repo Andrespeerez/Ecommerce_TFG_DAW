@@ -42,6 +42,8 @@ class CheckoutController extends Controller
         $max_items_per_product = config('cart.max_items_per_product', 10);
         $user = $request->user();
 
+        $this->cartService->clearCache();
+
         $cartSession = session('cart', []);
 
         // --------- CHECK FOR ERRORS --------------
@@ -95,7 +97,6 @@ class CheckoutController extends Controller
             }
 
             session(['cart' => []]);
-            $this->cartService->clearCache();
 
             DB::commit();
 
