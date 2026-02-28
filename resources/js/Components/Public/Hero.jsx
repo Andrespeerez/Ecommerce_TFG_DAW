@@ -8,6 +8,9 @@ export default function Hero () {
         >
             <img src="/assets/images/hero.webp" alt="Banner principal de Carpitería Andrés" 
             className="w-full aspect-auto"
+            fetchPriority="high"
+            width="1200"
+            height="600"
             />
 
             <h1 className="heading-4 lg:heading-1 md:heading-3 text-primary-900">Carpintería Andrés</h1>
