@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Services\CartService;
 use App\Services\OrderLineService;
 use App\Services\OrderService;
 use Exception;
@@ -16,11 +17,14 @@ class CheckoutController extends Controller
     // Services includes methods to create Orders and calculate Totals, Subtotals, and change Stock
     private readonly OrderService $orderService;
     private readonly OrderLineService $orderLineService;
+    private readonly CartService $cartService;
 
     public function __construct(
+        CartService $cartService,
         OrderService $orderService,
         OrderLineService $orderLineService
     ) {
+        $this->cartService = $cartService;
         $this->orderService = $orderService;
         $this->orderLineService = $orderLineService;
     }
@@ -87,6 +91,7 @@ class CheckoutController extends Controller
             }
 
             session(['cart' => []]);
+            $this->cartService->clearCache();
 
             DB::commit();
 
