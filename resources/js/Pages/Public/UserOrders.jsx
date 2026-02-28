@@ -31,7 +31,25 @@ export default function UserOrders({ auth, cart, canResetPassword, categories, o
                         {orders.data.map((order) => (
                             <OrderCard key={order.order_number} order={order} />
                         ))}
+
+                        <div className="flex justify-center gap-1 mt-6">
+                            {orders.links.map((link, index) => (
+                                <Link
+                                    key={index}
+                                    href={link.url || '#'}
+                                    className={`px-4 py-2 border rounded ${
+                                        link.active 
+                                            ? 'bg-neutral-800 text-white border-neutral-800' 
+                                            : 'bg-white text-neutral-800 border-neutral-300 hover:bg-neutral-100'
+                                    } ${!link.url && 'opacity-50 cursor-not-allowed'}`}
+                                    preserveScroll
+                                    dangerouslySetInnerHTML={{ __html: link.label }}
+                                />
+                            ))}
+                        </div>
                     </div>
+
+                    
                 </div>
             </PublicLayout>
         </>

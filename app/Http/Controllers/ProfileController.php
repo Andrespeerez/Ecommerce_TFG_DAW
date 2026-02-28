@@ -20,7 +20,7 @@ class ProfileController extends Controller
         $orders = Order::where("user_id", $request->user()->id)
             ->with(['orderLines.product'])
             ->orderBy('order_number', 'desc')
-            ->paginate(2);
+            ->paginate(6);
 
         return Inertia::render('Public/UserOrders', [
             'orders' => $orders,
