@@ -18,6 +18,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \App\Http\Middleware\SecurityHeaders::class,
         ]);
 
+        $middleware->trustProxies(at: '*');
+
         // Middleware aliases
         $middleware->alias([
             'admin' => IsAdmin::class,
