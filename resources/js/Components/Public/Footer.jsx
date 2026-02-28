@@ -21,7 +21,7 @@ export default function Footer() {
             </div>
             <section className="p-6 text-center flex flex-col gap-4">
                 <h2 className="heading-6 text-center">Aviso:</h2>
-                <p>Esta página no es un e-commerce real. Es un proyecto realizado como parte del proyecto de fin de grado de DAW. Se ruega que no se pongan datos reales en caso de querer publicarla.</p>
+                <p>Esta página no es un e-commerce real. Es un proyecto realizado como parte del proyecto de fin de grado de DAW. Se ruega que no se pongan datos reales en caso de querer loggearse.</p>
                 <p><strong>Autor:</strong> Andrés Pérez Guardiola</p>
                 <p><strong>GitHub:</strong> 
                     <a 
