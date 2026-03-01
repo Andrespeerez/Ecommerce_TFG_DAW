@@ -22,6 +22,9 @@ export default function Login({ canResetPassword, closeModal }) {
         e.preventDefault();
 
         post(route('login'), {
+            preserveState: true,
+            preserveScroll: true,
+            
             onFinish: () => reset('password'),
             onSuccess: () => closeModal(),
         });

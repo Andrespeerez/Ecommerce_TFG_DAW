@@ -17,6 +17,8 @@ export default function Signin({ closeModal }) {
         e.preventDefault();
 
         post(route('register'), {
+            preserveState: true,
+            preserveScroll: true,
             onFinish: () => reset('password', 'password_confirmation'),
             onSuccess: () => closeModal(),
         });

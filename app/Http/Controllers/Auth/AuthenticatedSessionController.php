@@ -29,11 +29,16 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
+        try {
+            $request->authenticate();
+            $request->session()->regenerate();
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(route('home.index', absolute: false));
+            return redirect()
+                ->intended(route('home.index', absolute: false))
+                ->with('success', 'Loggeado con éxito');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Credenciales incorrectos');
+        }
     }
 
     /**
