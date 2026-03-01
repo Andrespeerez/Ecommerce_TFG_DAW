@@ -18,29 +18,29 @@ export default function Notification () {
     if (!visible) return null;
 
     return (
-        <>
-        {flash.error && (
-            <div className="w-full bg-danger text-white px-6 py-3 rounded-lg heading-6 flex justify-between items-center z-50">
-                {flash.error}
-                <button 
-                onClick={() => setVisible(false)}
-                aria-label="Cerrar la notificación"
-                >
-                    <img src="/assets/images/close.svg" alt="Icono cerrar" className="size-8" />
-                </button>
-            </div>
-        )}
-        {flash.success && (
-            <div className="w-full bg-success text-white px-6 py-3 rounded-lg heading-6 flex justify-between items-center z-50">
-                {flash.success}
-                <button 
-                onClick={() => setVisible(false)}
-                aria-label="Cerrar la notificación"
-                >
-                    <img src="/assets/images/close.svg" alt="Icono cerrar" className="size-8" />
-                </button>
-            </div>
-        )}
-        </>
+        <div className="p-1">
+            {flash.error && (
+                <div className="w-full bg-danger text-white opacity-60 px-6 py-3 rounded-lg heading-6 text-[16px] flex justify-between items-center z-50">
+                    {flash.error}
+                    <button 
+                    onClick={() => setVisible(false)}
+                    aria-label="Cerrar la notificación"
+                    >
+                        <img src="/assets/images/close.svg" alt="Icono cerrar" className="size-8" />
+                    </button>
+                </div>
+            )}
+            {flash.success && (
+                <div className="w-full bg-success text-white opacity-60 px-6 py-3 rounded-lg heading-6 text-[16px] flex justify-between items-center z-50">
+                    {flash.success}
+                    <button 
+                    onClick={() => setVisible(false)}
+                    aria-label="Cerrar la notificación"
+                    >
+                        <img src="/assets/images/close.svg" alt="Icono cerrar" className="size-8" />
+                    </button>
+                </div>
+            )}
+        </div>
     );
 }
