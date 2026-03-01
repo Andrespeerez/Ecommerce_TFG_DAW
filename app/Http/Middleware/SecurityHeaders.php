@@ -33,7 +33,7 @@ class SecurityHeaders
 
         if (App::environment('production')) {
             $csp = "default-src 'self'; " .
-                   "script-src 'self' 'nonce-$nonce'; " . 
+                   "script-src 'self' 'nonce-$nonce' 'strict-dynamic';" . 
                    "style-src 'self' 'unsafe-inline'; " .
                    "img-src 'self' data: https://ecommerce-tfgdaw-production.up.railway.app; " .
                    "connect-src 'self'; " .
