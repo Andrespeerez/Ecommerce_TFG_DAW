@@ -33,7 +33,7 @@ export default function Products ({ auth, cart = cartDefault, products, canReset
             <meta property="og:description" content="Muebles y reformas de madera a medida con acabado artesanal." />
         </Head>
         
-        <PublicLayout cart={cart} auth={auth} canResetPassword={canResetPassword} categories={categories} >
+        <PublicLayout canResetPassword={canResetPassword} >
 
             <div
             className="flex gap-5 min-h-screen"
@@ -44,7 +44,7 @@ export default function Products ({ auth, cart = cartDefault, products, canReset
                     </div>
                 </aside>
 
-                <div className="flex-1 min-w-0 flex flex-col gap-10">
+                <div className="flex-1 min-w-0 flex flex-col gap-10 rounded-2xl bg-black/20 border-1 border-neutral-200">
                     <PillFilters categories={categories} materials={materials} finishes={finishes} filters={filters} />
                     
                     <div
