@@ -27,9 +27,9 @@ export default function Cart({ cart, openLoginModal, closeModals }) {
 
         if (!auth.user.address || !auth.user.city || !auth.user.province || !auth.user.postal_code ) {
             closeModals();
-            router.visit(route('profile.edit'), {
+            router.visit(route('profile.edit', {
                 error: 'Debes completar tus datos de envío para realizar un pedido.',
-            });
+            }));
             return;
         }
 

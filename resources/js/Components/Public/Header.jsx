@@ -9,7 +9,6 @@ import Dropdown from "../Dropdown";
 export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartOpen, handleCloseModal }) {
     const name = String(auth.user?.full_name).split(' ')[0];
 
-
     return (
         <header
         className="sticky top-0 z-50 bg-primary-50 stroke-primary-200 flex justify-between items-center px-5 py-[10px] border-b-2 h-20"
@@ -40,7 +39,7 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
                             aria-label="Abrir Menu de Usuario"
                         >
                             <span className="max-w-[130px] truncate heading-6 hidden lg:inline text-right">{name}</span>
-                            <img src="/assets/images/login.svg" alt="Icono usuario" aria-hidden="true" className="md:hidden inline" />
+                            <img src="/assets/images/login.svg" alt="Icono usuario" aria-hidden="true" className="sm:hidden inline" />
                             <svg
                                 className="-me-0.5 ms-2 h-4 w-4"
                                 xmlns="http://www.w3.org/2000/svg"
