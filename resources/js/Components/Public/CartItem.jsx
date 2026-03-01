@@ -4,7 +4,6 @@ import { router } from "@inertiajs/react";
 
 export default function CartItem({ product, quantity, errors }) {
     const [ isUpdating, setIsUpdating ] = useState(false);
-    console.log(product);
 
     /**
      * Increase quantity in 1

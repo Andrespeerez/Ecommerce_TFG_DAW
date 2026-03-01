@@ -1,19 +1,22 @@
 import '../css/app.css';
 import './bootstrap';
 
-import { createInertiaApp } from '@inertiajs/react';
+import { createInertiaApp, router } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { createRoot } from 'react-dom/client';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+window.addEventListener('popstate', (event) => {
+    router.reload({ 
+        preserveScroll: true, 
+        preserveState: false 
+    });
+});
+
 window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
-
-        router.reload({ 
-            preserveScroll: true,
-            preserveState: false 
-        });
+        window.location.reload();
     }
 });
 
