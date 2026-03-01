@@ -33,9 +33,7 @@ class AuthenticatedSessionController extends Controller
             $request->authenticate();
             $request->session()->regenerate();
 
-            return redirect()
-                ->intended(route('home.index', absolute: false))
-                ->with('success', 'Loggeado con éxito');
+            return back();
         } catch (\Exception $e) {
             return back()->with('error', 'Credenciales incorrectos');
         }
