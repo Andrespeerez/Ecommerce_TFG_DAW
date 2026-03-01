@@ -16,9 +16,6 @@ class SecurityHeaders
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $nonce = $nonce = \Str::random(40);
-        view()->share('csp_nonce', $nonce);
-
         $response = $next($request);
 
         $response->headers->set('X-Frame-Options', 'DENY');
@@ -33,7 +30,7 @@ class SecurityHeaders
 
         if (App::environment('production')) {
             $csp = "default-src 'self'; " .
-                   "script-src 'self' 'nonce-$nonce' 'strict-dynamic';" . 
+                   "script-src 'self' 'unsafe-inline'; " . 
                    "style-src 'self' 'unsafe-inline'; " .
                    "img-src 'self' data: https://ecommerce-tfgdaw-production.up.railway.app; " .
                    "connect-src 'self'; " .

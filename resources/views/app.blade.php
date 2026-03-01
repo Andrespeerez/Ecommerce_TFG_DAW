@@ -6,8 +6,6 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-        @routes(nonce: $csp_nonce)
-
         <!-- Scripts -->
         @routes
         @viteReactRefresh
