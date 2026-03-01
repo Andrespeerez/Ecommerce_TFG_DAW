@@ -31,27 +31,27 @@ Desarrollada para el Proyecto Proyecto Intermodular de 2º DAW.
 ## FUNCIONALIDADES <a id="funcionalidades"></a>
 
 - [x] Registro de usuarios con autenticación y roles
-- [] Catálogo de productos con filtros avanzados:
+- [ ] Catálogo de productos con filtros avanzados:
   - [x] Busqueda de texto
   - [x] Por material
   - [x] Por categoría
   - [x] Por acabado
   - [x] Por rango de precio
-  - [] Búsqueda avanzada que combine Título y Descripción de producto
+  - [ ] Búsqueda avanzada que combine Título y Descripción de producto
 - [x] Carrito de compras controlado desde servidor con notificaciones de stock / disponibilidad
   - [x] Carrito implementado en variable de session en Servidor (puedes añadir productos sin estar loggeado)
   - [x] Sistema contra anti-persona (límite de productos que se pueden comprar de una tacada) 
 - [x] Histórico de pedidos con estados
 - [x] Diseño responsive
-- [] UI/UX:
+- [ ] UI/UX:
   - [x] Validación de formularios en Cliente
   - [x] Barra de carga cuando está esperando respuesta del servidor
   - [x] Notificaciones cuando el servidor responde con un error o success
   - [x] Interfaz clara y coherente
-  - [] Skeletons para elementos de interfaz
-  - [] Navegación de login y cambio de datos de profile confusa para personas mayores
-  - [] Animación del carrito para guiar la vista en la navegación
-- [] Seguridad:
+  - [ ] Skeletons para elementos de interfaz
+  - [ ] Navegación de login y cambio de datos de profile confusa para personas mayores
+  - [ ] Animación del carrito para guiar la vista en la navegación
+- [ ] Seguridad:
   - [x] Throttling para peticiones pesadas (login, registro, cambios de datos en perfil de usuario, checkout)
   - [x] Token CSRF
   - [x] Prepared Statements de Eloquent para prevenir SQL Injection
@@ -59,7 +59,7 @@ Desarrollada para el Proyecto Proyecto Intermodular de 2º DAW.
   - [x] Cabeceras para evitar renderizar la web en Iframes (clickjacking)
   - [x] Validaciones siempre en servidor
   - [x] Middleware de auth y admin para rutas protegidas por roles
-  - [] Comprobación de que recurso pertenece al usuario que solicita (IDORs). Actualmente no está habilitado el endpoint para ver "/pedidos/{id}".
+  - [ ] Comprobación de que recurso pertenece al usuario que solicita (IDORs). Actualmente no está habilitado el endpoint para ver "/pedidos/{id}".
 - [x] Performance:
   - [x] Guardar imágenes en distintas resoluciones (normal, small, preview) para evitar reducir la descarga de imágenes grandes para ser usadas en Cards pequeños
   - [x] Cache para consultas repetitivas en servidor (menor uso de base de datos para buscar items del carrito, categorías, productos más vendidos)
