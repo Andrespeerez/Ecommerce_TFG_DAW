@@ -7,6 +7,13 @@ import { createRoot } from 'react-dom/client';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
+window.addEventListener('popstate', (event) => {
+    router.reload({ 
+        preserveScroll: true, 
+        preserveState: false,
+    });
+});
+
 createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) =>
