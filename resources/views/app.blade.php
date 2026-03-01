@@ -9,7 +9,8 @@
         <!-- Scripts -->
         @routes
         @viteReactRefresh
-        @if(isset($page['component']) && $page['component'] === 'Home') 
+
+        @if(Route::currentRouteName() === 'home.index')
             <link rel="preload" as="image" href="/assets/images/hero.webp" fetchpriority="high" type="image/webp">
         @endif
         
