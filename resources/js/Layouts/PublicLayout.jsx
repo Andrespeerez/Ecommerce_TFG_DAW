@@ -100,7 +100,7 @@ export default function PublicLayout ({ children, canResetPassword }) {
             type="cart"
             modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
             >
-                <Cart cart={cart} openLoginModal={handleOpenLogin} />
+                <Cart cart={cart} openLoginModal={handleOpenLogin} closeModals={handleCloseModal} />
             </Modal>
             }
 

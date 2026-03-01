@@ -3,7 +3,7 @@ import Button from "./Button";
 import CartItem from "./CartItem";
 import { router, usePage } from "@inertiajs/react";
 
-export default function Cart({ cart, openLoginModal }) {
+export default function Cart({ cart, openLoginModal, closeModals }) {
     const [ hasErrors, setHasErrors ] = useState(false);
     const { auth } = usePage().props;
 
@@ -22,6 +22,14 @@ export default function Cart({ cart, openLoginModal }) {
 
         if (!auth.user) {
             openLoginModal(); 
+            return;
+        }
+
+        if (!auth.user.address || !auth.user.city || !auth.user.province || !auth.user.postal_code ) {
+            closeModals();
+            router.visit(route('profile.edit'), {
+                error: 'Debes completar tus datos de envío para realizar un pedido.',
+            });
             return;
         }
 
