@@ -1,7 +1,7 @@
 import Modal from "@/Components/Public/Modal";
 import Footer from "@/Components/Public/Footer";
 import Header from "@/Components/Public/Header";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { useState } from "react";
 import Signin from "@/Components/Public/Signin";
 import Login from "@/Components/Public/Login";
@@ -11,7 +11,8 @@ import Cart from "@/Components/Public/Cart";
 import Notification from "@/Components/Public/Notification";
 
 
-export default function PublicLayout ({ children, auth, cart, categories, canResetPassword }) {
+export default function PublicLayout ({ children, canResetPassword }) {
+    const { cart, auth, categories } = usePage().props;
 
     // open/close modals
     const [ menuOpen, setMenuOpen ] = useState(false);

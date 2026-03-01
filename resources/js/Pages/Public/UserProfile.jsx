@@ -23,7 +23,7 @@ export default function UserProfile({ cart = cartDefault, auth, canResetPassword
                 <meta property="og:description" content="Muebles y reformas de madera a medida con acabado artesanal." />
             </Head>
             
-            <PublicLayout cart={cart} auth={auth} canResetPassword={canResetPassword} categories={categories}>
+            <PublicLayout canResetPassword={canResetPassword}>
                 <div
                 className="flex gap-5"
                 >

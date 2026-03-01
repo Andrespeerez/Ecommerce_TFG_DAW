@@ -50,7 +50,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
             <meta property="og:description" content="Muebles y reformas de madera a medida con acabado artesanal." />
         </Head>
 
-        <PublicLayout cart={cart} auth={auth} canResetPassword={canResetPassword} categories={categories} >
+        <PublicLayout canResetPassword={canResetPassword} >
             <button
             onClick={() => window.history.back()}
             className="text-accent-800 heading-6 p-5 mb-3"

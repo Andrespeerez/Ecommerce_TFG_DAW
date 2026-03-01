@@ -38,7 +38,7 @@ export default function Home({ cart = cartDefault, auth, canResetPassword, categ
                 <meta property="og:description" content="Muebles y reformas de madera a medida con acabado artesanal." />
             </Head>
             
-            <PublicLayout cart={cart} auth={auth} canResetPassword={canResetPassword} categories={categories} >
+            <PublicLayout canResetPassword={canResetPassword} >
                 <Hero />
 
                 <section className="flex flex-col items-center mt-[30px]">

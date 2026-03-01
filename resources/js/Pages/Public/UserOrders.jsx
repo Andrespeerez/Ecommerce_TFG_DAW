@@ -15,7 +15,7 @@ export default function UserOrders({ auth, cart, canResetPassword, categories, o
                 <meta property="og:description" content="Muebles y reformas de madera a medida con acabado artesanal." />
             </Head>
         
-            <PublicLayout auth={auth} cart={cart} categories={categories} canResetPassword={canResetPassword}>
+            <PublicLayout canResetPassword={canResetPassword}>
                 <div
                 className="flex gap-5"
                 >
