@@ -11,7 +11,7 @@ export default function Notification () {
 
         const timer = setTimeout(() => {
             setVisible(false);
-        }, 5000);
+        }, 1000);
 
         return () => clearTimeout(timer);
     }, [flash])
