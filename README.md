@@ -8,11 +8,11 @@ Plataforma de comercio electrónico de venta de productos de carpintería usando
 
 Desarrollada para el Proyecto Proyecto Intermodular de 2º DAW.
 
-![laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat&logo=laravel)
-![react](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react)
-![inertia](https://img.shields.io/badge/Inertia.js-2.0-9553E9?style=flat)
-![mysql](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat&logo=mysql)
-![tailwindcss](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat&logo=tailwind-css)
+<a href="https://laravel.com/docs/12.x" target="_blank">![laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat&logo=laravel)</a>
+<a href="https://es.react.dev/" target="_blank">![react](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react)</a>
+<a href="https://inertiajs.com/" target="_blank">![inertia](https://img.shields.io/badge/Inertia.js-2.0-9553E9?style=flat)</a>
+<a href="https://www.mysql.com/" target="_blank">![mysql](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat&logo=mysql)</a>
+<a href="https://tailwindcss.com/" target="_blank">![tailwindcss](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat&logo=tailwind-css)</a>
 
 <p align="right">(<a href="#readme-top">Arriba</a>)</p>
 
@@ -67,6 +67,8 @@ Desarrollada para el Proyecto Proyecto Intermodular de 2º DAW.
   - [x] Imágenes con loading="lazy" que no son importantes
   - [x] Imágenes importantes (como el hero) carga con fetchpriority="high" y preload en el head (solo en la vista Home)
 
+<p align="right">(<a href="#readme-top">Arriba</a>)</p>
+
 
 ## TECNOLOGÍAS <a id="tecnologias"></a>
 
@@ -83,12 +85,16 @@ Desarrollada para el Proyecto Proyecto Intermodular de 2º DAW.
 - Inertia.js
 - Tailwindcss 3.4
 
+<p align="right">(<a href="#readme-top">Arriba</a>)</p>
+
 ## REQUISITOS PREVIOS <a id="requisitos-previos"></a>
 
 - Git
 - Composer
 - Node.js
 - MySQL
+
+<p align="right">(<a href="#readme-top">Arriba</a>)</p>
 
 ## INSTALACIÓN <a id="instalacion"></a>
 
@@ -156,6 +162,8 @@ php artisan serve
 
 > Todo esto es para local. Para desplegarlo en producción deberíamos de desplegarlo en un servidor, por ejemplo, nginx, compilar los assets, ...
 
+<p align="right">(<a href="#readme-top">Arriba</a>)</p>
+
 ## ESTRUCTURA DEL PROYECTO <a id="estructura"></a>
 ```
 ecommerce-carpinteria/
@@ -201,13 +209,19 @@ ecommerce-carpinteria/
 
 ```
 
+<p align="right">(<a href="#readme-top">Arriba</a>)</p>
+
 ## CONTRIBUCIÓN <a id="contribucion"></a>
 
 Este es un proyecto académico.
+
+<p align="right">(<a href="#readme-top">Arriba</a>)</p>
 
 ## AUTORÍA <a id="autoria"></a>
 
 Andrés Pérez Guardiola
 
 - Alumno de 2º DAW - IGFormación (Alicante)
+
+<p align="right">(<a href="#readme-top">Arriba</a>)</p>
 
