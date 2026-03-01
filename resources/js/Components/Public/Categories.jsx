@@ -2,7 +2,6 @@ import { Link } from "@inertiajs/react";
 
 export default function Categories({ categories }) {
 
-    console.log(categories);
     return (
         <div 
         className="flex flex-col gap-4 mt-14"
