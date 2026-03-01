@@ -60,7 +60,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
 
             <div className="flex">
                 <section className="flex-1 mb-12 px-10">
-                    <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} className="mx-auto" fetchPriority="high"/>
+                    <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} className="mx-auto" fetchpriority="high"/>
                     <h2 className="lg:heading-3 heading-5 text-center my-4">{product.name}</h2>
                     <div id="product_description">
                         <ReactMarkdown>
