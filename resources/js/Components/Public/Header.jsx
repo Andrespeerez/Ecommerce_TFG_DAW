@@ -16,10 +16,10 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
         >
             <Link href="/" className="flex items-center" aria-label="Ir a la página principal">
                 <img src="/assets/images/logo2.svg" alt="Logo Carpintería Barberes" 
-                className="md:hidden"
+                className=""
                 />
                 <p
-                className="hidden md:flex flex-col font-extrabold font-lora">
+                className="hidden font-extrabold font-lora">
                     <span className="text-primary-700">Carpintería</span>
                     <span className="text-secondary-700">Andrés</span>
                 </p>
@@ -39,7 +39,7 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
                             onClick={handleCloseModal}
                             aria-label="Abrir Menu de Usuario"
                         >
-                            <span className="max-w-[130px] truncate heading-6 text-[16px] hidden md:inline text-right">{name}</span>
+                            <span className="max-w-[130px] truncate heading-6 hidden lg:inline text-right">{name}</span>
                             <img src="/assets/images/login.svg" alt="Icono usuario" aria-hidden="true" className="md:hidden inline" />
                             <svg
                                 className="-me-0.5 ms-2 h-4 w-4"

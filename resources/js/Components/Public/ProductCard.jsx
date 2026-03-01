@@ -14,7 +14,7 @@ export default function ProductCard({ product = productFake }) {
         <article
         itemScope 
         itemType="https://schema.org/Product"
-        className="rounded-[20px] flex flex-col justify-between gap-3 pb-[10px] bg-neutral-300 max-w-[450px] w-full overflow-hidden border-t-1 lg:h-[600px] md:h-[500px]"
+        className="rounded-[20px] flex flex-col justify-between gap-3 pb-5 bg-neutral-300 max-w-[450px] w-full overflow-hidden border-t-1 lg:h-[600px] md:h-[500px]"
         >
             <img src={`/storage/${product.image_small_url}`} alt={`Foto de ${product.name}`} 
             className="object-cover w-full h-[70%]"
@@ -30,7 +30,7 @@ export default function ProductCard({ product = productFake }) {
             </h3>
 
             <section
-            className="flex md:flex-row flex-col gap-4 justify-evenly items-center px-2"
+            className="flex md:flex-row flex-col gap-2 justify-evenly items-center px-2"
             itemProp="offers" 
             itemScope 
             itemType="https://schema.org/Offer"

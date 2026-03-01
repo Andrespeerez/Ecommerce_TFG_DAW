@@ -7,7 +7,7 @@ export default function CategoriesButton({ onClick }) {
         >       
             <img src="/assets/images/categories.svg" alt="Menu categorías" />
 
-            <span className="hidden md:inline text-primary-900 heading-6">Categorías</span>
+            <span className="hidden lg:inline text-primary-900 heading-6">Categorías</span>
         </button>
     );
 }
