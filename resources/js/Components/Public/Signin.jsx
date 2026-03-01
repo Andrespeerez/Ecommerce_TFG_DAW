@@ -3,6 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
 import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm } from "@inertiajs/react";
+import Button from './Button';
 
 export default function Signin({ closeModal }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -22,8 +23,8 @@ export default function Signin({ closeModal }) {
     };
 
     return (
-        <form onSubmit={submit}>
-            <p className='text-neutral-600'>Esta página no es un e-commerce real. Se ruega que no se usen datos reales.</p>
+        <form onSubmit={submit} className='px-20'>
+            <p className='text-neutral-600 mb-4'>Esta página no es un e-commerce real. <br />Se ruega que no se usen datos reales.</p>
 
             <div>
                 <InputLabel htmlFor="name" value="Name" />
@@ -102,9 +103,9 @@ export default function Signin({ closeModal }) {
             </div>
 
             <div className="mt-4 flex items-center justify-end">
-                <PrimaryButton className="ms-4 bg-primary-700 text-primary-50" disabled={processing}>
-                    Registrarse
-                </PrimaryButton>
+                <Button variant='primary' className="heading-6" disabled={processing}>
+                    Registrate
+                </Button>
             </div>
         </form>
     );

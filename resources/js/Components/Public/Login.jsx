@@ -1,10 +1,10 @@
 import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import PublicLayout from "@/Layouts/PublicLayout";
 import { Link, useForm } from "@inertiajs/react";
+import Button from './Button';
 
 export default function Login({ canResetPassword, closeModal }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -87,9 +87,9 @@ export default function Login({ canResetPassword, closeModal }) {
                     </Link>
                 )}
 
-                <PrimaryButton className="ms-4 bg-primary-700 text-primary-50" disabled={processing}>
+                <Button variant='primary' className="heading-6" disabled={processing}>
                     Entra
-                </PrimaryButton>
+                </Button>
             </div>
         </form>
     );

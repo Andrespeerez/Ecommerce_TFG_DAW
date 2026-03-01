@@ -9,7 +9,10 @@
         <!-- Scripts -->
         @routes
         @viteReactRefresh
-        <link rel="preload" as="image" href="/assets/images/hero.webp" fetchpriority="high" type="image/webp">
+        @if ($page['component'] == 'Home')
+            <link rel="preload" as="image" href="/assets/images/hero.webp" fetchpriority="high" type="image/webp">
+        @endif
+        
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
         @inertiaHead
     </head>

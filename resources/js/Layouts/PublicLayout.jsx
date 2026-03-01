@@ -84,7 +84,7 @@ export default function PublicLayout ({ children, auth, cart, categories, canRes
             {loginOpen && 
             <Modal closeModal={handleCloseModal} 
             type="login"
-            modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center pt-10"
+            modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-10 items-center pt-10"
             >
                 {loginSignin ? 
                 <Signin closeModal={handleCloseModal} /> : 
