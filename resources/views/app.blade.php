@@ -9,7 +9,7 @@
         <!-- Scripts -->
         @routes
         @viteReactRefresh
-        @if ($page['component'] == 'Home')
+        @if(isset($page['component']) && $page['component'] === 'Home') 
             <link rel="preload" as="image" href="/assets/images/hero.webp" fetchpriority="high" type="image/webp">
         @endif
         
