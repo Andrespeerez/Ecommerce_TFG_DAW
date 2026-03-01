@@ -1,59 +1,213 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<a id="readme-top"></a>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# E-Commerce Carpintería
 
-## About Laravel
+## DESCRIPCIÓN DEL PROYECTO
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Plataforma de comercio electrónico de venta de productos de carpintería usando Laravel + Inertia + React + MySQL + TailWindCSS.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Desarrollada para el Proyecto Proyecto Intermodular de 2º DAW.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+![laravel](https://img.shields.io/badge/Laravel-12-FF2D20?style=flat&logo=laravel)
+![react](https://img.shields.io/badge/React-18-61DAFB?style=flat&logo=react)
+![inertia](https://img.shields.io/badge/Inertia.js-2.0-9553E9?style=flat)
+![mysql](https://img.shields.io/badge/MySQL-8.0-4479A1?style=flat&logo=mysql)
+![tailwindcss](https://img.shields.io/badge/Tailwind-3.4-38B2AC?style=flat&logo=tailwind-css)
 
-## Learning Laravel
+<p align="right">(<a href="#readme-top">Arriba</a>)</p>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+## TABLA DE CONTENIDOS
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- <a href="#funcionalidades">Funcionalidades</a>
+- <a href="#tecnologias">Tecnologías</a>
+- <a href="#requisitos-previos">Requisitos Previos</a>
+- <a href="#instalacion">Instalación</a>
+- <a href="#estructura">Estructura del Proyecto</a>
+- <a href="#contribucion">Contribución</a>
+- <a href="#autoria">Autoría</a>
 
-## Laravel Sponsors
+<p align="right">(<a href="#readme-top">Arriba</a>)</p>
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## FUNCIONALIDADES <a id="funcionalidades"></a>
 
-### Premium Partners
+- [x] Registro de usuarios con autenticación y roles
+- [] Catálogo de productos con filtros avanzados:
+  - [x] Busqueda de texto
+  - [x] Por material
+  - [x] Por categoría
+  - [x] Por acabado
+  - [x] Por rango de precio
+  - [] Búsqueda avanzada que combine Título y Descripción de producto
+- [x] Carrito de compras controlado desde servidor con notificaciones de stock / disponibilidad
+  - [x] Carrito implementado en variable de session en Servidor (puedes añadir productos sin estar loggeado)
+  - [x] Sistema contra anti-persona (límite de productos que se pueden comprar de una tacada) 
+- [x] Histórico de pedidos con estados
+- [x] Diseño responsive
+- [] UI/UX:
+  - [x] Validación de formularios en Cliente
+  - [x] Barra de carga cuando está esperando respuesta del servidor
+  - [x] Notificaciones cuando el servidor responde con un error o success
+  - [x] Interfaz clara y coherente
+  - [] Skeletons para elementos de interfaz
+  - [] Navegación de login y cambio de datos de profile confusa para personas mayores
+  - [] Animación del carrito para guiar la vista en la navegación
+- [] Seguridad:
+  - [x] Throttling para peticiones pesadas (login, registro, cambios de datos en perfil de usuario, checkout)
+  - [x] Token CSRF
+  - [x] Prepared Statements de Eloquent para prevenir SQL Injection
+  - [x] Salidas saneadas para prevenir XSS
+  - [x] Cabeceras para evitar renderizar la web en Iframes (clickjacking)
+  - [x] Validaciones siempre en servidor
+  - [x] Middleware de auth y admin para rutas protegidas por roles
+  - [] Comprobación de que recurso pertenece al usuario que solicita (IDORs). Actualmente no está habilitado el endpoint para ver "/pedidos/{id}".
+- [x] Performance:
+  - [x] Guardar imágenes en distintas resoluciones (normal, small, preview) para evitar reducir la descarga de imágenes grandes para ser usadas en Cards pequeños
+  - [x] Cache para consultas repetitivas en servidor (menor uso de base de datos para buscar items del carrito, categorías, productos más vendidos)
+  - [x] Descarga de fuentes en /public/fonts
+  - [x] Imágenes con loading="lazy" que no son importantes
+  - [x] Imágenes importantes (como el hero) carga con fetchpriority="high" y preload en el head (solo en la vista Home)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
+## TECNOLOGÍAS <a id="tecnologias"></a>
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Backend:
 
-## Code of Conduct
+- PHP 8.2
+- Laravel 12
+- MySQL 8.0
+- Breeze -> Para autenticación
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Frontend:
 
-## Security Vulnerabilities
+- React 18
+- Inertia.js
+- Tailwindcss 3.4
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## REQUISITOS PREVIOS <a id="requisitos-previos"></a>
 
-## License
+- Git
+- Composer
+- Node.js
+- MySQL
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## INSTALACIÓN <a id="instalacion"></a>
+
+Para instalar el proyecto:
+
+1. **Clona el repositorio**
+```bash
+git clone git@github.com:Andrespeerez/Ecommerce_TFG_DAW.git
+cd Ecommerce_TFG_DAW
+```
+
+2. **Crea el archivo de configuración**
+
+El archivo `.env.example` con el que viene el proyecto incluye la configuración del proyecto, aunque deberemos de renombrarlo y hacer algunos ajustes:
+```bash
+cp .env.example .env
+```
+
+Y editamos el contenido:
+```.env
+APP_NAME="Carpintería ..."
+APP_ENV=local
+APP_DEBUG=true
+APP_URL=http://localhost:8080
+
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=ecommerce
+DB_USERNAME=...
+DB_PASSWORD=...
+```
+
+3. **Generar la clave**
+```bash
+php artisan key:generate
+```
+
+4. **Crear la base de datos**
+```bash
+CREATE DATABASE ecommerce;
+```
+
+5. **Ejecutar migraciones**
+```bash
+php artisan migrate --seed
+php artisan storage:link
+```
+
+6. **Instalar dependecias**
+```bash
+composer install
+npm install
+```
+
+7. **Inicia VITE**
+```bash
+npm run dev
+```
+
+8. **Inicia servidor**
+```bash
+php artisan serve
+```
+
+> Todo esto es para local. Para desplegarlo en producción deberíamos de desplegarlo en un servidor, por ejemplo, nginx, compilar los assets, ...
+
+## ESTRUCTURA DEL PROYECTO <a id="estructura"></a>
+```
+ecommerce-carpinteria/
+|-- app/
+|   |-- Http/
+|   |   |--- Controllers/
+|   |   |    |--- Admin/                     # Controladores admin
+|   |   |    |--- Public/                    # Controladores públicos
+|   |   |    |--- ProfileController.php      # Controlador de Area de Usuario
+|   |   |   
+|   │   |--- Middleware/                     # Middleware --> isAdmin y Cabeceras de Seguridad
+|   |
+|   |--- Models/                             # Modelos Eloquent
+|   |--- Services/                           # Lógica de negocio
+|        |--- CartService.php
+|        |--- OrderService.php
+|        |--- OrderLineService.php
+|        |--- ImageService.php                    # Se encarga de guardar imágenes en distintas resoluciones
+|        |--- ProductService.php
+|       
+|--- database/
+|    |--- migrations/                         # Migraciones SQL
+|    |--- seeders/                            # Datos de prueba
+|
+|--- resources/
+|   |--- css/                                 # css con clases personalizadas (tamaños de letras y estilos para ProductDetails#product_description)
+|   |--- js/
+|   |    |--- Components/                     # Componentes React
+|   |    |--- Layouts/                        # Layouts Inertia
+|   |    |--- Pages/                          # Páginas React 
+|   |
+|   |--- views/
+|        |--- app.blade.php                   # Template base
+|     
+|--- routes/
+|    |--- web.php                             # Rutas
+|  
+|--- README.md
+|--- composer.json
+|--- package.json
+|--- vite.config.js
+|--- tailwind.config.js                       # Theme de la web
+
+```
+
+## CONTRIBUCIÓN <a id="contribucion"></a>
+
+Este es un proyecto académico.
+
+## AUTORÍA <a id="autoria"></a>
+
+Andrés Pérez Guardiola
+
+- Alumno de 2º DAW - IGFormación (Alicante)
+
