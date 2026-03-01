@@ -20,14 +20,14 @@ export default function SearchBar() {
 
     return (
         <>
-            <form onSubmit={handleSearch} className="w-1/3 -space-x-16 hidden md:flex relative">
+            <form onSubmit={handleSearch} className="w-1/3 hidden md:flex relative">
                 <label htmlFor="search-bar" className="sr-only">Buscador</label>
                 <input id="search-bar" type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} 
-                className="w-full pl-5 pr-20 px-10 rounded-3xl texto-base"
+                className="w-full pl-5 pr-20 px-10 rounded-3xl texto-base py-3"
                 placeholder="Buscar productos..."
                 />
                 <button type="submit" 
-                className="-top-[40%] right-0"
+                className="absolute right-1"
                 aria-label="Buscar producto"
                 >
                     <img src="/assets/images/search.svg" alt="Buscar" />

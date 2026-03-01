@@ -7,7 +7,7 @@ export default function LoginButton({ onClick }) {
         >       
             <img src="/assets/images/login.svg" alt="Menu Login" aria-hidden="true"/>
 
-            <span className="hidden md:inline text-primary-900 heading-6">Login</span>
+            <span className="hidden lg:inline text-primary-900 heading-6">Login</span>
         </button>
     );
 }
