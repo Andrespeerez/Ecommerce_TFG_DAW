@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import CartItem from "./CartItem";
-import { router } from "@inertiajs/react";
+import { router, usePage } from "@inertiajs/react";
 
-export default function Cart({ cart }) {
+export default function Cart({ cart, openLoginModal }) {
     const [ hasErrors, setHasErrors ] = useState(false);
+    const { auth } = usePage().props;
 
     useEffect(() => {
         const errors = cart.errors.length > 0 || cart.items.some(item => item.errors.length > 0);
@@ -18,6 +19,11 @@ export default function Cart({ cart }) {
      */
     function submit(e) {
         e.preventDefault();
+
+        if (!auth.user) {
+            openLoginModal(); 
+            returnM
+        }
 
         router.post(route('checkout.store'), {}, {});
     }    
