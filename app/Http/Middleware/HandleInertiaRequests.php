@@ -23,7 +23,7 @@ class HandleInertiaRequests extends Middleware
      */
     public function version(Request $request): ?string
     {
-        return bin2hex(random_bytes(20));
+        return parent::version($request);
     }
 
     /**

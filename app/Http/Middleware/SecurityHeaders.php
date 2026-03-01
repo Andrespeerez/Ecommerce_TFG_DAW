@@ -58,6 +58,8 @@ class SecurityHeaders
          */
         $response->headers->set('Permissions-Policy', 'camera=(), microphone=(), geolocation=()');
 
+        $response->headers->set('Cache-Control', 'no-cache, private');
+
         /**
          * Content-Security-Policy (CSP)
          * 
