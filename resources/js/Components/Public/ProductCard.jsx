@@ -1,4 +1,6 @@
-import { ButtonLink } from "./Button";
+import { router, usePage } from "@inertiajs/react";
+import Button, {  } from "./Button";
+import { useState } from "react";
 
 // FAKE PRODUCT
 const productFake = {
@@ -9,12 +11,36 @@ const productFake = {
 }
 
 export default function ProductCard({ product = productFake }) {
+    const [ isAdding, setIsAdding ] = useState(false);
+    const { cart } = usePage().props;
+
+    const handleClickCard = (e) => {
+        router.visit(route('products.show', product.id));
+    }
+
+    const handleClickAdd = (e) => {
+        e.stopPropagation();
+
+        setIsAdding(true);
+
+        router.post(route('cart.add', product.id), {}, {
+            preserveScroll: true,
+            preserveState: true,
+            onSuccess: () => {
+                setIsAdding(false);
+            },
+            onError: () => {
+                setIsAdding(false);
+            },
+        });
+    }
 
     return (
         <article
         itemScope 
         itemType="https://schema.org/Product"
-        className="rounded-[20px] flex flex-col justify-between gap-3 pb-5 bg-neutral-300 max-w-[450px] w-full overflow-hidden border-t-1 lg:h-[600px] md:h-[500px]"
+        className="rounded-[20px] flex flex-col justify-between gap-3 pb-5 bg-neutral-300 max-w-[450px] w-full overflow-hidden border-t-1 lg:h-[600px] md:h-[500px] cursor-pointer"
+        onClick={handleClickCard}
         >
             <img src={`/storage/${product.image_small_url}`} alt={`Foto de ${product.name}`} 
             className="object-cover w-full h-[70%]"
@@ -42,9 +68,17 @@ export default function ProductCard({ product = productFake }) {
                     <span itemProp="price">{product.price_with_iva}</span>€
                 </p>
 
-                <ButtonLink variant="secondary" href={`/productos/${product.id}`} aria-label={`Ver detalles de ${product.name}`}>
-                    Ver Producto <span className="sr-only">{product.name}</span>
-                </ButtonLink>
+                <Button variant="secondary" aria-label={`Añadir ${product.name} al carrito`} 
+                disabled={isAdding}
+                onClick={handleClickAdd}
+                >
+                    Al carrito <span className="sr-only">{product.name}</span>
+                </Button>
+
+
+                
+
+                
             </section>
 
             {product.description && (
