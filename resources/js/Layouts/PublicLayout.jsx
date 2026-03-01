@@ -12,9 +12,6 @@ import Notification from "@/Components/Public/Notification";
 
 
 export default function PublicLayout ({ children, auth, cart, categories, canResetPassword }) {
-    console.log(categories);
-    console.log(cart);
-    console.log(auth);
 
     // open/close modals
     const [ menuOpen, setMenuOpen ] = useState(false);

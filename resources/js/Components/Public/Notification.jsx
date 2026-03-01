@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 export default function Notification () {
     const { flash } = usePage().props;
     const [ visible, setVisible ] = useState(false);
-    console.log(flash);
 
     useEffect(() => {
         setVisible(true);
