@@ -48,7 +48,7 @@ class CartService {
      * @param int $time - Time in seconds to cache
      * @return Collection
      */
-    public function getCartItems(int $time = 300): Collection {
+    public function getCartItems(int $time = 1): Collection {
         $cart = $this->getCart();
 
         // Get all Cart Items from database and store them in Cache
