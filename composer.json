@@ -16,6 +16,7 @@
         "laravel/framework": "^12.0",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
+        "phpdocumentor/shim": "^3.9",
         "tightenco/ziggy": "^2.0"
     },
     "require-dev": {
@@ -91,7 +92,8 @@
         "sort-packages": true,
         "allow-plugins": {
             "pestphp/pest-plugin": true,
-            "php-http/discovery": true
+            "php-http/discovery": true,
+            "phpdocumentor/shim": true
         }
     },
     "minimum-stability": "stable",
