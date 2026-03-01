@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/area-cliente/email', [ProfileController::class, 'updateEmail'])->middleware('throttle:4,1')->name('profile.update.email')->middleware('password.confirm');
     Route::patch('/area-cliente/password', [ProfileController::class, 'updatePassword'])->middleware('throttle:4,1')->name('profile.update.password');
     Route::patch('/area-cliente/info', [ProfileController::class, 'updateInfo'])->middleware('throttle:4,1')->name('profile.update.info');
-    Route::patch('/area-cliente/shipment', [ProfileController::class, 'updateShipment'])->middleware('throttle:4,1')->name('profile.update.shipment')->middleware('password.confirm');
+    Route::patch('/area-cliente/shipment', [ProfileController::class, 'updateShipment'])->middleware('throttle:4,1')->name('profile.update.shipment');
     Route::delete('/area-cliente', [ProfileController::class, 'destroy'])->name('profile.destroy')->middleware('password.confirm');
 
     Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store')->middleware('throttle:4,1');
