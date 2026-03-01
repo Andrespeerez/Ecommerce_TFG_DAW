@@ -6,11 +6,10 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-        <link rel="preload" as="image" href="/assets/images/hero.webp" fetchpriority="high">
-
         <!-- Scripts -->
         @routes
         @viteReactRefresh
+        <link rel="preload" as="image" href="/assets/images/hero.webp" fetchpriority="high" type="image/webp">
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
         @inertiaHead
     </head>
