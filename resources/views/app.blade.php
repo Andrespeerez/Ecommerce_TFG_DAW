@@ -6,7 +6,7 @@
 
         <title inertia>{{ config('app.name', 'Laravel') }}</title>
 
-        <link rel="preload" as="image" href="/images/hero.webp" fetchpriority="high">
+        <link rel="preload" as="image" href="/assets/images/hero.webp" fetchpriority="high">
 
         <!-- Scripts -->
         @routes
