@@ -22,7 +22,7 @@ export default function Cart({ cart, openLoginModal }) {
 
         if (!auth.user) {
             openLoginModal(); 
-            returnM
+            return;
         }
 
         router.post(route('checkout.store'), {}, {});
