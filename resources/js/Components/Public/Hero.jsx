@@ -3,7 +3,7 @@ import { ButtonLink } from "./Button";
 export default function Hero () {
     return (
         <section
-        className="w-full bg-neutral-300 flex flex-col items-center text-center pb-[30px] "
+        className="w-full bg-neutral-300 flex flex-col items-center text-center pb-[30px] gap-5"
         aria-label="Banner Principal - Ir a catálogo"
         >
             <img src="/assets/images/hero.webp" alt="Banner principal de Carpitería Andrés" 
@@ -15,7 +15,7 @@ export default function Hero () {
 
             <h1 className="heading-4 lg:heading-1 md:heading-3 text-primary-900">Carpintería Andrés</h1>
 
-            <ButtonLink href="/tienda">
+            <ButtonLink href="/tienda" className="lg:w-96 w-full bg-purple-700 hover:bg-purple-500 active:bg-purple-900 heading-6">
                 Ver Catálogo
             </ButtonLink>
         </section>
