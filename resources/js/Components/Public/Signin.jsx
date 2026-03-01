@@ -103,7 +103,7 @@ export default function Signin({ closeModal }) {
             </div>
 
             <div className="mt-4 flex items-center justify-end">
-                <Button variant='primary' className="heading-6" disabled={processing}>
+                <Button type="submit" variant='primary' className="heading-6" disabled={processing}>
                     Registrate
                 </Button>
             </div>

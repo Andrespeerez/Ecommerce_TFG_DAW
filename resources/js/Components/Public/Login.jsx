@@ -87,7 +87,7 @@ export default function Login({ canResetPassword, closeModal }) {
                     </Link>
                 )}
 
-                <Button variant='primary' className="heading-6" disabled={processing}>
+                <Button type='submit' variant='primary' className="heading-6" disabled={processing}>
                     Entra
                 </Button>
             </div>
