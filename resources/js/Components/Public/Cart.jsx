@@ -25,7 +25,8 @@ export default function Cart({ cart, openLoginModal }) {
             return;
         }
 
-        router.post(route('checkout.store'), {}, {});
+        if (confirm('¿Estas seguro de tu compra?'))
+            router.post(route('checkout.store'), {}, {});
     }    
 
     return (
@@ -50,9 +51,7 @@ export default function Cart({ cart, openLoginModal }) {
                 className="w-full rounded-b-[0px]"
                 disabled={hasErrors}
                 onClick={(e) => {
-                    if (confirm("Confirmar pedido")) {
-                        submit(e);
-                    }
+                    submit(e);
                 }}
                 >
                     Realizar Pedido
