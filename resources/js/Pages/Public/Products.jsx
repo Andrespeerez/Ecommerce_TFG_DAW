@@ -65,7 +65,11 @@ export default function Products ({ auth, cart = cartDefault, products, canReset
                                         : 'bg-white text-neutral-800 border-neutral-300 hover:bg-neutral-100'
                                 } ${!link.url && 'opacity-50 cursor-not-allowed'}`}
                                 preserveScroll
-                                dangerouslySetInnerHTML={{ __html: link.label }}
+                                dangerouslySetInnerHTML={{ 
+                                    __html: link.label
+                                            .replace('&laquo; Previous', '&laquo Anterior')
+                                            .replace('Next &raquo;', 'Siguiente &raquo;'),
+                                }}
                             />
                         ))}
                     </div>

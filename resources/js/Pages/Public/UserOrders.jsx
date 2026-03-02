@@ -50,7 +50,7 @@ export default function UserOrders({ auth, cart, canResetPassword, categories, o
                             <OrderCard key={order.order_number} order={order} />
                         ))}
 
-                        <div className="flex justify-center gap-1 mt-6">
+                        <div className="flex justify-center gap-1 my-6">
                             {orders.links.map((link, index) => (
                                 <Link
                                     key={index}
@@ -61,7 +61,11 @@ export default function UserOrders({ auth, cart, canResetPassword, categories, o
                                             : 'bg-white text-neutral-800 border-neutral-300 hover:bg-neutral-100'
                                     } ${!link.url && 'opacity-50 cursor-not-allowed'}`}
                                     preserveScroll
-                                    dangerouslySetInnerHTML={{ __html: link.label }}
+                                    dangerouslySetInnerHTML={{ 
+                                        __html: link.label
+                                            .replace('&laquo; Previous', '&laquo Anterior')
+                                            .replace('Next &raquo;', 'Siguiente &raquo;'),
+                                    }}
                                 />
                             ))}
                         </div>
