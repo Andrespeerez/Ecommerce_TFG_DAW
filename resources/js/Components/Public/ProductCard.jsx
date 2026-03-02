@@ -56,7 +56,7 @@ export default function ProductCard({ product = productFake }) {
 
                 <img 
                     src={`/storage/${product.image_small_url}`} alt={`Foto de ${product.name}`} 
-                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${isLoading ? "opacity-0" : "opacity-100"}`}
+                    className={`w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 ${isLoading ? "hidden" : "block"}`}
                     itemProp="image"
                     loading="lazy"
                     onLoad={() => setIsLoading(false)}

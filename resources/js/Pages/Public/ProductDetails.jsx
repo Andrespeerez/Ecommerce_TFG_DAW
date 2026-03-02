@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { Head, router, useForm } from "@inertiajs/react";
 import Button from "@/Components/Public/Button";
 import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 const cartDefault = {
     total_items: 0
@@ -22,6 +23,7 @@ const productDefault = {
 
 export default function ProductDetails({ auth, cart = cartDefault, product = productDefault, canResetPassword, categories, }) {
     const [ isAdding, setIsAdding ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(true);
     const [ quantity, setQuantity ] = useState(1);
 
     function submit(e) {
@@ -62,15 +64,31 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
             </button>
 
             <div className="flex">
-                <section className="flex-1 mb-12 px-10">
-                    <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} className="mx-auto" fetchpriority="high" loading="eager"/>
+                <section className="flex-1 mb-12 px-10 flex flex-col items-center">
+                    {isLoading && 
+                    <Skeleton 
+                    height="600px"
+                    width="600px"
+                    className={`rounded-2xl`}
+                    />
+                    }
+
+                    <img src={`/storage/${product.image_url}`} 
+                    height="600px"
+                    width="600px"
+                    alt={`Foto de ${product.name}`}
+                    onLoad={() => setIsLoading(false)} 
+                    className={`rounded-2xl ${isLoading ? 'hidden' : 'block'}`}
+                    fetchpriority="high" 
+                    loading="eager"/>
                     <h2 className="lg:heading-3 heading-5 text-center my-4">{product.name}</h2>
-                    <div id="product_description" className="pb-6">
+
+                    <div id="product_description" className="pb-6 w-full">
                         <ReactMarkdown>
                             {product.description}
                         </ReactMarkdown>
                     </div>
-                    <div>
+                    <div className="w-full">
                         <h3 className="heading-6">Caraterísticas:</h3>
                         
                         <h4 className="text-base font-lora font-bold">Dimensiones:</h4>

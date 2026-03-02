@@ -87,7 +87,7 @@ export default function CartItem({ product, quantity, errors }) {
                     <img 
                     src={`/storage/${product.image_preview_url}`} 
                     alt="Imagen" 
-                    className={`size-32 object-cover ${isLoading ? "opacity-0" : "opacity-100"}`}
+                    className={`size-32 object-cover ${isLoading ? "hidden" : "block"}`}
                     loading="lazy"
                     onLoad={() => setIsLoading(false)}
                     />
