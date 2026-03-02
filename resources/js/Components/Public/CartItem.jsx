@@ -1,9 +1,11 @@
 import { useState } from "react";
 import Button from "./Button";
 import { Link, router } from "@inertiajs/react";
+import Skeleton from "react-loading-skeleton";
 
 export default function CartItem({ product, quantity, errors }) {
     const [ isUpdating, setIsUpdating ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(true);
 
     /**
      * Increase quantity in 1
@@ -71,13 +73,28 @@ export default function CartItem({ product, quantity, errors }) {
     }
 
     return (
-        <article className="flex gap-6 p-3 w-full border-t-[1px] border-primary-200">
-            <Link href={`/productos/${product.id}`}>
-                <img src={`/storage/${product.image_preview_url}`} alt="Imagen" className="size-32 flex-shrink-0 object-cover" loading="lazy"/>
-            </Link>
-            
+        <article className="flex justify-between gap-2 p-3 w-full border-t-[1px] border-primary-200">
+            <div className="size-32">
+                <Link href={`/productos/${product.id}`}>
+                    {isLoading && 
+                        <Skeleton 
+                        width="128px"
+                        height="128px"
+                        className="flex-shrink-0"
+                        />
+                    }
 
-            <section className="flex flex-col justify-evenly w-full min-w-0">
+                    <img 
+                    src={`/storage/${product.image_preview_url}`} 
+                    alt="Imagen" 
+                    className={`size-32 object-cover ${isLoading ? "opacity-0" : "opacity-100"}`}
+                    loading="lazy"
+                    onLoad={() => setIsLoading(false)}
+                    />
+                </Link>
+            </div>
+            
+            <section className="flex flex-col justify-evenly w-full min-w-0 flex-1">
                 <h3 className="heading-6 truncate">
                     {product.name}
                 </h3>
