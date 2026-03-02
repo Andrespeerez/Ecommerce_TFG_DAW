@@ -1,4 +1,9 @@
+import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
+
 export default function OrderCard({ order }) {
+    const [ isLoading, setIsLoading ] = useState(true);
+
     const statusColor = {
         'pending': 'text-warning',
         'confirmed': 'text-success',
@@ -44,9 +49,22 @@ export default function OrderCard({ order }) {
             <div className="flex flex-col gap-2 p-2">
                 {order.order_lines.map((orderLine) => (
                     <div key={orderLine.id} className="w-full bg-neutral-100 first-of-type:rounded-t-xl last-of-type:rounded-b-xl overflow-hidden flex justify-between">
-                        <img src={`/storage/${orderLine.product.image_url}`} alt={`Imagen de producto ${orderLine.product.name}`} 
-                        className="size-24 object-cover"
+                        <figure className="size-32">
+                            {isLoading && 
+                            <Skeleton 
+                            height="128px"
+                            width="128px"
+                            />
+                            }
+
+                            <img src={`/storage/${orderLine.product.image_url}`} 
+                            alt={`Imagen de producto ${orderLine.product.name}`} 
+                            className={`object-cover ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                            loading="lazy"
+                            onLoad={() => setIsLoading(false)}
                         />
+                        </figure>
+                        
 
                         <div className="flex-1">
                             <h3 className="heading-6 text-center">{orderLine.product.name}</h3>
