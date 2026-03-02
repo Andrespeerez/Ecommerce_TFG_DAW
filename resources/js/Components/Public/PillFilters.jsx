@@ -24,13 +24,11 @@ export default function PillFilters({ filters, categories, materials, finishes }
     
     return (
         <div
-        className="flex flex-wrap gap-5 px-10 pt-10"
+        className="flex flex-col flex-wrap gap-5 px-10 pt-10"
         >
-            <PillsContainer filters={filters} categories={categories} materials={materials} finishes={finishes} />
-
             {Object.keys(filters).length > 0 &&
             <div
-            className="bg-accent-300 hover:bg-accent-500 heading-6 text-neutral-800 flex gap-[10px] p-[10px] items-center rounded-[10px]"
+            className="bg-warning hover:bg-yellow-600 heading-6 text-neutral-800 flex gap-[10px] p-[10px] items-center rounded-[10px] cursor-pointer"
             >
                 <button
                 onClick={removeAllFilters}
@@ -40,6 +38,10 @@ export default function PillFilters({ filters, categories, materials, finishes }
                 Quitar filtros
             </div>
             }
+
+            <PillsContainer filters={filters} categories={categories} materials={materials} finishes={finishes} />
+
+            
         </div>
     );
 }
