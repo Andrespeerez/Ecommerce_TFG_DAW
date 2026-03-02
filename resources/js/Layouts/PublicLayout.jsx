@@ -140,7 +140,7 @@ export default function PublicLayout ({ children, canResetPassword }) {
                 {cartOpen && 
                 <Modal closeModal={handleCloseModal} 
                 type="cart"
-                modalStyle="max-h-[calc(100vh-80px)] md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
+                modalStyle="h-[calc(100vh-80px)] md:w-1/2 xl:w-1/3 w-full bg-neutral-200 flex flex-col gap-20 items-center"
                 >
                     <Cart cart={cart} openLoginModal={handleOpenLogin} closeModals={handleCloseModal} triggerConfirm={handleConfirm} />
                 </Modal>
