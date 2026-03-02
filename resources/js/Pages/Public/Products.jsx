@@ -44,7 +44,7 @@ export default function Products ({ auth, cart = cartDefault, products, canReset
                     </div>
                 </aside>
 
-                <div className="flex-1 min-w-0 flex flex-col gap-10 rounded-2xl bg-black/20 border-1 border-neutral-200">
+                <div className="flex-1 min-w-0 flex flex-col gap-10 rounded-2xl bg-neutral-500 border-1 border-neutral-200">
                     <PillFilters categories={categories} materials={materials} finishes={finishes} filters={filters} />
                     
                     <div
@@ -73,10 +73,10 @@ export default function Products ({ auth, cart = cartDefault, products, canReset
             </div>
 
             <button
-            className="fixed bottom-0 w-full bg-neutral-800 text-neutral-50 heading-6 py-5 block lg:hidden"
+            className="fixed bottom-0 w-full bg-neutral-700 text-neutral-50 heading-6 py-5 block lg:hidden"
             onClick={() => setMobileFiltersOpen(true)}
             >
-                FILTROS
+                AÑADIR FILTROS
             </button>
 
             {mobileFiltersOpen && 

@@ -45,7 +45,7 @@ export default function UserOrders({ auth, cart, canResetPassword, categories, o
                     >
                         <NavigationLinks />
                     </aside>
-                    <div className="grow flex flex-col gap-3 mx-4 ml-8 p-2 rounded-lg md:pl-0 bg-black/20 min-h-screen">
+                    <div className="grow flex flex-col gap-3 mx-4 ml-8 p-2 rounded-lg md:pl-0 bg-neutral-500 min-h-screen">
                         {orders.data.map((order) => (
                             <OrderCard key={order.order_number} order={order} />
                         ))}
