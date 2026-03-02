@@ -112,9 +112,9 @@ export default function PublicLayout ({ children, canResetPassword }) {
 
 
                 {menuOpen && 
-                <Modal closeModal={handleCloseModal} 
+                <Modal closeModal={handleCloseModal}
                 type="menu"
-                modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
+                modalStyle="h-[calc(100vh-80px)] md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center overflow-y-auto"
                 >
                     <Categories categories={categories} />      
                 </Modal>
@@ -123,20 +123,24 @@ export default function PublicLayout ({ children, canResetPassword }) {
                 {loginOpen && 
                 <Modal closeModal={handleCloseModal} 
                 type="login"
-                modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-10 items-center pt-10"
+                modalStyle="h-[calc(100vh-80px)] md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-10 items-center pt-10 overflow-y-auto pb-60"
                 >
                     {loginSignin ? 
                     <Signin closeModal={handleCloseModal} /> : 
                     <Login canResetPassword={canResetPassword} closeModal={handleCloseModal} />
-                    }       
-                    <Button onClick={toggleLoginSignin}>{loginSignin ? "Ya tienes cuenta? Entra" : "No tienes cuenta? Registrate"}</Button>    
+                    }
+                    <div className="flex flex-col gap-1">
+                        <p>{loginSignin ? "¿Ya tienes cuenta?" : "¿No tienes cuenta?"}</p>
+                        <Button onClick={toggleLoginSignin}>{loginSignin ? "Entra" : "Registrate"}</Button>
+                    </div>
+                        
                 </Modal>
                 }
 
                 {cartOpen && 
                 <Modal closeModal={handleCloseModal} 
                 type="cart"
-                modalStyle="h-full md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
+                modalStyle="max-h-[calc(100vh-80px)] md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-20 items-center"
                 >
                     <Cart cart={cart} openLoginModal={handleOpenLogin} closeModals={handleCloseModal} triggerConfirm={handleConfirm} />
                 </Modal>
