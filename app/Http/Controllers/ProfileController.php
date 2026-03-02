@@ -120,16 +120,21 @@ class ProfileController extends Controller
     }
 
     /**
-     * Delete the user's account.
+     * Soft delete an user (active = false)
+     * 
+     * @param Request $request
+     * @return RedirectResponse
      */
     public function destroy(Request $request): RedirectResponse
     {
 
         $user = $request->user();
 
-        Auth::logout();
+        // Soft Delete
+        $user->active = false;
+        $user->save();
 
-        $user->delete();
+        Auth::logout();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
