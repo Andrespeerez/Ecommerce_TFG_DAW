@@ -165,6 +165,8 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                                     return;
                                 }
 
+                                if (!/^\d+$/.test(val)) return;
+
                                 let currentQuantity = Math.abs(parseInt(val, 10));
 
                                 if (!isNaN(currentQuantity) || currentQuantity === 0) {
@@ -225,6 +227,8 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                             setQuantity(''); 
                             return;
                         }
+
+                        if (!/^\d+$/.test(val)) return;
 
                         let currentQuantity = Math.abs(parseInt(val, 10));
 
