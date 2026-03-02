@@ -1,16 +1,50 @@
+import Modal from "@/Components/Public/Modal";
+import ConfirmPasswordForm from "@/Components/Public/ConfirmPasswordForm";
 import UserProfileAccount from "@/Components/Public/UserProfileAccount";
 import UserProfileDelete from "@/Components/Public/UserProfileDetele";
 import UserProfileInfo from "@/Components/Public/UserProfileInfo";
 import UserProfileShipment from "@/Components/Public/UserProfileShipment";
 import PublicLayout from "@/Layouts/PublicLayout";
 import { Head, Link } from "@inertiajs/react";
+import { useEffect, useState } from "react";
 
 // TODO: This is a fake cart. Need a real one from server
 const cartDefault = {
     total_items: 0
 }
 
-export default function UserProfile({ cart = cartDefault, auth, canResetPassword, categories, mustVerifyEmail, status }) {
+export default function UserProfile({ cart = cartDefault, auth, canResetPassword, categories, mustVerifyEmail, status, errors }) {
+    const [ confirmPasswordModal, setConfirmPasswordModal ] = useState({
+        isOpen: false,
+        onSuccess: null,
+    });
+
+    useEffect(() => {
+        if (errors?.password_confirmed === false) {
+            setConfirmPasswordModal({
+                isOpen: true,
+                onSuccess: executeAction,
+            });
+        }
+    }, [errors]);
+
+    const executeAction = (action) => {
+        action({
+            onError: (errors) => {
+                if (errors.password_confirmed === false) {
+                    setConfirmPasswordModal({
+                        isOpen: true,
+                        onSuccess: () => {
+                            setConfirmPasswordModal({ isOpen: false, onSuccess: null });
+                            action();
+                        },
+                    });
+                }
+            }
+        })
+    }
+
+
     return (
         <>
             <Head title="Área Cliente " />
@@ -36,12 +70,22 @@ export default function UserProfile({ cart = cartDefault, auth, canResetPassword
                         </ul>
                     </aside>
                     <div className="grow flex flex-col gap-3 mx-4">
-                        <UserProfileAccount mustVerifyEmail={mustVerifyEmail} status={status} /> 
+                        <UserProfileAccount mustVerifyEmail={mustVerifyEmail} status={status} confirmAction={executeAction} /> 
                         <UserProfileInfo />
                         <UserProfileShipment />
-                        <UserProfileDelete />
+                        <UserProfileDelete confirmAction={executeAction} />
                     </div>
                 </div>
+
+                {confirmPasswordModal.isOpen && (
+                    <Modal type="confirm" closeModal={() => setConfirmPasswordModal({ isOpen: false, onSuccess: null })}>
+                        <ConfirmPasswordForm 
+                            onSuccess={() => {
+                                confirmPasswordModal.onSuccess();
+                            }}
+                        />
+                    </Modal>
+                )}
                 
             </PublicLayout>
         </>

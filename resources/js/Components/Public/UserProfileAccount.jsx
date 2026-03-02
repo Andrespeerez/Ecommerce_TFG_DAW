@@ -2,10 +2,13 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+import { ConfirmContext } from '@/Layouts/PublicLayout';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { useContext } from 'react';
 
-export default function UserProfileAccount() {
+export default function UserProfileAccount({ confirmAction }) {
+    const triggerConfirm = useContext(ConfirmContext);
     const user = usePage().props.auth.user;
     const { data, setData, patch, errors, processing, recentlySuccessful, reset } = useForm({
         email: user.email,
@@ -14,13 +17,22 @@ export default function UserProfileAccount() {
         password_confirmation: '',
     });
 
-    const submitEmail = (e) => {
+    const handleEditEmail = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update.email'), {
-            onSuccess: () => reset('current_password', 'password', 'password_confirmation'),
+        triggerConfirm('¿Estás seguro de que quieres cambiar tu email?', () => {
+            
+            const performPatch = (extraOptions = {}) => {
+                patch(route('profile.update.email'), {
+                    preserveScroll: true,
+                    onSuccess: () => reset('current_password', 'password', 'password_confirmation'),
+                    ...extraOptions,
+                });
+            };
+
+            confirmAction(performPatch);
         });
-    }
+    };
 
     const submitPassword = (e) => {
         e.preventDefault();
@@ -41,7 +53,7 @@ export default function UserProfileAccount() {
                 </p>
             </header>
 
-            <form onSubmit={submitEmail} className="mt-6 space-y-6">
+            <form onSubmit={handleEditEmail} className="mt-6 space-y-6">
                 <h3 className="heading-6 mb-4">Cambiar Email</h3>
                 <div>
                     <InputLabel htmlFor="email" value="Email" className='text-base font-semibold'/>
