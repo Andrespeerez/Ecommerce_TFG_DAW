@@ -1,9 +1,17 @@
 import { router } from "@inertiajs/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export default function SearchBar() {
+export default function SearchBar({ closeModals }) {
     const [ searchValue, setSearchValue ] = useState('');
     const [ mobileDropDown, setMobileDropDown ] = useState(false);
+    const searchRef = useRef(null);
+
+    // foco to element
+    useEffect(() => {
+        if (mobileDropDown) {
+            searchRef.current?.focus();
+        }
+    }, [mobileDropDown]);
 
     /**
      * Submit search param to /tienda?search=...
@@ -36,7 +44,10 @@ export default function SearchBar() {
 
             <button
                 className="md:hidden"
-                onClick={(e) => setMobileDropDown((previous) => !previous)}
+                onClick={(e) => {
+                    closeModals();
+                    setMobileDropDown((previous) => !previous);
+                }}
                 aria-label="Abrir buscador"
             >
                 <img src="/assets/images/search.svg" alt="Buscar" />
@@ -46,6 +57,7 @@ export default function SearchBar() {
                 <form onSubmit={handleSearch} className="absolute top-20 w-full md:hidden left-0 flex">
                     <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} 
                     className="w-full pl-5 pr-20 px-10 texto-base"
+                    ref={searchRef}
                     />
                     <button type="submit" 
                     className="-ml-12 inline"

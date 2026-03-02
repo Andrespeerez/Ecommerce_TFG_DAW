@@ -26,7 +26,7 @@ export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartO
 
             <CategoriesButton onClick={() => setMenuOpen(true)} />
 
-            <SearchBar />
+            <SearchBar closeModals={handleCloseModal} />
             
             {auth.user ? 
             <Dropdown>
