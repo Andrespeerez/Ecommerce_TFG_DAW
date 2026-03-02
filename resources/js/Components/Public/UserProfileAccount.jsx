@@ -56,12 +56,12 @@ export default function UserProfileAccount({ confirmAction }) {
             <form onSubmit={handleEditEmail} className="mt-6 space-y-6">
                 <h3 className="heading-6 mb-4">Cambiar Email</h3>
                 <div>
-                    <InputLabel htmlFor="email" value="Email" className='px-2 text-base font-semibold'/>
+                    <InputLabel htmlFor="email" value="Email" className='text-base font-semibold'/>
 
                     <TextInput
                         id="email"
                         type="email"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full px-4"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
                         required
@@ -98,11 +98,11 @@ export default function UserProfileAccount({ confirmAction }) {
                     
                     <div className="space-y-4">
                         <div>
-                            <InputLabel htmlFor="current_password" value="Contraseña Actual" className='px-2 text-base font-semibold'/>
+                            <InputLabel htmlFor="current_password" value="Contraseña Actual" className='text-base font-semibold'/>
                             <TextInput
                                 id="current_password"
                                 type="password"
-                                className="mt-1 block w-full"
+                                className="mt-1 block w-full px-4"
                                 value={data.current_password}
                                 onChange={(e) => setData('current_password', e.target.value)}
                             />
@@ -114,7 +114,7 @@ export default function UserProfileAccount({ confirmAction }) {
                             <TextInput
                                 id="password"
                                 type="password"
-                                className="mt-1 block w-full px-2"
+                                className="mt-1 block w-full px-4"
                                 value={data.password}
                                 onChange={(e) => setData('password', e.target.value)}
                             />
@@ -126,7 +126,7 @@ export default function UserProfileAccount({ confirmAction }) {
                             <TextInput
                                 id="password_confirmation"
                                 type="password"
-                                className="mt-1 block w-full px-2"
+                                className="mt-1 block w-full px-4"
                                 value={data.password_confirmation}
                                 onChange={(e) => setData('password_confirmation', e.target.value)}
                             />
