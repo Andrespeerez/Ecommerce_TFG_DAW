@@ -70,15 +70,15 @@
     }
 
     .btn-primary {
-        @apply btn h5 bg-primary-700 hover:bg-primary-500 active:bg-primary-900;
+        @apply btn bg-primary-700 hover:bg-primary-500 active:bg-primary-900;
     }
 
     .btn-secondary {
-        @apply btn h6 bg-secondary-500 hover:bg-secondary-700 active:bg-secondary-900;
+        @apply btn bg-secondary-500 hover:bg-secondary-700 active:bg-secondary-900;
     }
 
     .btn-accent {
-        @apply btn h6 bg-accent-500 hover:bg-accent-700 active:bg-accent-800;
+        @apply btn bg-accent-500 hover:bg-accent-700 active:bg-accent-800;
     }
 
     /* Product Details MarkDown */

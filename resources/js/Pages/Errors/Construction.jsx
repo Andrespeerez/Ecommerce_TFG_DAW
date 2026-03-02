@@ -1,7 +1,7 @@
 import PublicLayout from "@/Layouts/PublicLayout";
 import { Head, router } from "@inertiajs/react";
 
-export default function Construction(cart, auth) {
+export default function Construction({cart, auth}) {
     const handleBack = () => {
         router.get(route('home.index'));
     }
