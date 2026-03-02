@@ -147,7 +147,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                             aria-label="Menos producto"
                             onClick={() => setQuantity(prev => {
                                 if (!validateInput(prev - 1)) {
-                                    return prev;
+                                    return;
                                 }
 
                                 return prev - 1;
@@ -180,7 +180,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                             aria-label="Más producto"
                             onClick={() => setQuantity(prev => {
                                 if (!validateInput(prev + 1)) {
-                                    return prev;
+                                    return;
                                 }
 
                                 return prev + 1;
@@ -208,7 +208,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                     aria-label="Menos producto"
                     onClick={() => setQuantity(prev => {
                         if (!validateInput(prev - 1)) {
-                            return prev;
+                            return;
                         }
 
                         return prev - 1;
@@ -241,7 +241,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                     aria-label="Más producto"
                     onClick={() => setQuantity(prev => {
                         if (!validateInput(prev + 1)) {
-                            return prev;
+                            return;
                         }
 
                         return prev + 1;
