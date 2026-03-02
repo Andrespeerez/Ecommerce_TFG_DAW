@@ -37,7 +37,7 @@ export default function ConfirmPasswordForm({ onSuccess }) {
         <div className="bg-white p-8 rounded-lg max-w-md w-full">
             <h2 className="heading-5 mb-4">Confirma tu contraseña</h2>
             <p className="text-base text-neutral-600 mb-6">
-                Por seguridad, por favor confirma tu contraseña para continuar.
+                Por favor, confirma tu contraseña para continuar.
             </p>
 
             <form onSubmit={submit}>

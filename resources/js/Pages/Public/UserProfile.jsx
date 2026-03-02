@@ -14,6 +14,7 @@ const cartDefault = {
 }
 
 export default function UserProfile({ cart = cartDefault, auth, canResetPassword, categories, mustVerifyEmail, status, errors }) {
+    const [ menuOpen, setMenuOpen ] = useState(false);
     const [ confirmPasswordModal, setConfirmPasswordModal ] = useState({
         isOpen: false,
         onSuccess: null,
@@ -44,6 +45,13 @@ export default function UserProfile({ cart = cartDefault, auth, canResetPassword
         })
     }
 
+    const NavigationLinks = () => (
+        <ul className="flex flex-col gap-2 text-left pl-4 pt-4 heading-6">
+            <li><Link href="/area-cliente" className="text-neutral-600">Mi Perfil</Link></li>
+            <li><Link href="/area-cliente/pedidos">Mis Pedidos</Link></li>
+        </ul>
+    )
+
 
     return (
         <>
@@ -58,18 +66,25 @@ export default function UserProfile({ cart = cartDefault, auth, canResetPassword
             </Head>
             
             <PublicLayout canResetPassword={canResetPassword}>
+                <div className="md:hidden fixed l-0 h-screen">
+                    <button 
+                        onClick={() => setMenuOpen(true)}
+                        className="h-screen flex items-center justify-between bg-neutral-50 p-2 rounded-lg shadow-sm"
+                        aria-label="Abrir menú de Perfil de usuario"
+                    >
+                        <img src="/assets/images/right.svg" alt="flecha de abrir menu" className="size-4" />
+                    </button>
+                </div>
+
                 <div
                 className="flex gap-5"
                 >
                     <aside
                     className="md:w-1/4 lg:w-1/5 hidden md:block"
                     >
-                        <ul className="flex flex-col gap-2 text-left pl-4 pt-4 heading-6">
-                            <li><Link href="/area-cliente" className="text-neutral-600">Datos de Cliente</Link></li>
-                            <li><Link href="/area-cliente/pedidos">Pedidos</Link></li>
-                        </ul>
+                        <NavigationLinks />
                     </aside>
-                    <div className="grow flex flex-col gap-3 mx-4">
+                    <div className="grow flex flex-col gap-3 mx-4 ml-8 p-2 rounded-lg md:pl-0 bg-black/20">
                         <UserProfileAccount mustVerifyEmail={mustVerifyEmail} status={status} confirmAction={executeAction} /> 
                         <UserProfileInfo />
                         <UserProfileShipment />
@@ -84,6 +99,18 @@ export default function UserProfile({ cart = cartDefault, auth, canResetPassword
                                 confirmPasswordModal.onSuccess();
                             }}
                         />
+                    </Modal>
+                )}
+
+                {menuOpen && (
+                    <Modal 
+                        type="menu" 
+                        closeModal={() => setMenuOpen(false)}
+                        modalStyle="h-full w-3/4 bg-neutral-200 p-2 shadow-2xl"
+                    >
+                        <div className="mt-10">
+                            <NavigationLinks />
+                        </div>
                     </Modal>
                 )}
                 
