@@ -46,11 +46,13 @@ export default function Cart({ cart, openLoginModal, closeModals, triggerConfirm
     }
 
     return (
-        <div className="flex flex-col justify-between pt-5 gap-2 h-full w-full">    
+        <div className="flex flex-col justify-between pt-14 gap-2 h-full w-full">    
 
 
             <div className="w-full overflow-y-auto">
-                {cart.items.map((item) => {
+                {cart.items?.length == 0 ? 
+                <p className="heading-6 text-center pt-10">El carrito está vacío</p>
+                : cart.items.map((item) => {
                     return (
                         <CartItem key={item.data.id} product={item.data} quantity={item.quantity} errors={item.errors} />
                     );
@@ -61,13 +63,13 @@ export default function Cart({ cart, openLoginModal, closeModals, triggerConfirm
                     <p className="text-danger text-base bg-neutral-600">{error}</p>
                 )) : ''}
                 <div className="flex justify-between items-center py-1 px-2">
-                    <p className="text-base font-bold font-lora">Precio total: {cart.total_price} €</p>
+                    <p className="text-base font-bold font-lora">Precio total: {cart.total_price.toFixed(2)} €</p>
                     <p className="text-base font-bold">Nº Productos: {cart.total_items}</p>
                 </div>
                 
                 <Button 
                 className="w-full rounded-b-[0px]"
-                disabled={hasErrors}
+                disabled={hasErrors || cart.items?.length == 0}
                 onClick={(e) => {
                     submit(e);
                 }}
