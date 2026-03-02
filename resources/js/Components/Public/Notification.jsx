@@ -15,7 +15,7 @@ export default function Notification () {
         return () => clearTimeout(timer);
     }, [flash])
 
-    if (!visible) return null;
+    if (!visible || (flash.error == null && flash.success == null)) return null;
 
     return (
         <div className="p-1">
