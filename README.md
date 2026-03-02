@@ -43,12 +43,12 @@ Desarrollada para el Proyecto Proyecto Intermodular de 2º DAW.
   - [x] Sistema contra anti-persona (límite de productos que se pueden comprar de una tacada) 
 - [x] Histórico de pedidos con estados
 - [x] Diseño responsive
-- [ ] UI/UX:
+- [x] UI/UX:
   - [x] Validación de formularios en Cliente
   - [x] Barra de carga cuando está esperando respuesta del servidor
   - [x] Notificaciones cuando el servidor responde con un error o success
   - [x] Interfaz clara y coherente
-  - [ ] Skeletons para elementos de interfaz
+  - [x] Skeletons para elementos de interfaz
   - [x] Navegación de login y cambio de datos de profile confusa para personas mayores
   - [x] Animación del carrito para guiar la vista en la navegación
 - [ ] Seguridad:
