@@ -43,7 +43,9 @@ export default function Filters ({ filters, categories, materials, finishes}) {
             >
                 <h3 className="heading-5">Categorías:</h3>
                 {categories.map(category => (
-                    <label key={category.id}>
+                    <label key={category.id}
+                    className="flex gap-2"
+                    >
                         <input type="checkbox"
                         checked={data.categories.includes(String(category.id))}
                         onChange={() => {
@@ -68,7 +70,9 @@ export default function Filters ({ filters, categories, materials, finishes}) {
             >
                 <h3 className="heading-5">Materiales:</h3>
                 {materials.map(material => (
-                    <label key={material.id}>
+                    <label key={material.id}
+                    className="flex gap-2"
+                    >
                         <input type="checkbox"
                         checked={data.materials.includes(String(material.id))}
                         onChange={() => {
@@ -93,7 +97,9 @@ export default function Filters ({ filters, categories, materials, finishes}) {
             >
                 <h3 className="heading-5">Acabados:</h3>
                 {finishes.map(finish => (
-                    <label key={finish.id}>
+                    <label key={finish.id}
+                    className="flex gap-2"
+                    >
                         <input type="checkbox"
                         checked={data.finishes.includes(String(finish.id))}
                         onChange={() => {
@@ -115,18 +121,18 @@ export default function Filters ({ filters, categories, materials, finishes}) {
                 <section>
                     <h3 className="heading-5">Precios:</h3>
                     <div
-                    className="flex gap-4 items-center"
+                    className="flex flex-col gap-4"
                     >
                         <label>
                             Precio mínimo:
                             <input type="number" onChange={e => setData('price_min', e.target.value)} value={data.price_min}
-                            className="w-12 text-right p-2 rounded-2xl ml-2"
+                            className="w-32 text-right p-2 rounded-2xl ml-2" min="0"
                             />€
                         </label>
                         <label>
                             Precio máximo:
                             <input type="number" onChange={e => setData('price_max', e.target.value)} value={data.price_max}
-                            className="w-12 text-right p-2 rounded-2xl ml-2"
+                            className="w-32 text-right p-2 rounded-2xl ml-2" min="0"
                             />€
                         </label>
                     </div>
