@@ -18,7 +18,7 @@ export default function Notification () {
     if (!visible || (flash.error == null && flash.success == null)) return null;
 
     return (
-        <div className="p-1">
+        <div className="p-1 fixed mt-20">
             {flash.error && (
                 <div className="w-full bg-danger text-white opacity-60 px-6 py-3 rounded-lg heading-6 text-[16px] flex justify-between items-center z-50">
                     {flash.error}
