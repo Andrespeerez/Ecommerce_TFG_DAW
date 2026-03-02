@@ -23,6 +23,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Middleware aliases
         $middleware->alias([
             'admin' => IsAdmin::class,
+            'password.confirm' => \App\Http\Middleware\RequirePassword::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

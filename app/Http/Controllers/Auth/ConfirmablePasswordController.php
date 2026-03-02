@@ -36,6 +36,10 @@ class ConfirmablePasswordController extends Controller
 
         $request->session()->put('auth.password_confirmed_at', time());
 
+        if ($request->header('X-Inertia')) {
+            return back();
+        }
+
         return redirect()->intended(route('dashboard', absolute: false));
     }
 }
