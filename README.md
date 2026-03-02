@@ -49,8 +49,8 @@ Desarrollada para el Proyecto Proyecto Intermodular de 2º DAW.
   - [x] Notificaciones cuando el servidor responde con un error o success
   - [x] Interfaz clara y coherente
   - [ ] Skeletons para elementos de interfaz
-  - [ ] Navegación de login y cambio de datos de profile confusa para personas mayores
-  - [ ] Animación del carrito para guiar la vista en la navegación
+  - [x] Navegación de login y cambio de datos de profile confusa para personas mayores
+  - [x] Animación del carrito para guiar la vista en la navegación
 - [ ] Seguridad:
   - [x] Throttling para peticiones pesadas (login, registro, cambios de datos en perfil de usuario, checkout)
   - [x] Token CSRF
