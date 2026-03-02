@@ -14,7 +14,9 @@ export default function CartItem({ product, quantity, errors }) {
         e.preventDefault();
         setIsUpdating(true);
 
-        router.post(route('cart.add', id), {}, {
+        router.post(route('cart.add', id), {
+            quantity: 1,
+        }, {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -112,7 +114,7 @@ export default function CartItem({ product, quantity, errors }) {
                 </div>
                 {isUpdating ? 'Actualizando ...' : ''}
                 {errors.map((error, index) => (
-                        <p key={index} className="text-base text-warning">{error}</p> 
+                        <p key={index} className="text-base text-danger font-bold">{error}</p> 
                     ) 
                 )}
             </section>

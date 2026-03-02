@@ -22,13 +22,16 @@ const productDefault = {
 
 export default function ProductDetails({ auth, cart = cartDefault, product = productDefault, canResetPassword, categories, }) {
     const [ isAdding, setIsAdding ] = useState(false);
+    const [ quantity, setQuantity ] = useState(1);
 
     function submit(e) {
         e.preventDefault();
 
         setIsAdding(true);
 
-        router.post(route('cart.add', product.id), {}, {
+        router.post(route('cart.add', product.id), {
+            quantity: quantity
+        }, {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -62,7 +65,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                 <section className="flex-1 mb-12 px-10">
                     <img src={`/storage/${product.image_url}`} alt={`Foto de ${product.name}`} className="mx-auto" fetchpriority="high"/>
                     <h2 className="lg:heading-3 heading-5 text-center my-4">{product.name}</h2>
-                    <div id="product_description">
+                    <div id="product_description" className="pb-6">
                         <ReactMarkdown>
                             {product.description}
                         </ReactMarkdown>
@@ -102,6 +105,36 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                         className="heading-6 text-center"
                         >{product.name}</h2>
                         <p className="heading-6">{product.price_with_iva}€</p>
+
+                        <div className="text-center p-4 flex gap-4 justify-center items-center">
+                            <button type="button"
+                            aria-label="Menos producto"
+                            onClick={() => setQuantity(prev => {
+                                if (prev <= 1) return prev;
+                                
+                                return prev - 1;
+                            })}
+                            >
+                                <img src="/assets/images/minus.svg" alt="Menos producto" />   
+                            </button>
+                            <input type="number" 
+                            value={quantity}
+                            onChange={(e) => {
+                                setQuantity(e.target.value)
+                            }}
+                            className="w-12 text-center px-3 rounded-md"
+                            step="1"
+                            min="1" /> 
+                            <button type="button"
+                            aria-label="Más producto"
+                            onClick={() => setQuantity(prev => {
+                                return prev + 1;
+                            })}
+                            >
+                                <img src="/assets/images/plus.svg" alt="Más producto" />
+                            </button>
+                        </div>
+
                         <Button type="submit" variant="secondary" disabled={isAdding}>
                             { isAdding ? "Añadiendo ..." : "Añadir al Carrito" }
                         </Button>
@@ -111,9 +144,39 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
             </div>
 
             <form onSubmit={submit}
-            className="sticky bottom-0 z-40 bg-primary-100 w-full lg:hidden"
+            className="sticky bottom-0 z-40 bg-primary-100 w-full lg:hidden border-t-2 border-t-primary-400"
             >
-                <p className="heading-6 text-center">{product.price_with_iva}€</p>
+                <p className="heading-6 text-center">{product.price_with_iva}€ / unidad</p>
+                
+                <div className="text-center p-4 flex gap-4 justify-center items-center">
+                    <button type="button"
+                    aria-label="Menos producto"
+                    onClick={() => setQuantity(prev => {
+                        if (prev <= 1) return prev;
+                        
+                        return prev - 1;
+                    })}
+                    >
+                        <img src="/assets/images/minus.svg" alt="Menos producto" />   
+                    </button>
+                    <input type="number" 
+                    value={quantity}
+                    onChange={(e) => {
+                        setQuantity(e.target.value)
+                    }}
+                    step="1"
+                    className="w-12 text-center px-3 rounded-md"
+                    min="1" /> 
+                    <button type="button"
+                    aria-label="Más producto"
+                    onClick={() => setQuantity(prev => {
+                        return prev + 1;
+                    })}
+                    >
+                        <img src="/assets/images/plus.svg" alt="Más producto" />
+                    </button>
+                </div>
+
                 <Button type="submit" variant="secondary" disabled={isAdding} className="w-full rounded-b-[0px] heading-6">
                     { isAdding ? "Añadiendo ..." : "Añadir al Carrito" }
                 </Button>

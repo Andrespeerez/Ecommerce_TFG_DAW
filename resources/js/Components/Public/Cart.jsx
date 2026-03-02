@@ -7,7 +7,6 @@ import Confirm from "./Confirm";
 
 export default function Cart({ cart, openLoginModal, closeModals, triggerConfirm }) {
     const [ hasErrors, setHasErrors ] = useState(false);
-    const [ openConfirmModal, setOpenConfirmModal ] = useState(false);
     const { auth } = usePage().props;
 
     useEffect(() => {
@@ -37,6 +36,14 @@ export default function Cart({ cart, openLoginModal, closeModals, triggerConfirm
             }));
             return;
         }
+
+        if (cart.items?.length === 0) {
+            return;
+        }
+
+        if (hasErrors) {
+            return;
+        }
         
         triggerConfirm('¿Quieres completar el pedido?', action);
     }    
@@ -58,24 +65,27 @@ export default function Cart({ cart, openLoginModal, closeModals, triggerConfirm
                     );
                 })}
             </div>
-            <div className="bg-neutral-800 text-neutral-50">
-                {hasErrors ? cart.errors.map((error) => (
-                    <p className="text-danger text-base bg-neutral-600">{error}</p>
+            <div className=" text-neutral-50">
+                {hasErrors ? cart.errors.map((error, index) => (
+                    <p className="text-danger text-base font-bold p-2 text-center" key={index}>{error}</p>
                 )) : ''}
-                <div className="flex justify-between items-center py-1 px-2">
-                    <p className="text-base font-bold font-lora">Precio total: {cart.total_price.toFixed(2)} €</p>
-                    <p className="text-base font-bold">Nº Productos: {cart.total_items}</p>
+                <div className="bg-neutral-800">
+                    <div className="flex justify-between items-center py-1 px-2 ">
+                        <p className="text-base font-bold font-lora">Precio total: {cart.total_price.toFixed(2)} €</p>
+                        <p className="text-base font-bold">Nº Productos: {cart.total_items}</p>
+                    </div>
+                    
+                    <Button 
+                    className="w-full rounded-b-[0px]"
+                    disabled={hasErrors || cart.items?.length == 0}
+                    onClick={(e) => {
+                        submit(e);
+                    }}
+                    >
+                        Realizar Pedido
+                    </Button>
                 </div>
                 
-                <Button 
-                className="w-full rounded-b-[0px]"
-                disabled={hasErrors || cart.items?.length == 0}
-                onClick={(e) => {
-                    submit(e);
-                }}
-                >
-                    Realizar Pedido
-                </Button>
             </div>
         </div>
     );
