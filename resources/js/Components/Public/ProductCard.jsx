@@ -23,7 +23,9 @@ export default function ProductCard({ product = productFake }) {
 
         setIsAdding(true);
 
-        router.post(route('cart.add', product.id), {}, {
+        router.post(route('cart.add', product.id), {
+            quantity: 1,
+        }, {
             preserveScroll: true,
             preserveState: true,
             onSuccess: () => {
@@ -42,11 +44,14 @@ export default function ProductCard({ product = productFake }) {
         className="rounded-[20px] flex flex-col justify-between gap-3 pb-5 bg-neutral-300 max-w-[450px] w-full overflow-hidden border-t-1 lg:h-[600px] md:h-[500px] cursor-pointer"
         onClick={handleClickCard}
         >
-            <img src={`/storage/${product.image_small_url}`} alt={`Foto de ${product.name}`} 
-            className="object-cover w-full h-[70%]"
-            itemProp="image"
-            loading="lazy"
-            />
+            <figure className="group relative w-full h-[70%] overflow-hidden rounded-lg">
+                <img 
+                    src={`/storage/${product.image_small_url}`} alt={`Foto de ${product.name}`} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    itemProp="image"
+                    loading="lazy"
+                />
+            </figure>            
 
             <h3
             className="heading-6 lg:heading-5 text-primary-900 text-center"
