@@ -6,7 +6,7 @@ export default function OrderCard({ order }) {
     }
 
     return (
-        <article className="bg-neutral-400 rounded-[10px]">
+        <article className="bg-white rounded-[10px] md:ml-2">
             <header className="flex flex-col md:flex-row gap-3 heading-6 text-[16px] justify-between p-4">
                 <div className="flex flex-col items-center">
                     <h2>
