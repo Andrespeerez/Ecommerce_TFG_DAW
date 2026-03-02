@@ -13,6 +13,10 @@
         @if(Route::currentRouteName() === 'home.index')
             <link rel="preload" as="image" href="/assets/images/hero.webp" fetchpriority="high" type="image/webp">
         @endif
+
+        @if($page['component'] === 'Errors/Construction')
+            <link rel="preload" as="image" href="/assets/images/under-construction.webp" fetchpriority="high" type="image/webp">
+        @endif
         
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
         @inertiaHead

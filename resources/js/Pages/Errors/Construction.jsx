@@ -23,6 +23,8 @@ export default function Construction(cart, auth) {
                         src="/assets/images/under-construction.webp" 
                         alt="Sitio en construcción" 
                         className="max-w-2xl w-full h-auto object-contain"
+                        loading="eager"
+                        fetchpriority="high"
                     />
                     
                     <button
