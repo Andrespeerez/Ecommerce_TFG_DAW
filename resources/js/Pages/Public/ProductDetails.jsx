@@ -29,10 +29,14 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
     function submit(e) {
         e.preventDefault();
 
+        if (quantity === '' || quantity === null || quantity < 1) {
+            return; 
+        }
+
         setIsAdding(true);
 
         router.post(route('cart.add', product.id), {
-            quantity: quantity
+            quantity: quantity,
         }, {
             preserveScroll: true,
             preserveState: true,
@@ -43,6 +47,20 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                 setIsAdding(false);
             },
         });
+    }
+
+    function validateInput(currentQuantity) {
+        if (currentQuantity < 1) {
+            setQuantity(1);
+            return false;
+        }
+
+        if (currentQuantity > 99) {
+            setQuantity(99);
+            return false;
+        }
+
+        return true;
     }
 
     return (
@@ -128,8 +146,10 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                             <button type="button"
                             aria-label="Menos producto"
                             onClick={() => setQuantity(prev => {
-                                if (prev <= 1) return prev;
-                                
+                                if (!validateInput(prev - 1)) {
+                                    return prev;
+                                }
+
                                 return prev - 1;
                             })}
                             >
@@ -138,7 +158,20 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                             <input type="number" 
                             value={quantity}
                             onChange={(e) => {
-                                setQuantity(e.target.value)
+                                const val = e.target.value;
+
+                                if (val === '') {
+                                    setQuantity(''); 
+                                    return;
+                                }
+
+                                let currentQuantity = Math.abs(parseInt(val, 10));
+
+                                if (!isNaN(currentQuantity) || currentQuantity === 0) {
+                                    if (validateInput(currentQuantity)) {
+                                        setQuantity(currentQuantity);
+                                    }
+                                }
                             }}
                             className="max-w-20 text-center px-3 rounded-md"
                             step="1"
@@ -146,6 +179,10 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                             <button type="button"
                             aria-label="Más producto"
                             onClick={() => setQuantity(prev => {
+                                if (!validateInput(prev + 1)) {
+                                    return prev;
+                                }
+
                                 return prev + 1;
                             })}
                             >
@@ -170,8 +207,10 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                     <button type="button"
                     aria-label="Menos producto"
                     onClick={() => setQuantity(prev => {
-                        if (prev <= 1) return prev;
-                        
+                        if (!validateInput(prev - 1)) {
+                            return prev;
+                        }
+
                         return prev - 1;
                     })}
                     >
@@ -180,7 +219,20 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                     <input type="number" 
                     value={quantity}
                     onChange={(e) => {
-                        setQuantity(e.target.value)
+                        const val = e.target.value;
+
+                        if (val === '') {
+                            setQuantity(''); 
+                            return;
+                        }
+
+                        let currentQuantity = Math.abs(parseInt(val, 10));
+
+                        if (!isNaN(currentQuantity) || currentQuantity === 0) {
+                            if (validateInput(currentQuantity)) {
+                                setQuantity(currentQuantity);
+                            }
+                        }
                     }}
                     step="1"
                     className="max-w-20 text-center px-3 rounded-md"
@@ -188,6 +240,10 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                     <button type="button"
                     aria-label="Más producto"
                     onClick={() => setQuantity(prev => {
+                        if (!validateInput(prev + 1)) {
+                            return prev;
+                        }
+
                         return prev + 1;
                     })}
                     >
