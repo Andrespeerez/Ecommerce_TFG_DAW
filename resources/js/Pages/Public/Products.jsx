@@ -73,7 +73,7 @@ export default function Products ({ auth, cart = cartDefault, products, canReset
             </div>
 
             <button
-            className="fixed bottom-0 w-full bg-neutral-700 text-neutral-50 heading-6 py-5 block lg:hidden"
+            className="fixed bottom-0 w-full bg-primary-800 text-neutral-50 heading-6 py-5 block lg:hidden"
             onClick={() => setMobileFiltersOpen(true)}
             >
                 AÑADIR FILTROS
