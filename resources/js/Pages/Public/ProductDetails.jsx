@@ -122,7 +122,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                             onChange={(e) => {
                                 setQuantity(e.target.value)
                             }}
-                            className="w-12 text-center px-3 rounded-md"
+                            className="max-w-20 text-center px-3 rounded-md"
                             step="1"
                             min="1" /> 
                             <button type="button"
@@ -165,7 +165,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                         setQuantity(e.target.value)
                     }}
                     step="1"
-                    className="w-12 text-center px-3 rounded-md"
+                    className="max-w-20 text-center px-3 rounded-md"
                     min="1" /> 
                     <button type="button"
                     aria-label="Más producto"
