@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import Button from "./Button";
 import CartItem from "./CartItem";
 import { router, usePage } from "@inertiajs/react";
+import Modal from "./Modal";
+import Confirm from "./Confirm";
 
-export default function Cart({ cart, openLoginModal, closeModals }) {
+export default function Cart({ cart, openLoginModal, closeModals, triggerConfirm }) {
     const [ hasErrors, setHasErrors ] = useState(false);
+    const [ openConfirmModal, setOpenConfirmModal ] = useState(false);
     const { auth } = usePage().props;
 
     useEffect(() => {
@@ -20,11 +23,13 @@ export default function Cart({ cart, openLoginModal, closeModals }) {
     function submit(e) {
         e.preventDefault();
 
+        // 1 Check if is authed
         if (!auth.user) {
             openLoginModal(); 
             return;
         }
 
+        // 2 Check if has 
         if (!auth.user.address || !auth.user.city || !auth.user.province || !auth.user.postal_code ) {
             closeModals();
             router.visit(route('profile.edit', {
@@ -32,13 +37,18 @@ export default function Cart({ cart, openLoginModal, closeModals }) {
             }));
             return;
         }
-
-        if (confirm('¿Estas seguro de tu compra?'))
-            router.post(route('checkout.store'), {}, {});
+        
+        triggerConfirm('¿Quieres completar el pedido?', action);
     }    
 
+    const action = () => {
+        router.post(route('checkout.store'), {}, {});
+    }
+
     return (
-        <div className="flex flex-col justify-between pt-5 gap-2 h-full w-full">
+        <div className="flex flex-col justify-between pt-5 gap-2 h-full w-full">    
+
+
             <div className="w-full overflow-y-auto">
                 {cart.items.map((item) => {
                     return (

@@ -4,11 +4,12 @@ export default function Modal({ children, closeModal, type = '', modalStyle = ''
         menu: 'flex items-start justify-start mt-20',
         cart: 'flex items-start justify-end mt-20',
         filters: 'flex mt-20',
+        confirm: 'flex items-center justify-center mt-20',
     }
 
     return (
         <div 
-            className={`fixed z-40 inset-0 bg-black/50 ${types[type]}`}
+            className={`fixed z-50 inset-0 bg-black/50 ${types[type]}`}
             onClick={closeModal}
         >
             <div
