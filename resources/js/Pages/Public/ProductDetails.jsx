@@ -50,7 +50,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
     }
 
     function validateInput(currentQuantity) {
-        if (currentQuantity < 1) {
+        if (isNaN(currentQuantity) || currentQuantity < 1) {
             setQuantity(1);
             return false;
         }
@@ -146,11 +146,11 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                             <button type="button"
                             aria-label="Menos producto"
                             onClick={() => setQuantity(prev => {
-                                if (!validateInput(prev - 1)) {
+                                if (!validateInput(parseInt(prev) - 1)) {
                                     return;
                                 }
 
-                                return prev - 1;
+                                return parseInt(prev) - 1;
                             })}
                             >
                                 <img src="/assets/images/minus.svg" alt="Menos producto" />   
@@ -167,7 +167,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
 
                                 if (!/^\d+$/.test(val)) return;
 
-                                let currentQuantity = Math.abs(parseInt(val, 10));
+                                let currentQuantity = parseInt(val, 10);
 
                                 if (!isNaN(currentQuantity) || currentQuantity === 0) {
                                     if (validateInput(currentQuantity)) {
@@ -181,11 +181,11 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                             <button type="button"
                             aria-label="Más producto"
                             onClick={() => setQuantity(prev => {
-                                if (!validateInput(prev + 1)) {
+                                if (!validateInput(parseInt(prev) + 1)) {
                                     return;
                                 }
 
-                                return prev + 1;
+                                return parseInt(prev) + 1;
                             })}
                             >
                                 <img src="/assets/images/plus.svg" alt="Más producto" />
@@ -209,11 +209,11 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                     <button type="button"
                     aria-label="Menos producto"
                     onClick={() => setQuantity(prev => {
-                        if (!validateInput(prev - 1)) {
+                        if (!validateInput(parseInt(prev) - 1)) {
                             return;
                         }
 
-                        return prev - 1;
+                        return parseInt(prev) - 1;
                     })}
                     >
                         <img src="/assets/images/minus.svg" alt="Menos producto" />   
@@ -230,7 +230,7 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
 
                         if (!/^\d+$/.test(val)) return;
 
-                        let currentQuantity = Math.abs(parseInt(val, 10));
+                        let currentQuantity = parseInt(val, 10);
 
                         if (!isNaN(currentQuantity) || currentQuantity === 0) {
                             if (validateInput(currentQuantity)) {
@@ -244,11 +244,11 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                     <button type="button"
                     aria-label="Más producto"
                     onClick={() => setQuantity(prev => {
-                        if (!validateInput(prev + 1)) {
+                        if (!validateInput( parseInt(prev) + 1)) {
                             return;
                         }
 
-                        return prev + 1;
+                        return parseInt(prev) + 1;
                     })}
                     >
                         <img src="/assets/images/plus.svg" alt="Más producto" />
