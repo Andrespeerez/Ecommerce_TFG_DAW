@@ -44,7 +44,7 @@ export default function UserProfileShipment() {
                     <TextInput
                         id="address"
                         type="text"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full px-2"
                         value={data.address}
                         onChange={(e) => setData('address', e.target.value)}
                         autoComplete="address"
@@ -59,7 +59,7 @@ export default function UserProfileShipment() {
                     <TextInput
                         id="city"
                         type="text"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full px-2"
                         value={data.city}
                         onChange={(e) => setData('city', e.target.value)}
                         autoComplete="city"
@@ -74,7 +74,7 @@ export default function UserProfileShipment() {
                     <TextInput
                         id="province"
                         type="text"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full px-2"
                         value={data.province}
                         onChange={(e) => setData('province', e.target.value)}
                         autoComplete="province"
@@ -88,11 +88,12 @@ export default function UserProfileShipment() {
 
                     <TextInput
                         id="postal_code"
-                        type="text"
-                        className="mt-1 block w-full"
+                        type="number"
+                        className="mt-1 block w-full px-2"
                         value={data.postal_code}
                         onChange={(e) => setData('postal_code', e.target.value)}
                         autoComplete="postal_code"
+                        min="0"
                     />
 
                     <InputError className="mt-2" message={errors.postal_code} />

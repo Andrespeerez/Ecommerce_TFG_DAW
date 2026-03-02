@@ -84,7 +84,7 @@ export default function UserProfile({ cart = cartDefault, auth, canResetPassword
                     >
                         <NavigationLinks />
                     </aside>
-                    <div className="grow flex flex-col gap-3 mx-4 ml-8 p-2 rounded-lg md:pl-0 bg-black/20">
+                    <div className="grow flex flex-col gap-3 mx-4 ml-8 p-2 rounded-lg md:pl-0 bg-neutral-500">
                         <UserProfileAccount mustVerifyEmail={mustVerifyEmail} status={status} confirmAction={executeAction} /> 
                         <UserProfileInfo />
                         <UserProfileShipment />

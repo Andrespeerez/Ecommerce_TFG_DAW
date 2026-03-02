@@ -40,7 +40,7 @@ export default function UserProfileInfo() {
                     <TextInput
                         id="full_name"
                         type="text"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full px-2"
                         value={data.full_name}
                         onChange={(e) => setData('full_name', e.target.value)}
                         required
@@ -56,7 +56,7 @@ export default function UserProfileInfo() {
                     <TextInput
                         id="phone"
                         type="tel"
-                        className="mt-1 block w-full"
+                        className="mt-1 block w-full px-2"
                         value={data.phone}
                         onChange={(e) => setData('phone', e.target.value)}
                         required
