@@ -4,15 +4,29 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function UserProfileShipment() {
     const user = usePage().props.auth.user;
+
     const { data, setData, patch, errors, processing, recentlySuccessful, reset } = useForm({
         address: user.address || '',
         city: user.city || '',
         province: user.province || '',
         postal_code: user.postal_code || '',
     });
+
+    const [ clientErrors, setClientErrors ] = useState({
+        postal_code: '',
+    })
+
+    const validatePostalCode = (value) => {
+        if (value && value.length !== 5) {
+            return 'El código postal debe de tener 5 dígitos.';
+        }
+
+        return '';
+    };
 
     /**
      * Send form to change shipment address
@@ -21,7 +35,14 @@ export default function UserProfileShipment() {
     function submit (e) {
         e.preventDefault();
 
-        patch(route('profile.update.shipment'));
+        if (validatePostalCode(data.postal_code)) {
+            return;
+        }
+
+        patch(route('profile.update.shipment'), {
+            preserveState: true,
+            preserveScroll: true,
+        });
     }
 
     return (
@@ -91,12 +112,19 @@ export default function UserProfileShipment() {
                         type="number"
                         className="mt-1 block w-full px-4"
                         value={data.postal_code}
-                        onChange={(e) => setData('postal_code', e.target.value)}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setData('postal_code', value)
+                            setClientErrors(prev => ({
+                                ...prev,
+                                postal_code: validatePostalCode(value)
+                            }))
+                        }}
                         autoComplete="postal_code"
                         min="0"
                     />
 
-                    <InputError className="mt-2" message={errors.postal_code} />
+                    <InputError className="mt-2" message={clientErrors.postal_code || errors.postal_code} />
                 </div>
 
                 <div className="flex items-center gap-4">

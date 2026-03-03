@@ -84,7 +84,7 @@ export default function Signin({ closeModal }) {
     const submit = (e) => {
         e.preventDefault();
 
-        if (!validateForm) {
+        if (!validateForm()) {
             return;
         }
 

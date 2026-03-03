@@ -4,13 +4,47 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { useState } from 'react';
 
 export default function UserProfileInfo() {
     const user = usePage().props.auth.user;
+
     const { data, setData, patch, errors, processing, recentlySuccessful, reset } = useForm({
         full_name: user.full_name || '',
         phone: user.phone || '',
     });
+
+    const [ clientErrors, setClientErrors ] = useState({
+        full_name: '',
+        phone: '',
+    });
+
+    const validateFullName = (value) => {
+        if (!value.trim()) {
+            return 'El nombre es obligatorio';
+        }
+
+        return '';
+    };
+
+    const validatePhone = (value) => {
+        if (value.length > 15) {
+            return 'El teléfono no puede tener más de 15 caracteres';
+        }
+
+        return '';
+    }
+
+    const validateForm = () => {
+        const newErrors = {
+            full_name: validateFullName(data.full_name),
+            phone: validatePhone(data.phone),
+        };
+
+        setClientErrors(newErrors);
+
+        return !Object.values(newErrors).some(error => error !== '');
+    }
 
     /**
      * Send form to update user info
@@ -19,7 +53,14 @@ export default function UserProfileInfo() {
     function submit(e) {
         e.preventDefault();
 
-        patch(route('profile.update.info'));
+        if (!validateForm()) {
+            return;
+        }
+
+        patch(route('profile.update.info'), {
+            preserveState: true,
+            preserveScroll: true,
+        });
     }
 
     return (
@@ -42,12 +83,19 @@ export default function UserProfileInfo() {
                         type="text"
                         className="mt-1 block w-full px-4"
                         value={data.full_name}
-                        onChange={(e) => setData('full_name', e.target.value)}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setData('full_name', value);
+                            setClientErrors(prev => ({
+                                ...prev,
+                                full_name: validateFullName(value),
+                            }));                            
+                        }}
                         required
                         autoComplete="full_name"
                     />
 
-                    <InputError className="mt-2" message={errors.full_name} />
+                    <InputError className="mt-2" message={clientErrors.full_name || errors.full_name} />
                 </div>
 
                 <div>
@@ -58,12 +106,18 @@ export default function UserProfileInfo() {
                         type="tel"
                         className="mt-1 block w-full px-4"
                         value={data.phone}
-                        onChange={(e) => setData('phone', e.target.value)}
-                        required
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setData('phone', value);
+                            setClientErrors(prev => ({
+                                ...prev,
+                                phone: validatePhone(value),
+                            }));                            
+                        }}
                         autoComplete="phone"
                     />
 
-                    <InputError className="mt-2" message={errors.phone} />
+                    <InputError className="mt-2" message={clientErrors.phone || errors.phone} />
                 </div>
 
                 <div className="flex items-center gap-4">

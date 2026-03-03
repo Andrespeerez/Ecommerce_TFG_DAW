@@ -38,6 +38,8 @@ export default function UserProfileAccount({ confirmAction }) {
         e.preventDefault();
 
         patch(route('profile.update.password'), {
+            preserveState: true,
+            preserveScroll: true,
             onSuccess: () => reset('current_password', 'password', 'password_confirmation'),
         });
     }

@@ -70,7 +70,7 @@ export default function Login({ canResetPassword, closeModal }) {
             authError: '',
         })
 
-        if (!validateForm) {
+        if (!validateForm()) {
             return;
         }
 
