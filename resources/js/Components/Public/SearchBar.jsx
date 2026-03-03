@@ -38,7 +38,12 @@ export default function SearchBar({ closeModals }) {
                 className="absolute right-1"
                 aria-label="Buscar producto"
                 >
-                    <img src="/assets/images/search.svg" alt="Buscar" />
+                    <img 
+                    src="/assets/images/search.svg" 
+                    alt="Buscar" 
+                    height="48"
+                    width="48"
+                    />
                 </button>
             </form>
 
@@ -50,12 +55,20 @@ export default function SearchBar({ closeModals }) {
                 }}
                 aria-label="Abrir buscador"
             >
-                <img src="/assets/images/search.svg" alt="Buscar" />
+                <img 
+                src="/assets/images/search.svg" 
+                alt="Buscar" 
+                height="48"
+                width="48"
+                />
             </button>
 
             {mobileDropDown && 
                 <form onSubmit={handleSearch} className="absolute top-20 w-full md:hidden left-0 flex">
-                    <input type="text" value={searchValue} onChange={(e) => setSearchValue(e.target.value)} 
+                    <input type="text" 
+                    value={searchValue} 
+                    onChange={(e) => setSearchValue(e.target.value)} 
+                    onBlur={(e) => setMobileDropDown(false)}
                     className="w-full pl-5 pr-20 px-10 texto-base"
                     ref={searchRef}
                     />

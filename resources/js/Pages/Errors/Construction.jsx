@@ -37,6 +37,7 @@ export default function Construction({cart, auth}) {
                         className={`max-w-2xl w-full h-auto object-contain ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                         loading="eager"
                         fetchpriority="high"
+                        onLoad={() => setIsLoading(false)}
                     />
                     
                     <button

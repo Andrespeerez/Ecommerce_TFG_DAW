@@ -46,7 +46,7 @@ export default function ProductCard({ product = productFake }) {
         className="rounded-[20px] flex flex-col justify-between gap-3 pb-5 bg-neutral-300 max-w-[450px] w-full overflow-hidden border-t-1 lg:h-[600px] md:h-[500px] cursor-pointer"
         onClick={handleClickCard}
         >
-            <figure className="group relative w-full h-[70%] overflow-hidden rounded-lg">
+            <figure className="group relative w-full h-[70%] max-h-[400px] min-h-[260px] overflow-hidden rounded-lg">
                 {isLoading && 
                 <Skeleton 
                 width="450"

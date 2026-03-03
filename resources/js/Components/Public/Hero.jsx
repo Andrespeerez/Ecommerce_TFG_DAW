@@ -10,7 +10,7 @@ export default function Hero () {
         className="w-full bg-neutral-300 flex flex-col items-center text-center pb-[30px] gap-5"
         aria-label="Banner Principal - Ir a catálogo"
         >
-            <figure className="w-full">
+            <figure className="w-full min-h-[80px] max-h-[1200px]">
                 {isLoading &&
                 <div style={{ aspectRatio: '2545 / 634' }} className="w-full">
                     <Skeleton 
