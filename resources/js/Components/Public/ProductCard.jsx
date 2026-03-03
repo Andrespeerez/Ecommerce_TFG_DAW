@@ -49,7 +49,8 @@ export default function ProductCard({ product = productFake }) {
             <figure className="group relative w-full h-[70%] overflow-hidden rounded-lg">
                 {isLoading && 
                 <Skeleton 
-                
+                width="450"
+                height="400"
                 className="w-full h-full"
                 />
                 }

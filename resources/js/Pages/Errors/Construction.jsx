@@ -1,7 +1,11 @@
 import PublicLayout from "@/Layouts/PublicLayout";
 import { Head, router } from "@inertiajs/react";
+import { useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 export default function Construction({cart, auth}) {
+    const [ isLoading, setIsLoading ] = useState(true);
+
     const handleBack = () => {
         router.get(route('home.index'));
     }
@@ -18,11 +22,19 @@ export default function Construction({cart, auth}) {
 
             <PublicLayout>
                 <div className="w-full min-h-[80vh] flex flex-col items-center justify-center p-10 gap-8">
+                    { isLoading &&
+                    <Skeleton
+                    width="672"
+                    height="620"
+                    className="max-w-2xl w-full h-auto"
+                    />
+                    }
+
         
                     <img 
                         src="/assets/images/under-construction.webp" 
                         alt="Sitio en construcción" 
-                        className="max-w-2xl w-full h-auto object-contain"
+                        className={`max-w-2xl w-full h-auto object-contain ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                         loading="eager"
                         fetchpriority="high"
                     />

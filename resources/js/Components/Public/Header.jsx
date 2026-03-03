@@ -5,23 +5,35 @@ import CartButton from "./CartButton";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 import Dropdown from "../Dropdown";
+import Skeleton from "react-loading-skeleton";
 
 export default function Header({ auth, cart, setMenuOpen, setLoginOpen, setCartOpen, handleCloseModal }) {
     const name = String(auth.user?.full_name).split(' ')[0];
+    const [ isLoading, setIsLoading ] = useState(true);
 
     return (
         <header
         className="sticky top-0 z-50 bg-primary-50 stroke-primary-200 flex justify-between items-center px-5 py-[10px] border-b-2 h-20"
         >
-            <Link href="/" className="flex items-center" aria-label="Ir a la página principal">
-                <img src="/assets/images/logo2.svg" alt="Logo Carpintería Barberes" 
-                className=""
+            <Link href="/" 
+            className="flex items-center h-[40px] w-[40px]" 
+            aria-label="Carpintería Andrés - Ir a la página principal">
+                { isLoading && 
+                <Skeleton 
+                height="40"
+                width="40"
                 />
-                <p
-                className="hidden font-extrabold font-lora">
-                    <span className="text-primary-700">Carpintería</span>
-                    <span className="text-secondary-700">Andrés</span>
-                </p>
+                }
+
+                <img 
+                height="40"
+                width="40"
+                src="/assets/images/logo2.svg" 
+                alt="Logo Carpintería Barberes" 
+                className={`${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                onLoad={() => setIsLoading(false)}
+                />
+
             </Link>
 
             <CategoriesButton onClick={() => setMenuOpen(true)} />

@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 export default function CartButton({ onClick, cart }) {
-    const [ hasNewItems, sethasNewItems ] = useState(false); 
+    const [ hasNewItems, sethasNewItems ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(true);
 
 
     useEffect(() => {
@@ -22,8 +24,28 @@ export default function CartButton({ onClick, cart }) {
         onClick={onClick}
         className="bg-neutral-50 hover:bg-neutral-300 active:bg-neutral-500 flex gap-[10px] items-center px-[10px] py-[5px] relative rounded-[10px] transition duration-150"
         aria-label="Menu de carrito"
-        >       
-            <img src="/assets/images/cart.svg" alt="Menu Carrito" aria-label="Carrito" className={`${ hasNewItems ? 'animate-bounce' : ''}`}/>
+        >
+            <figure
+            aria-label="Carrito" 
+            className={`h-[24px] w-[24px] ${ hasNewItems ? 'animate-bounce' : ''}`}
+            >
+                {isLoading &&
+                <Skeleton 
+                height="24" 
+                width="24" 
+                />
+                }
+
+                <img 
+                src="/assets/images/cart.svg"
+                alt="Menu Carrito"
+                aria-hidden="true" 
+                height="24" 
+                width="24" 
+                className={`${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                onLoad={() => setIsLoading(false)}
+                />
+            </figure>
 
             <span
             className={`absolute bg-success text-white font-semibold rounded-full size-6 -top-1 left-6 texto-base text-center ${hasNewItems ? 'animate-bounce' : ''}`}
