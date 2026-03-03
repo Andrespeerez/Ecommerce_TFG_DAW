@@ -9,7 +9,7 @@ export default function Modal({ children, closeModal, type = '', modalStyle = ''
 
     return (
         <div 
-            className={`fixed z-50 inset-0 bg-black/50 overscroll-contain ${types[type]}`}
+            className={`fixed z-40 inset-0 bg-black/50 ${types[type]} overscroll-contain`}
             onClick={closeModal}
         >
             <div

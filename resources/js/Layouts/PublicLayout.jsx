@@ -123,7 +123,7 @@ export default function PublicLayout ({ children, canResetPassword }) {
                 {loginOpen && 
                 <Modal closeModal={handleCloseModal} 
                 type="login"
-                modalStyle="h-[calc(100vh-80px)] md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-10 items-center pt-10 overflow-y-auto pb-60"
+                modalStyle="h-[calc(100vh-80px)] md:w-1/2 xl:w-1/3 w-full bg-neutral-200 p-100 flex flex-col gap-10 items-center pt-20 overflow-y-auto pb-60"
                 >
                     {loginSignin ? 
                     <Signin closeModal={handleCloseModal} /> : 

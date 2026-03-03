@@ -4,6 +4,7 @@ use App\Http\Middleware\IsAdmin;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use Illuminate\Http\Exceptions\ThrottleRequestsException;
 use Inertia\Inertia;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -29,7 +30,18 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        // NotFoundHttpException --> render NotFound.jsx
         $exceptions->render(function (NotFoundHttpException $e, $request) {
             return Inertia::render('Errors/NotFound')->toResponse($request)->setStatusCode(404);
         });
+
+        // ThrottleRequestException --> returns flash 'error' (to be rendered by Notification.jsx)
+        $exceptions->render(function (ThrottleRequestsException $e, $request) {
+        if ($request->header('X-Inertia')) {
+            return back()->with('error', 'Demasiados intentos. Por favor, espera un momento antes de volver a probar.');
+        }
+
+        return null;
+    });
+    
     })->create();
