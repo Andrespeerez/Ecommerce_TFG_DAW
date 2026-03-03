@@ -69,6 +69,8 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'current_password' => 'required_with:password,email',
             'password' => ['nullable', 'confirmed', Password::defaults()],
+        ], [
+            'confirmed' => 'Las contraseñas deben de ser las mismas.',
         ]);
 
         $user = $request->user();
@@ -93,6 +95,9 @@ class ProfileController extends Controller
         $validated = $request->validate([
             'full_name' => 'required|string|max:255',
             'phone' => 'nullable|string|max:15',
+        ], [
+            'full_name.required' => 'El nombre completo es obligatorio',
+            'phone.max' => 'El teléfono no puede tener más de 15 caracteres'
         ]);
 
         $request->user()->update($validated);

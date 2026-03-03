@@ -5,11 +5,13 @@ import TextInput from '@/Components/TextInput';
 import { ConfirmContext } from '@/Layouts/PublicLayout';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 export default function UserProfileAccount({ confirmAction }) {
     const triggerConfirm = useContext(ConfirmContext);
+
     const user = usePage().props.auth.user;
+
     const { data, setData, patch, errors, processing, recentlySuccessful, reset } = useForm({
         email: user.email,
         current_password: '',
@@ -17,8 +19,39 @@ export default function UserProfileAccount({ confirmAction }) {
         password_confirmation: '',
     });
 
+    const [ clientEmailErrors, setClientEmailErrors ] = useState({
+        email: '',
+    });
+
+    const [ clientPasswordErrors, setClientPasswordErrors ] = useState({
+        current_password: '',
+        password: '',
+        password_confirmation: '',
+    });
+
+    const validateEmail = (value) => {
+        if (!value) {
+            return 'El email es obligatorio';
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            return 'El formato del email no es válido';
+        }
+
+        return '';
+    }
+
     const handleEditEmail = (e) => {
         e.preventDefault();
+
+        const emailError = validateEmail(data.email);
+        if (emailError !== '') {
+            setClientEmailErrors({ 
+                email: emailError,
+            });
+            return;
+        }
 
         triggerConfirm('¿Estás seguro de que quieres cambiar tu email?', () => {
             
@@ -34,8 +67,48 @@ export default function UserProfileAccount({ confirmAction }) {
         });
     };
 
+        const validatePassword = (value) => {
+        if (!value) {
+            return 'La constraseña es obligatoria';
+        }
+
+        if (value.length < 8) {
+            return 'La contraseña debe tener al menos 8 caracteres';
+        }
+
+        return '';
+    }
+
+    const validatePasswordConfirmation = (value, password) => {
+        if (!value) {
+            return 'Debes confirmar la contraseña';
+        }
+
+        if (value !== password) {
+            return 'Las contraseñas no coinciden';
+        }
+
+        return '';
+    }
+
+    const validatePasswordForm = () => {
+        const newErrors = {
+            current_password: validatePassword(data.current_password),
+            password: validatePassword(data.password),
+            password_confirmation: validatePasswordConfirmation(data.password_confirmation, data.password),
+        };
+
+        setClientPasswordErrors(newErrors);
+
+        return !Object.values(newErrors).some(error => error !== '');
+    };
+
     const submitPassword = (e) => {
         e.preventDefault();
+
+        if (!validatePasswordForm()) {
+            return;
+        }
 
         patch(route('profile.update.password'), {
             preserveState: true,
@@ -65,12 +138,19 @@ export default function UserProfileAccount({ confirmAction }) {
                         type="email"
                         className="mt-1 block w-full px-4"
                         value={data.email}
-                        onChange={(e) => setData('email', e.target.value)}
-                        required
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setData('email', value);
+                            setClientEmailErrors(prev => ({
+                                ...prev,
+                                email: validateEmail(value),
+                            }))
+                        }}
                         autoComplete="username"
+                        required
                     />
 
-                    <InputError className="mt-2" message={errors.email} />
+                    <InputError className="mt-2" message={clientEmailErrors.email || errors.email} />
                 </div>
 
                 <div className="flex items-center gap-4">
@@ -106,9 +186,16 @@ export default function UserProfileAccount({ confirmAction }) {
                                 type="password"
                                 className="mt-1 block w-full px-4"
                                 value={data.current_password}
-                                onChange={(e) => setData('current_password', e.target.value)}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    setData('current_password', value);
+                                    setClientPasswordErrors(prev => ({
+                                        ...prev,
+                                        current_password: validatePassword(value),
+                                    }))
+                                }}
                             />
-                            <InputError className="mt-2" message={errors.current_password} />
+                            <InputError className="mt-2" message={clientPasswordErrors.current_password || errors.current_password} />
                         </div>
 
                         <div>
@@ -118,9 +205,16 @@ export default function UserProfileAccount({ confirmAction }) {
                                 type="password"
                                 className="mt-1 block w-full px-4"
                                 value={data.password}
-                                onChange={(e) => setData('password', e.target.value)}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    setData('password', value);
+                                    setClientPasswordErrors(prev => ({
+                                        ...prev,
+                                        password: validatePassword(value),
+                                    }))
+                                }}
                             />
-                            <InputError className="mt-2" message={errors.password} />
+                            <InputError className="mt-2" message={clientPasswordErrors.password || errors.password} />
                         </div>
 
                         <div>
@@ -130,9 +224,18 @@ export default function UserProfileAccount({ confirmAction }) {
                                 type="password"
                                 className="mt-1 block w-full px-4"
                                 value={data.password_confirmation}
-                                onChange={(e) => setData('password_confirmation', e.target.value)}
+                                onChange={(e) => {
+                                    const value = e.target.value;
+                                    setData('password_confirmation', value);
+                                    setClientPasswordErrors(prev => ({
+                                        ...prev,
+                                        password_confirmation: validatePasswordConfirmation(value, data.password),
+                                    }))
+                                }}
                             />
                         </div>
+
+                        <InputError className="mt-2" message={clientPasswordErrors.password_confirmation} />
                     </div>
                 </div>
 
