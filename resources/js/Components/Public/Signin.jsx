@@ -1,9 +1,9 @@
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
-import PrimaryButton from '@/Components/PrimaryButton';
 import { useForm } from "@inertiajs/react";
 import Button from './Button';
+import { useState } from 'react';
 
 export default function Signin({ closeModal }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -13,8 +13,80 @@ export default function Signin({ closeModal }) {
         password_confirmation: '',
     });
 
+    const [ clientErrors, setClientErrors ] = useState({
+        full_name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+    })
+
+    const validateFullName = (value) => {
+        if (!value.trim()) {
+            return 'El nombre es obligatorio';
+        }
+
+        return '';
+    };
+
+    const validateEmail = (value) => {
+        if (!value) {
+            return 'El email es obligatorio';
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            return 'El formato del email no es válido';
+        }
+
+        return '';
+    }
+
+    const validatePassword = (value) => {
+        if (!value) {
+            return 'La contraseña es obligatoria';
+        }
+
+        if (value.length < 8) {
+            return 'La contraseña debe tener al menos 8 caracteres';
+        }
+
+        return '';
+    };
+
+    const validatePasswordConfirmation = (value, password) => {
+        if (!value) {
+            return 'Debes confirmar la contraseña';
+        }
+
+        if (value !== password) {
+            return 'Las contraseñas no coinciden';
+        }
+
+        return '';
+    }
+
+    const validateForm = () => {
+        const newErrors = {
+            full_name: validateFullName(data.full_name),
+            email: validateEmail(data.email),
+            password: validatePassword(data.password),
+            password_confirmation: validatePasswordConfirmation(
+                data.password_confirmation, 
+                data.password
+            ),
+        };
+
+        setClientErrors(newErrors);
+
+        return !Object.values(newErrors).some(error => error !== '');
+    };
+
     const submit = (e) => {
         e.preventDefault();
+
+        if (!validateForm) {
+            return;
+        }
 
         post(route('register'), {
             preserveState: true,
@@ -38,11 +110,18 @@ export default function Signin({ closeModal }) {
                     className="mt-1 block w-full"
                     autoComplete="name"
                     isFocused={true}
-                    onChange={(e) => setData('full_name', e.target.value)}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        setData('full_name', value);
+                        setClientErrors(prev => ({
+                            ...prev,
+                            full_name: validateFullName(value),
+                        }));
+                    }}
                     required
                 />
 
-                <InputError message={errors.full_name} className="mt-2" />
+                <InputError message={clientErrors.full_name || errors.full_name} className="mt-2" />
             </div>
 
             <div className="mt-4">
@@ -55,11 +134,18 @@ export default function Signin({ closeModal }) {
                     value={data.email}
                     className="mt-1 block w-full"
                     autoComplete="username"
-                    onChange={(e) => setData('email', e.target.value)}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        setData('email', value);
+                        setClientErrors(prev => ({
+                            ...prev,
+                            email: validateEmail(value),
+                        }));
+                    }}
                     required
                 />
 
-                <InputError message={errors.email} className="mt-2" />
+                <InputError message={clientErrors.email || errors.email} className="mt-2" />
             </div>
 
             <div className="mt-4">
@@ -72,11 +158,18 @@ export default function Signin({ closeModal }) {
                     value={data.password}
                     className="mt-1 block w-full"
                     autoComplete="new-password"
-                    onChange={(e) => setData('password', e.target.value)}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        setData('password', value);
+                        setClientErrors(prev => ({
+                            ...prev,
+                            password: validatePassword(value),
+                        }));
+                    }}
                     required
                 />
 
-                <InputError message={errors.password} className="mt-2" />
+                <InputError message={clientErrors.password || errors.password} className="mt-2" />
             </div>
 
             <div className="mt-4">
@@ -92,20 +185,25 @@ export default function Signin({ closeModal }) {
                     value={data.password_confirmation}
                     className="mt-1 block w-full"
                     autoComplete="new-password"
-                    onChange={(e) =>
-                        setData('password_confirmation', e.target.value)
-                    }
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        setData('password_confirmation', value);
+                        setClientErrors(prev => ({
+                            ...prev,
+                            password_confirmation: validatePasswordConfirmation(value, data.password),
+                        }));
+                    }}
                     required
                 />
 
                 <InputError
-                    message={errors.password_confirmation}
+                    message={clientErrors.password_confirmation ||  errors.password_confirmation}
                     className="mt-2"
                 />
             </div>
 
             <div className="mt-4 flex items-center justify-end">
-                <Button type="submit" variant='primary' className="heading-6" disabled={processing}>
+                <Button type="submit" variant='primary' className="md:text-[16px] font-lora" disabled={processing}>
                     Registrate
                 </Button>
             </div>

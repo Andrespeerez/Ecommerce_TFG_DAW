@@ -34,6 +34,10 @@ class RegisteredUserController extends Controller
             'full_name' => 'required|string|max:255',
             'email' => 'required|string|lowercase|email|max:255|unique:'.User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ],[
+            'required' => 'El campo :attribute no puede estar vacío.',
+            'email' => 'Ese formato de correo no es correcto.',
+            'unique' => 'El correo no está disponible.',
         ]);
 
         $user = User::create([

@@ -2,16 +2,61 @@ import Checkbox from '@/Components/Checkbox';
 import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import TextInput from '@/Components/TextInput';
-import PublicLayout from "@/Layouts/PublicLayout";
-import { Link, useForm } from "@inertiajs/react";
+import { Link, useForm, usePage } from "@inertiajs/react";
 import Button from './Button';
+import { useState } from 'react';
 
-export default function Login({ canResetPassword, closeModal }) {
+export default function Login({ canResetPassword, closeModal }) {   
+    const { auth } = usePage().props;
+
     const { data, setData, post, processing, errors, reset } = useForm({
         email: '',
         password: '',
         remember: false,
     });
+
+    const [ clientErrors, setClientErrors ] = useState({
+        email: '',
+        password: '',
+    });
+
+    const [ authErrors, setAuthErrors ] = useState({
+        authError: '',
+    });
+
+    const validateEmail = (value) => {
+        if (!value) {
+            return 'El email es obligatorio';
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(value)) {
+            return 'El formato del email no es válido';
+        }
+
+        return '';
+    };
+
+    const validatePassword = (value) => {
+        if (!value) {
+            return 'La contraseña es obligatoria';
+        }
+
+        return '';
+    };
+
+    const validateForm = () => {
+        const newErrors = {
+            email: validateEmail(data.email),
+            password: validatePassword(data.password),
+        };
+
+        setClientErrors(newErrors);
+
+        return !Object.values(newErrors).some(error => error !== '');
+    };
+
+
 
     /**
      * Submit form for login
@@ -21,12 +66,29 @@ export default function Login({ canResetPassword, closeModal }) {
     function submitLogin(e) {
         e.preventDefault();
 
+        setAuthErrors({
+            authError: '',
+        })
+
+        if (!validateForm) {
+            return;
+        }
+
         post(route('login'), {
             preserveState: true,
             preserveScroll: true,
             
             onFinish: () => reset('password'),
-            onSuccess: () => closeModal(),
+            onSuccess: () =>{ 
+                if (Object.keys(errors).length === 0 && auth.user !== null) {
+                    closeModal();
+                }
+
+                setAuthErrors({
+                    authError : "Usuario o Contraseña Incorrectos",
+                })
+                reset('password');
+            },
         });
     }
 
@@ -43,10 +105,17 @@ export default function Login({ canResetPassword, closeModal }) {
                     className="mt-1 block w-full"
                     autoComplete="username"
                     isFocused={true}
-                    onChange={(e) => setData('email', e.target.value)}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        setData('email', value);
+                        setClientErrors(prev => ({
+                            ...prev,
+                            email: validateEmail(value),
+                        }));
+                    }}
                 />
 
-                <InputError message={errors.email} className="mt-2" />
+                <InputError message={clientErrors.email} className="mt-2" />
             </div>
 
             <div className="mt-4">
@@ -59,10 +128,17 @@ export default function Login({ canResetPassword, closeModal }) {
                     value={data.password}
                     className="mt-1 block w-full"
                     autoComplete="current-password"
-                    onChange={(e) => setData('password', e.target.value)}
+                    onChange={(e) => {
+                        const value = e.target.value;
+                        setData('password', value);
+                        setClientErrors(prev => ({
+                            ...prev,
+                            password: validatePassword(value),
+                        }));
+                    }}
                 />
 
-                <InputError message={errors.password} className="mt-2" />
+                <InputError message={clientErrors.password} className="mt-2" />
             </div>
 
             <div className="mt-4 block">
@@ -80,7 +156,8 @@ export default function Login({ canResetPassword, closeModal }) {
                 </label>
             </div>
 
-            <div className="mt-4 flex items-center justify-end">
+            <div className='mt-2 flex flex-col gap-1'>
+                <InputError message={authErrors.authError} className="mt-2" />
                 {canResetPassword && (
                     <Link
                         href={route('password.request')}
@@ -89,8 +166,10 @@ export default function Login({ canResetPassword, closeModal }) {
                         ¿Olvidaste tu contraseña?
                     </Link>
                 )}
+            </div>
 
-                <Button type='submit' variant='primary' className="heading-6" disabled={processing}>
+            <div className="mt-4 flex items-center justify-end">
+                <Button type='submit' variant='primary' className="md:text-[16px] font-lora" disabled={processing}>
                     Entra
                 </Button>
             </div>
