@@ -10,6 +10,12 @@
         @routes
         @viteReactRefresh
 
+        <link rel="preload" as="image" href="/assets/images/logo2.svg" fetchpriority="high" type="image/svg+xml">
+        <link rel="preload" as="image" href="/assets/images/categories.svg" fetchpriority="high" type="image/svg+xml">
+        <link rel="preload" as="image" href="/assets/images/search.svg" fetchpriority="high" type="image/svg+xml">
+        <link rel="preload" as="image" href="/assets/images/login.svg" fetchpriority="high" type="image/svg+xml">
+        <link rel="preload" as="image" href="/assets/images/cart.svg" fetchpriority="high" type="image/svg+xml">
+
         @if(Route::currentRouteName() === 'home.index')
             <link rel="preload" as="image" href="/assets/images/hero.webp" fetchpriority="high" type="image/webp">
         @endif
