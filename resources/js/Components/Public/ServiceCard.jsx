@@ -11,7 +11,7 @@ export default function ServiceCard({ title, image, href}) {
         >
             <h3 className="heading-6 lg:heading-5 text-primary-900 text-center">{title}</h3>
 
-            <figure className="w-[420px] h-[315px]">
+            <figure className="max-w-[420px] w-full max-h-[315px]">
                 {isLoading &&
                 <Skeleton
                 className="w-full aspect-auto"

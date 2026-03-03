@@ -18,9 +18,9 @@ export default function Notification () {
     if (!visible || (flash.error == null && flash.success == null)) return null;
 
     return (
-        <div className="p-1 fixed mt-20 z-50">
+        <div className="p-1 fixed top-20 left-1/2 -translate-x-1/2 mx-auto z-50">
             {flash.error && (
-                <div className="w-full bg-danger text-white opacity-60 px-6 py-3 rounded-lg heading-6 text-[16px] flex justify-between items-center z-50">
+                <div className="w-full bg-danger text-white px-6 py-3 rounded-lg heading-6 text-[16px] flex justify-between items-center z-50">
                     {flash.error}
                     <button 
                     onClick={() => setVisible(false)}
@@ -31,7 +31,7 @@ export default function Notification () {
                 </div>
             )}
             {flash.success && (
-                <div className="w-full bg-success text-white opacity-60 px-6 py-3 rounded-lg heading-6 text-[16px] flex justify-between items-center z-50">
+                <div className="w-full bg-success text-white px-6 py-3 rounded-lg heading-6 text-[16px] flex justify-between items-center z-50">
                     {flash.success}
                     <button 
                     onClick={() => setVisible(false)}
