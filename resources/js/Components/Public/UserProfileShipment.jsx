@@ -18,7 +18,9 @@ export default function UserProfileShipment() {
 
     const [ clientErrors, setClientErrors ] = useState({
         postal_code: '',
-    })
+    });
+
+    const missingShippingInfo = !data.address || !data.city || !data.province || !data.postal_code;
 
     const validatePostalCode = (value) => {
         if (value && value.length !== 5) {
@@ -58,6 +60,10 @@ export default function UserProfileShipment() {
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <h3 className="heading-6 mb-4">Dirección de envío</h3>
+
+                {missingShippingInfo && (
+                    <p className='text-base text-warning'>Sin estos campos no podrás finalizar tu compra.</p>
+                )}
 
                 <div>
                     <InputLabel htmlFor="address" value="Dirección" className='text-base font-semibold'/>
