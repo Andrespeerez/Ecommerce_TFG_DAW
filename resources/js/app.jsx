@@ -11,6 +11,7 @@ const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 window.addEventListener('popstate', (event) => {
     setTimeout(() => {
         router.reload({ 
+            only: ['cart'],
             preserveScroll: true, 
             preserveState: false,
         });
