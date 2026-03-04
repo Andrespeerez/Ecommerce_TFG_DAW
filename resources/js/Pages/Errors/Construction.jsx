@@ -22,23 +22,26 @@ export default function Construction({cart, auth}) {
 
             <PublicLayout>
                 <div className="w-full min-h-[80vh] flex flex-col items-center justify-center p-10 gap-8">
-                    { isLoading &&
-                    <Skeleton
-                    width="672"
-                    height="620"
-                    className="max-w-2xl w-full h-auto"
-                    />
-                    }
+                    <div
+                    className="w-full max-w-2xl aspect-[672/620] relative"
+                    >
+                        { isLoading &&
+                        <Skeleton
+                        width="672"
+                        height="620"
+                        className="absolute w-full" 
+                        />
+                        }
 
-        
-                    <img 
-                        src="/assets/images/under-construction.webp" 
-                        alt="Sitio en construcción" 
-                        className={`max-w-2xl w-full h-auto object-contain ${isLoading ? 'opacity-0' : 'opacity-100'}`}
-                        loading="eager"
-                        fetchpriority="high"
-                        onLoad={() => setIsLoading(false)}
-                    />
+                        <img 
+                            src="/assets/images/under-construction.webp" 
+                            alt="Sitio en construcción"
+                            className={`w-full max-h-[620px] object-contain ${isLoading ? 'opacity-0' : 'opacity-100'}`}
+                            loading="eager"
+                            fetchpriority="high"
+                            onLoad={() => setIsLoading(false)}
+                        />
+                    </div>
                     
                     <button
                         className="p-4 bg-neutral-700 text-neutral-50 heading-6 text-[16px] lg:heading-6 rounded-lg active:scale-95 transition-transform"
