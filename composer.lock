@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2802b3c057b19b575072dc7269004ce8",
+    "content-hash": "a33608b6a0eb636a9409bd792bc5df42",
     "packages": [
         {
             "name": "brick/math",
@@ -7506,6 +7506,53 @@
             "time": "2022-02-21T01:04:05+00:00"
         },
         {
+            "name": "phpstan/phpdoc-parser",
+            "version": "2.3.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpdoc-parser.git",
+                "reference": "a004701b11273a26cd7955a61d67a7f1e525a45a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/a004701b11273a26cd7955a61d67a7f1e525a45a",
+                "reference": "a004701b11273a26cd7955a61d67a7f1e525a45a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 || ^8.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^2.0",
+                "nikic/php-parser": "^5.3.0",
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.6",
+                "symfony/process": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\PhpDocParser\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPDoc parser with support for nullable, intersection and generic types",
+            "support": {
+                "issues": "https://github.com/phpstan/phpdoc-parser/issues",
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/2.3.2"
+            },
+            "time": "2026-01-25T14:56:51+00:00"
+        },
+        {
             "name": "phpunit/php-code-coverage",
             "version": "11.0.12",
             "source": {
@@ -8947,6 +8994,62 @@
                 }
             ],
             "time": "2024-10-09T05:16:32+00:00"
+        },
+        {
+            "name": "smeghead/php-class-diagram",
+            "version": "v1.6.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/smeghead/php-class-diagram.git",
+                "reference": "964306a904534a7b3a3c6a2f6504a0cb19a78b52"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/smeghead/php-class-diagram/zipball/964306a904534a7b3a3c6a2f6504a0cb19a78b52",
+                "reference": "964306a904534a7b3a3c6a2f6504a0cb19a78b52",
+                "shasum": ""
+            },
+            "require": {
+                "nikic/php-parser": "^5.2",
+                "php": ">=8.2",
+                "phpstan/phpdoc-parser": "^2.3",
+                "symfony/finder": "^5.3|^6.0|^7.0"
+            },
+            "require-dev": {
+                "clue/phar-composer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^11.5",
+                "smeghead/php-vendor-credits": "~0.0.4"
+            },
+            "bin": [
+                "bin/php-class-diagram"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Smeghead\\PhpClassDiagram\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "smeghead",
+                    "email": "smeghead7@gmail.com"
+                }
+            ],
+            "description": "A CLI tool that parses the PHP source directory and outputs PlantUML scripts.",
+            "keywords": [
+                "classdiagram",
+                "plantuml"
+            ],
+            "support": {
+                "issues": "https://github.com/smeghead/php-class-diagram/issues",
+                "source": "https://github.com/smeghead/php-class-diagram/tree/v1.6.1"
+            },
+            "time": "2026-01-12T05:09:20+00:00"
         },
         {
             "name": "staabm/side-effects-detector",
