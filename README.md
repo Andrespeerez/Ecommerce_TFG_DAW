@@ -2,6 +2,20 @@
 
 # E-Commerce Carpintería
 
+## DEMO ONLINE:
+[https://ecommercetfgdaw-production.up.railway.app/](https://ecommercetfgdaw-production.up.railway.app/)
+
+## CAPTURAS:
+
+<img width="2547" height="1281" alt="image" src="https://github.com/user-attachments/assets/028dfb45-146a-459c-b4ec-e824c36fd4a5" />
+
+### Catálogo:
+<img width="2546" height="1280" alt="image" src="https://github.com/user-attachments/assets/f5c879dc-df43-42bc-8de2-352855756194" />
+
+### Carrito:
+<img width="2542" height="1281" alt="image" src="https://github.com/user-attachments/assets/a9d40e9d-3077-4f80-94fe-2500325797a8" />
+
+
 ## DESCRIPCIÓN DEL PROYECTO
 
 Plataforma de comercio electrónico de venta de productos de carpintería usando Laravel + Inertia + React + MySQL + TailWindCSS.
