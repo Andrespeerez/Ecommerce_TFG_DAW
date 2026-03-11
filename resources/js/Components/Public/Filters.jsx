@@ -31,7 +31,7 @@ export default function Filters ({ filters, categories, materials, finishes}) {
     function applyFilters(e) {
         e.preventDefault();
 
-        get(route('products.index'), {preservaState: true, replace: true});
+        get(route('products.index'), {preserveState: true, replace: true});
     }
     
     return(
