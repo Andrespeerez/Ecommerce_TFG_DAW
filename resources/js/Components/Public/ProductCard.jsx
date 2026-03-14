@@ -9,6 +9,7 @@ const productFake = {
     image_url: "https://placehold.co/600x400",
     name: "Producto muy falso",
     price_with_iva: 40,
+    stocK: 10,
 }
 
 export default function ProductCard({ product = productFake }) {
@@ -18,6 +19,25 @@ export default function ProductCard({ product = productFake }) {
     
     const handleClickCard = (e) => {
         router.visit(route('products.show', product.id));
+    }
+
+    const stockMessage = () => {
+        if (product.stock <= 0) {
+            return {
+                message: "Sin Stock",
+                color: "bg-slate-900",
+            };
+        } else if(product.stock <= 10) {
+            return {
+                message: "Últimas Unidades",
+                color: "bg-danger",
+            };
+        } else {
+            return {
+                message: "Suficiente Stock",
+                color: "bg-accent-700",
+            }
+        }
     }
 
     const handleClickAdd = (e) => {
@@ -43,7 +63,7 @@ export default function ProductCard({ product = productFake }) {
         <article
         itemScope 
         itemType="https://schema.org/Product"
-        className="rounded-[20px] flex flex-col justify-between gap-3 pb-5 bg-neutral-300 max-w-[450px] w-full overflow-hidden border-t-1 lg:h-[600px] md:h-[500px] cursor-pointer"
+        className="rounded-[20px] flex flex-col justify-between items-center gap-3 pb-5 bg-neutral-300 max-w-[450px] w-full overflow-hidden border-t-1 lg:h-[600px] md:h-[500px] cursor-pointer"
         onClick={handleClickCard}
         >
             <figure className="group relative w-full h-[70%] max-h-[400px] min-h-[260px] overflow-hidden rounded-lg">
@@ -71,6 +91,12 @@ export default function ProductCard({ product = productFake }) {
                 {product.name}
             </h3>
 
+            <p
+            className={`text-primary-50 font-bold p-1 px-2 text-base text-center w-52 rounded-md ${stockMessage().color}`}
+            >
+                {stockMessage().message}
+            </p>
+
             <section
             className="flex md:flex-row flex-col gap-2 justify-evenly items-center px-2"
             itemProp="offers" 
@@ -90,11 +116,7 @@ export default function ProductCard({ product = productFake }) {
                 >
                     Al carrito <span className="sr-only">{product.name}</span>
                 </Button>
-
-
-                
-
-                
+ 
             </section>
 
             {product.description && (

@@ -26,6 +26,25 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
     const [ isLoading, setIsLoading ] = useState(true);
     const [ quantity, setQuantity ] = useState(1);
 
+    const stockMessage = () => {
+        if (product.stock <= 0) {
+            return {
+                message: "Sin Stock",
+                color: "bg-slate-900",
+            };
+        } else if(product.stock <= 10) {
+            return {
+                message: "Últimas Unidades",
+                color: "bg-danger",
+            };
+        } else {
+            return {
+                message: "Suficiente Stock",
+                color: "bg-accent-700",
+            }
+        }
+    }
+
     function submit(e) {
         e.preventDefault();
 
@@ -142,6 +161,12 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
                         >{product.name}</h2>
                         <p className="heading-6">{product.price_with_iva}€</p>
 
+                        <p
+                        className={`text-primary-50 font-bold p-1 px-2 text-base text-center w-52 rounded-md ${stockMessage().color}`}
+                        >
+                            {stockMessage().message}
+                        </p>
+
                         <div className="text-center p-4 flex gap-4 justify-center items-center">
                             <button type="button"
                             aria-label="Menos producto"
@@ -201,9 +226,15 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
             </div>
 
             <form onSubmit={submit}
-            className="sticky bottom-0 z-40 bg-primary-100 w-full lg:hidden border-t-2 border-t-primary-400"
+            className="sticky bottom-0 z-40 bg-primary-100 w-full lg:hidden border-t-2 border-t-primary-400 flex flex-col items-center"
             >
                 <p className="heading-6 text-center">{product.price_with_iva}€ / unidad</p>
+
+                <p
+                className={`text-primary-50 font-bold p-1 px-2 text-base text-center w-52 rounded-md ${stockMessage().color}`}
+                >
+                    {stockMessage().message}
+                </p>
                 
                 <div className="text-center p-4 flex gap-4 justify-center items-center">
                     <button type="button"
