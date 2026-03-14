@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Middleware\IsAdmin;
+use \App\Http\Middleware\RequirePassword;
+use App\Http\Middleware\Authenticate;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -26,7 +29,8 @@ return Application::configure(basePath: dirname(__DIR__))
         // Middleware aliases
         $middleware->alias([
             'admin' => IsAdmin::class,
-            'password.confirm' => \App\Http\Middleware\RequirePassword::class,
+            'password.confirm' => RequirePassword::class,
+            'auth' => Authenticate::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

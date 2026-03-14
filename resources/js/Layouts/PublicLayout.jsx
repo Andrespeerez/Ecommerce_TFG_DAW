@@ -2,7 +2,7 @@ import Modal from "@/Components/Public/Modal";
 import Footer from "@/Components/Public/Footer";
 import Header from "@/Components/Public/Header";
 import { Link, usePage } from "@inertiajs/react";
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import Signin from "@/Components/Public/Signin";
 import Login from "@/Components/Public/Login";
 import { Button } from "@/Components/Admin/Button";
@@ -14,7 +14,7 @@ import Confirm from "@/Components/Public/Confirm";
 export const ConfirmContext = createContext();
 
 export default function PublicLayout ({ children, canResetPassword }) {
-    const { cart, auth, categories } = usePage().props;
+    const { cart, auth, categories, flash } = usePage().props;
     
 
     // open/close modals
@@ -27,6 +27,12 @@ export default function PublicLayout ({ children, canResetPassword }) {
         message: '',
         onConfirm: () => {},
     })
+
+    useEffect(() => {
+        if (flash?.openLoginModal) {
+            setLoginOpen(true);
+        }
+    }, [flash])
 
     function handleConfirm (message, action) {
         handleCloseModal();

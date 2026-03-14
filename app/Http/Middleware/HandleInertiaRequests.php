@@ -87,6 +87,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->query('error') ?? $request->session()->get('error'),
+                'openLoginModal' => $request->session()->get('openLoginModal', false),
             ],
             'categories' => Cache::remember('categories', 3600, function () {
                 return Category::select('id', 'name', 'active')
