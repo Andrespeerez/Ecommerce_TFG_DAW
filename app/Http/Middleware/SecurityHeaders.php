@@ -19,15 +19,6 @@ class SecurityHeaders
         $response = $next($request);
 
         /**
-         * X-Frame-Options: DENY
-         * 
-         * Impide que mi web sea cargada dentro de un <iframe> en otra página
-         * Un atacante puede meter mi web dentro de un iframe y correr un script que 
-         * capture las teclas de teclado o clicks del ratón para robarme datos
-         */
-        $response->headers->set('X-Frame-Options', 'DENY');
-
-        /**
          * X-Content-Type-Options: nosniff
          * 
          * Obliga al navegador a respetar el MIME del archivo.
@@ -35,6 +26,21 @@ class SecurityHeaders
          * tratará como lo que indique el MIME y no ejecutará el script malicioso
          */
         $response->headers->set('X-Content-Type-Options', 'nosniff');
+
+        if ($request->is('build/*', 'storage/*', 'assets/*', 'fonts/*')) {
+            $response->headers->set('Cache-Control', 'public, immutable, max-age=31536000');
+            $response->headers->set('X-Mi-Cache', 'funcionando');
+            return $response;
+        }
+
+        /**
+         * X-Frame-Options: DENY
+         * 
+         * Impide que mi web sea cargada dentro de un <iframe> en otra página
+         * Un atacante puede meter mi web dentro de un iframe y correr un script que 
+         * capture las teclas de teclado o clicks del ratón para robarme datos
+         */
+        $response->headers->set('X-Frame-Options', 'DENY');
 
         /**
          * Referrer-Policy: strict-origin-when-cross-origin

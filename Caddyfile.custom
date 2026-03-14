@@ -1,0 +1,18 @@
+{
+    frankenphp
+}
+
+:{$PORT} {
+    root * public
+    encode gzip zstd
+    php_server
+
+    @static {
+        path *.ico *.css *.js *.gif *.jpg *.jpeg *.png *.svg *.woff *.woff2 *.webp
+    }
+    
+    header @static {
+        Cache-Control "public, max-age=31536000, immutable"
+        X-Mi-Cache "funcionando-en-frankenphp"
+    }
+}
