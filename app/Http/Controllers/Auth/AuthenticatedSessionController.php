@@ -35,7 +35,8 @@ class AuthenticatedSessionController extends Controller
 
             return back();
         } catch (\Exception $e) {
-            return back()->with('error', 'Credenciales incorrectos');
+            session()->flash('error', 'Credenciales incorrectos');
+            throw $e;
         }
     }
 

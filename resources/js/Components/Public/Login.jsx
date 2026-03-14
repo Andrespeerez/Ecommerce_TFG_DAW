@@ -68,7 +68,7 @@ export default function Login({ canResetPassword, closeModal }) {
 
         setAuthErrors({
             authError: '',
-        })
+        });
 
         if (!validateForm()) {
             return;
@@ -77,17 +77,15 @@ export default function Login({ canResetPassword, closeModal }) {
         post(route('login'), {
             preserveState: true,
             preserveScroll: true,
-            
             onFinish: () => reset('password'),
-            onSuccess: () =>{ 
-                if (Object.keys(errors).length === 0 && auth.user !== null) {
-                    closeModal();
-                }
-
+            onSuccess: () => {
+                console.log(errors);
+                closeModal()
+            },
+            onError: () => {
                 setAuthErrors({
-                    authError : "Usuario o Contraseña Incorrectos",
-                })
-                reset('password');
+                    authError: "Usuario o Contraseña Incorrectos",
+                });
             },
         });
     }
