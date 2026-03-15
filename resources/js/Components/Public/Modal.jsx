@@ -13,7 +13,7 @@ export default function Modal({ children, closeModal, type = '', modalStyle = ''
             onClick={closeModal}
         >
             <div
-                className={`relative ${modalStyle}`}
+                className={`relative z-50 ${modalStyle}`}
                 onClick={(e) => e.stopPropagation()}
             >
                 <button

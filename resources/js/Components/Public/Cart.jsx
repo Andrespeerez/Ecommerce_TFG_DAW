@@ -53,10 +53,10 @@ export default function Cart({ cart, openLoginModal, closeModals, triggerConfirm
     }
 
     return (
-        <div className="relative flex flex-col justify-between pt-14 gap-2 h-full w-full">    
+        <div className="relative flex flex-col justify-between mt-14 gap-2 h-full w-full">    
 
 
-            <div className="w-full overflow-y-auto pb-40">
+            <div className="w-full overflow-y-auto mb-40">
                 {cart.items?.length == 0 ? 
                 <p className="heading-6 text-center pt-10">El carrito está vacío</p>
                 : cart.items.map((item) => {

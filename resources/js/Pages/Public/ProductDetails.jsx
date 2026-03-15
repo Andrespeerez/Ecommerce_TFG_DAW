@@ -30,12 +30,12 @@ export default function ProductDetails({ auth, cart = cartDefault, product = pro
         if (product.stock <= 0) {
             return {
                 message: "Sin Stock",
-                color: "bg-slate-900",
+                color: "bg-zinc-900",
             };
         } else if(product.stock <= 10) {
             return {
                 message: "Últimas Unidades",
-                color: "bg-danger",
+                color: "bg-orange-800",
             };
         } else {
             return {

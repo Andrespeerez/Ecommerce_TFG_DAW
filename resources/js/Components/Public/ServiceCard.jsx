@@ -25,6 +25,8 @@ export default function ServiceCard({ title, image, href}) {
                 className={`object-cover w-full ${isLoading ? 'opacity-0' : 'opacity-100'}`}
                 loading="lazy"
                 onLoad={() => setIsLoading(false)}
+                height="315"
+                width="420"
                 />   
             </figure>
             
